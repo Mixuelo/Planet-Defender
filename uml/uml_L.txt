@@ -1,0 +1,69 @@
+@startuml
+
++interface IGameObject {
+    name() : String
+    transform() : ITransform
+    collider() : ICollider
+}
+
++interface ITransform {
+    +move() : void
+    +rotate() : void
+    +scale() : void
+
+    +position() : Point
+    +layer() : int
+    +angle() : double
+    +scale() : double
+}
+
++interface ICollider {
+    centroid() : Point
+}
+
++class GameObject implements IGameObject{
+    -name : String
+
+    +toString() : String
+}
+
++class Transform implements ITransform {
+    -layer : int
+    -angle : double
+    -scale : double
+
+    +toString() : String
+}
+
++class Collider implements ICollider {
+    +toString() : String
+}
+
++class Point {
+    -x : double
+    -y : double
+
+    +x() : double
+    +y() : double
+
+    +toString() : String
+}
+
++class ColliderCircle extends Collider {
+    -radius : double
+
+    +radius() : double
+}
+
++class ColliderPolygon extends Collider {
+    +vertices() : ArrayList<Point>
+}
+
+GameObject *-- Transform : -transform
+GameObject *-- Collider : -collider
+Transform *-- Point : -position
+Collider *-- Point : -centroid
+ColliderPolygon *-- Point : -ArrayList<> vertices
+
+
+@enduml

@@ -1,5 +1,3 @@
-import java.awt.Point;
-
 public interface ITransform {
     /**
     * Move this ITransform by dPos.x(), dPos.y() and dlayer
