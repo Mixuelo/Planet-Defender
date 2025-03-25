@@ -2,10 +2,10 @@
     @author     Miguel Alvito
     @version    1.0 (2024-03-25)
 */
-public class Point 
+public class Point implements Cloneable
 {
-    double x;
-    double y;
+    private double x;
+    private double y;
 
     /** Construtor do Point
         @param x    o valor da abcissa do ponto
@@ -34,5 +34,22 @@ public class Point
     public String toString()
     {
         return "(" + this.x + "," + this.y + ")";
+    }
+
+    /** Clona este objeto, copiando as coordenadas */
+    @Override
+    public Point clone()
+    {
+        try
+        {
+            Point res = (Point) super.clone();
+            res.x = this.x;
+            res.y = this.y;
+            return res;
+        }
+        catch(CloneNotSupportedException e)
+        {
+            throw new InternalError();
+        }
     }
 }
