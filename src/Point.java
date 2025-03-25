@@ -78,4 +78,15 @@ public class Point implements Cloneable
             throw new InternalError();
         }
     }
+
+    /**
+     * Este método aplica um deslocamento em x e y ao ponto.
+     * @param dx {@code double}
+     * @param dy {@code double}
+     */
+    public void translation(double dx, double dy)
+    {
+        x += dx;
+        y += dy;
+    }
 }
