@@ -36,6 +36,32 @@ public class Point implements Cloneable
         return "(" + this.x + "," + this.y + ")";
     }
 
+    /** Verifica se este ponto e o objeto that são iguais
+        @param that o objeto a verificar
+    */
+    @Override
+    public boolean equals(Object that)
+    {
+        if(that == this) { return true; }
+        if(that == null) { return false; }
+        if(this.getClass() != that.getClass()) { return false; }   
+        return this.equals((Point) that);
+    }
+
+    /** Verifica se este ponto e o ponto that têm coordenadas iguais
+        @param that o outro ponto, em Point
+        @post       return == that.equals(this)
+    */
+    public boolean equals(Point that)
+    {
+        if(this.x <= that.x() + 1e-9 && this.x >= that.x() - 1e-9 &&
+           this.y <= that.y() + 1e-9 && this.y >= that.y() - 1e-9)
+        {
+            return true;
+        }
+        return false;
+    }
+
     /** Clona este objeto, copiando as coordenadas */
     @Override
     public Point clone()

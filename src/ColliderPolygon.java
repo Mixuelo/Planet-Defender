@@ -13,11 +13,44 @@ public class ColliderPolygon extends Collider
     */
     public ColliderPolygon(ArrayList<Point> pontos) 
     {
+        checkVertices(pontos);
         this.vertices = new ArrayList<Point>();
 
         for(Point p : pontos)
         {
             this.vertices.add(p.clone());
+        }
+    }
+
+    private static void checkVertices(ArrayList<Point> pontos) throws IllegalArgumentException
+    {
+        int n = pontos.size();
+
+        if(n < 3) 
+        {
+            throw new IllegalArgumentException("O poligono tem menos de 3 pontos: " + n);
+        }
+
+        ArrayList<LineSegment> edges = new ArrayList<LineSegment>();
+
+        for(int i = 0; i < n; i++)
+        {
+            LineSegment e = new LineSegment(pontos.get(i), pontos.get((i+1)%n));
+
+            if(e.pointCollinear(pontos.get((i+2)%n)))
+            {
+                throw new IllegalArgumentException("O poligono tem duas arestas colineares");
+            }
+
+            for(LineSegment other : edges)
+            {
+                if(e.segmentIntersect(other))
+                {
+                    throw new IllegalArgumentException("O poligono tem duas arestas que intersetam");
+                }
+            }
+
+            edges.add(e);
         }
     }
 
