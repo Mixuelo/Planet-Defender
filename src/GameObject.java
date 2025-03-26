@@ -3,9 +3,16 @@
  */
 public class GameObject implements IGameObject
 {
+    private String name;
     private Transform transform;
     private Collider collider;
-    private String name;
+
+    public GameObject(String n, Transform t, Collider c)
+    {
+        name = n;
+        transform = t;
+        collider = c;
+    }
 
     /**
      * @return the name of the GameObject

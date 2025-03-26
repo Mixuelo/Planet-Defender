@@ -8,13 +8,21 @@ public class Transform implements ITransform
     private double angle;
     private double scale;
 
+    public Transform(Point p, int l, double a, double s)
+    {
+        position = p;
+        layer = l;
+        angle = a;
+        scale = s;
+    }
+
     /**
      * Este método devolve uma string na forma "(x,y) layer angle scale", onde x e y correspondem às coordenadas cartesianas de position.
      * @return {@code String}
      */
     public String toString()
     {
-        return "(" + position.x() + "," + position.y() + ")" + layer + angle + scale;
+        return position.toString() + " " + layer + " " + angle + " " + scale;
     }
 
     /**
