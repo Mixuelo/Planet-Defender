@@ -6,7 +6,6 @@
 public class ColliderCircle extends Collider 
 {
     private double radius;
-    private double scale;
     
     /** Construtor do Collider em circulo
         @param center   o centro do circulo, em Point
@@ -18,13 +17,18 @@ public class ColliderCircle extends Collider
         this.centroid = center.clone();
         this.radius = radius;
         this.scale = 1;
+        this.angle = 0;
     }
 
     //TODO: DOCUMENTAR e TESTAR
     public ColliderCircle(Transform trans, Point center, double radius)
     {
-        this(center, radius);
-        this.scale(trans.scale());
+        this(trans.position(), radius);
+
+        this.radius *= trans.scale();
+        this.scale *= trans.scale();
+
+        this.angle = trans.angle();
     }
 
     /** Verificar se o raio é maior que 0, caso nao for dá-se uma exceção
@@ -59,27 +63,6 @@ public class ColliderCircle extends Collider
     public void rotate(double dAngle)
     {
         this.angle += dAngle;
-    }
-
-    //TODO: DOCUMENTAR e TESTAR
-    //@pre  s > 0
-    public void setScale(double s)
-    {
-        double d = s / this.scale;
-        this.scale(d);
-    }
-
-    //TODO: DOCUMENTAR e TESTAR
-    public void setCentroid(Point pos)
-    {
-        Point diff = pos.subNew(this.centroid);
-        this.centroid.addThis(diff);
-    }
-
-    //TODO: DOCUMENTAR e TESTAR
-    public void setAngle(double a)
-    {
-        this.angle = a;
     }
 
     /** Devolve uma representação em String do Collider, no formato: "<centroid> <radius>" */
