@@ -31,7 +31,7 @@ public class Transform implements ITransform
     /**
      * Rotate this ITransform from current orientation by dTheta
      * @param dTheta
-     * pos: 0 <= this.angle() < 360
+     * @pos 0 <= this.angle() < 360
      */
     public void rotate(double dTheta)
     {

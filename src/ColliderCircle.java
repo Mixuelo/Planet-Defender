@@ -36,6 +36,6 @@ public class ColliderCircle extends Collider
     @Override
     public String toString()
     {
-        return this.centroid + " " + this.radius;
+        return this.centroid + " " + String.format("%.2f", this.radius);
     }
 }

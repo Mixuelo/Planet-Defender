@@ -33,7 +33,7 @@ public class Point implements Cloneable
     @Override
     public String toString()
     {
-        return "(" + this.x + "," + this.y + ")";
+        return String.format("(%.2f,%.2f)", this.x, this.y);
     }
 
     /** Verifica se este ponto e o objeto that são iguais
@@ -77,6 +77,13 @@ public class Point implements Cloneable
         {
             throw new InternalError();
         }
+    }
+
+    /** Devolver hash code */ 
+    @Override
+    public int hashCode()
+    {
+        return super.hashCode();
     }
 
     /**
