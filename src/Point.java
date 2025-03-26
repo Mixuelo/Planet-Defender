@@ -29,16 +29,81 @@ public class Point implements Cloneable
         return this.y;
     }
 
-    //TODO: DOCUMENTAR
-    public Point sub(Point that)
+    //TODO: DOCUMENTAR e TESTAR
+    public Point subNew(Point that)
     {
         return new Point(this.x - that.x(), this.y - that.y());
     }
 
-    //TODO: DOCUMENTAR
-    public Point add(Point that)
+    //TODO: DOCUMENTAR e TESTAR
+    public Point addNew(Point that)
     {
         return new Point(this.x + that.x(), this.y + that.y());
+    }
+
+    //TODO: DOCUMENTAR e TESTAR
+    public Point multNew(Point that)
+    {
+        return new Point(this.x * that.x(), this.y * that.y());
+    }
+
+    //TODO: DOCUMENTAR e TESTAR
+    public Point multNew(double factor)
+    {
+        return new Point(this.x * factor, this.y * factor);
+    }
+
+    //TODO: DOCUMENTAR e TESTAR
+    public void subThis(Point that)
+    {
+        this.x -= that.x();
+        this.y -= that.y();
+    }
+
+    //TODO: DOCUMENTAR e TESTAR
+    public void addThis(Point that)
+    {
+        this.x += that.x();
+        this.y += that.y();
+    }
+
+    //TODO: DOCUMENTAR e TESTAR
+    public void multThis(Point that)
+    {
+        this.x *= that.x();
+        this.y *= that.y();
+    }
+
+    //TODO: DOCUMENTAR e TESTAR
+    public void multThis(double factor)
+    {
+        this.x *= factor;
+        this.y *= factor;
+    }
+
+    //TODO: DOCUMENTAR e TESTAR
+    public void rotateThis(Point axis, double dAngle)
+    {
+        this.subThis(axis);
+
+        double rads = Math.toRadians(dAngle);
+        double newX = this.x * Math.cos(rads) - this.y * Math.sin(rads);
+        double newY = this.x * Math.sin(rads) + this.y * Math.cos(rads);
+        this.x = newX;
+        this.y = newY;
+
+        this.addThis(axis);
+    }
+
+    //TODO: DOCUMENTAR e TESTAR
+    public void scaleThis(Point axis, double dScale)
+    {
+        Point diff = this.subNew(axis);
+        diff.multThis(dScale);
+        Point res = axis.addNew(diff);
+        
+        this.x = res.x();
+        this.x = res.y();
     }
 
     /** Devolve uma representação em String do ponto, no formato: "(<x>,<y>)" */
