@@ -40,9 +40,6 @@ public class Cliente
 
         GameObject gameObject = new GameObject(name, transform, collider);
         System.out.println(gameObject.toString());
-        System.out.println(gameObject.transform().toString());
-        System.out.println(gameObject.collider().toString());
-        // Todos os doubles devem ser impressos com 2 algarismos de precisão decimal.
 
         sc.close();
         return;

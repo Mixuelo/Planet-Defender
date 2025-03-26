@@ -39,4 +39,19 @@ public class ColliderPolygonTests
             new ColliderPolygon(new ArrayList<Point>());
         });
     }
+
+    @Test
+    public void testVertices()
+    {
+        ArrayList<Point> a1 = new ArrayList<Point>
+                (Arrays.asList(new Point(3,3), new Point(5,3), new Point(4,4)));
+        ArrayList<Point> a2 = new ArrayList<Point>
+                (Arrays.asList(new Point(3,3), new Point(5,3), new Point(8,8)));
+        ArrayList<Point> a3 = new ArrayList<Point>
+                (Arrays.asList(new Point(3,3), new Point(5,3), new Point(0,0)));
+
+        assertEquals(new ColliderPolygon(a1).vertices(), a1);
+        assertEquals(new ColliderPolygon(a2).vertices(), a2);
+        assertEquals(new ColliderPolygon(a3).vertices(), a3);
+    }
 }

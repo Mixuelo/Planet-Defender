@@ -23,12 +23,12 @@ public class GameObject implements IGameObject
     }
 
     /**
-     * Este método devolve uma string na forma "name".
+     * Este método devolve uma string com os dados do game object".
      * @return {@code String}
      */
     public String toString()
     {
-        return name;
+        return name + "\n" + transform.toString() + "\n" + collider.toString();
     }
 
     /**
