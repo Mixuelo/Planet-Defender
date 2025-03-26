@@ -23,15 +23,6 @@ public abstract class Collider implements ICollider
     //TODO: DOCUMENTAR
     public abstract void rotate(double dAngle);
 
-    //TODO: DOCUMENTAR
-    public abstract void setScale(double scale);
-
-    //TODO: DOCUMENTAR
-    public abstract void setCentroid(Point pos);
-
-    //TODO: DOCUMENTAR
-    public abstract void setAngle(double angle);
-
     /** Devolve uma representação em String do Collider */
     @Override
     public abstract String toString(); 
