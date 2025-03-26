@@ -7,15 +7,19 @@ public class Cliente
     public static void main(String[] args)
     {
         Scanner sc = new Scanner(System.in);
+        String s;
+        String [] aos;
 
         String name = sc.nextLine();
 
-        Transform transform = new Transform(new Point(sc.nextDouble(), sc.nextDouble()), sc.nextInt(), sc.nextDouble(), sc.nextDouble());
+        s = sc.nextLine();
+        aos = s.split(" ");
+        Transform transform = new Transform(new Point(Double.parseDouble(aos[0]), Double.parseDouble(aos[1])),
+                Integer.parseInt(aos[2]), Double.parseDouble(aos[3]), Double.parseDouble(aos[4]));
         Collider collider = null;
 
-        String buffer = sc.nextLine();
-        String line = sc.nextLine();
-        String [] aos = line.split(" ");
+        s = sc.nextLine();
+        aos = s.split(" ");
         if(aos.length == 3)
         {
             collider = new ColliderCircle(new Point(Double.parseDouble(aos[0]), Double.parseDouble(aos[1])), Double.parseDouble(aos[2]));
@@ -35,8 +39,10 @@ public class Cliente
         }
 
         GameObject gameObject = new GameObject(name, transform, collider);
-
-
+        System.out.println(gameObject.toString());
+        System.out.println(gameObject.transform().toString());
+        System.out.println(gameObject.collider().toString());
+        // Todos os doubles devem ser impressos com 2 algarismos de precisão decimal.
 
         sc.close();
         return;

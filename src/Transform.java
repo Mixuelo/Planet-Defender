@@ -22,7 +22,7 @@ public class Transform implements ITransform
      */
     public String toString()
     {
-        return "(" + position.x() + "," + position.y() + ")" + layer + angle + scale;
+        return position.toString() + " " + layer + " " + angle + " " + scale;
     }
 
     /**
