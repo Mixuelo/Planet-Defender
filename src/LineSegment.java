@@ -1,3 +1,8 @@
+/**
+ * Classe para segmentos.
+ * @author Miguel Alvito, Nicole Reis e Pedro Pinto
+ * @version 1.0 (2024-03-25)
+ */
 public class LineSegment extends Line
 {
     /** Construtor do Segmento 
@@ -25,7 +30,7 @@ public class LineSegment extends Line
         @param that o Point a verificar
         @pre        o Point that é colinear ao segmento
         @return     devolve true caso o Point that esteja no segmento, devolve false caso contrário
-        @see        https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect/
+        @see        <a href = https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect/ a>
      */
     public boolean pointOnSegment(Point that)
     {
@@ -41,7 +46,7 @@ public class LineSegment extends Line
     /** Verifica se o Segmento that interseta este segmento
         @param that o outro Segmento
         @return     devolve true caso o Segmento that intersetar este segmento, devolve false caso contrario
-        @see        https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect/
+        @see        <a href = https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect/ a>
      */
     public boolean segmentIntersect(LineSegment that)
     {

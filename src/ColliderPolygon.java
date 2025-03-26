@@ -1,15 +1,15 @@
 import java.util.ArrayList;
 
-/** Collider em forma de poligono
-    @author     Miguel Alvito
+/** Collider em forma de polígono.
+    @author     Miguel Alvito, Nicole Reis e Pedro Pinto
     @version    1.0 (2024-03-25)
 */
 public class ColliderPolygon extends Collider
 {
     private ArrayList<Point> vertices;
 
-    /** Contrutor do Collider em poligono
-        @param pontos   um ArrayList contendo os vertices do poligono, em Point, estes têm que estar ordenados 
+    /** Contrutor do Collider em polígono.
+        @param pontos   um {@code ArrayList} contendo os vértices do poligono, {@code Point}, estes têm que estar ordenados.
     */
     public ColliderPolygon(ArrayList<Point> pontos) 
     {
@@ -27,6 +27,11 @@ public class ColliderPolygon extends Collider
         this.scale = 1;
     }
 
+    /**
+     * Outro construtor do Collider em polígono.
+     * @param trans {@code Transform}
+     * @param pontos {@code ArrayList<Point>}
+     */
     public ColliderPolygon(Transform trans, ArrayList<Point> pontos)
     {
         this(pontos);
@@ -46,6 +51,11 @@ public class ColliderPolygon extends Collider
         this.scale = sDiff;
     }
 
+    /**
+     * Este método verifica se os vértices dados formam um polígono.
+     * @param pontos {@code ArrayList<Point>}
+     * @throws IllegalArgumentException
+     */
     private static void checkVertices(ArrayList<Point> pontos) throws IllegalArgumentException
     {
         int n = pontos.size();
@@ -78,7 +88,9 @@ public class ColliderPolygon extends Collider
         }
     }
 
-    /** Devolve uma copia do vetor de vertices do poligono */
+    /** Devolve uma cópia do vetor de vértices do polígono.
+     *  @return {@code ArrayList<Point>}
+     */
     public ArrayList<Point> vertices()
     {
         ArrayList<Point> res = new ArrayList<Point>(this.vertices.size());
@@ -89,7 +101,10 @@ public class ColliderPolygon extends Collider
         return res;
     }
 
-    //TODO: DOCUMENTAR
+    /**
+     * Este método calcula a área do polígono.
+     * @return área {@code double}
+     */
     private double calculateArea()
     {
         double res = 0;
@@ -106,7 +121,10 @@ public class ColliderPolygon extends Collider
         return res / 2;
     }
 
-    //TODO: DOCUMENTAR
+    /**
+     * Este método calcula o centroid do polígono.
+     * @return centroid {@code Point}
+     */
     private Point calculateCentroid()
     {
         double A = this.calculateArea();
@@ -130,7 +148,10 @@ public class ColliderPolygon extends Collider
         return c;
     }
 
-    //TODO: DOCUMENTAR e TESTAR
+    /**
+     * Este método altera a escala.
+     * @param dScale {@code double}
+     */
     public void scale(double dScale)
     {
         for(Point v : this.vertices)
@@ -140,7 +161,10 @@ public class ColliderPolygon extends Collider
         this.scale *= dScale;
     }
 
-    //TODO: DOCUMENTAR e TESTAR
+    /**
+     * Este método move o Collider.
+     * @param dPos {@code Point}
+     */
     public void move(Point dPos)
     {
         for(Point v : this.vertices)
@@ -149,7 +173,10 @@ public class ColliderPolygon extends Collider
         }
     }
 
-    //TODO: DOCUMENTAR e TESTAR
+    /**
+     * Este método faz a rotação do Collider em determinados graus.
+     * @param dAngle {@code double}
+     */
     public void rotate(double dAngle)
     {
         for(Point v : this.vertices)
@@ -159,7 +186,10 @@ public class ColliderPolygon extends Collider
         this.angle += dAngle;
     }
 
-    /** Devolve uma representação em String to Collider, no formato: "[<vertice0>,<vertice1>,...,<verticeN>]" */
+    /**
+     * Devolve uma representação em String to Collider, no formato: "[<vertice0>,<vertice1>,...,<verticeN>]"
+     * @return {@code String}
+     */
     @Override
     public String toString()
     {

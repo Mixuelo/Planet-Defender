@@ -12,4 +12,24 @@ public class PointTests
         assertEquals("(1.23,2.00)", new Point(1.234, 2).toString());
         assertEquals("(1.00,-9.88)", new Point(1, -9.876543).toString());
     }
+
+    // subNew
+
+    // addNew
+
+    // multNew(Point that)
+
+    // multNew(double factor)
+
+    // subThis
+
+    // addThis
+
+    // multThis(Point that)
+
+    // multThis(double factor)
+
+    // rotateThis
+
+    // scaleThis
 }

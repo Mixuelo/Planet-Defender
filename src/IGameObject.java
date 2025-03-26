@@ -1,4 +1,5 @@
-public interface IGameObject {
+public interface IGameObject
+{
     /**
     * @return the name of the GameObject
     */

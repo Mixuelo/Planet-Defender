@@ -1,5 +1,7 @@
 /**
- *
+ *  Classe para o GameObject.
+ *  @author Miguel Alvito, Nicole Reis e Pedro Pinto
+ *  @version 1.0 (2024-03-25)
  */
 public class GameObject implements IGameObject
 {
@@ -7,6 +9,12 @@ public class GameObject implements IGameObject
     private Transform transform;
     private Collider collider;
 
+    /**
+     * Contrutor de um GameObject.
+     * @param n {@code String}
+     * @param t {@code Transform}
+     * @param c {@code Collider}
+     */
     public GameObject(String n, Transform t, Collider c)
     {
         name = n;
@@ -15,7 +23,8 @@ public class GameObject implements IGameObject
     }
 
     /**
-     * @return the name of the GameObject
+     * Este método retorna o nome do GameObject.
+     * @return the name of the GameObject {@code String}
      */
     public String name()
     {
@@ -23,7 +32,7 @@ public class GameObject implements IGameObject
     }
 
     /**
-     * Este método devolve uma string com os dados do game object".
+     * Este método devolve uma string com os dados do GameObject.
      * @return {@code String}
      */
     public String toString()
@@ -32,7 +41,7 @@ public class GameObject implements IGameObject
     }
 
     /**
-     * @return the Transform of the GameObject
+     * @return the Transform of the GameObject {@code ITransform}
      */
     public ITransform transform()
     {
@@ -40,7 +49,7 @@ public class GameObject implements IGameObject
     }
 
     /**
-     * @return the Collider of the GameObject with its centroid at this.transform().position()
+     * @return the Collider of the GameObject with its centroid at this.transform().position() {@code ICollider}
      */
     public ICollider collider()
     {

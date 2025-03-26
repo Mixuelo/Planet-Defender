@@ -1,5 +1,7 @@
 /**
- *
+ * Classe para Transform.
+ * @author Miguel Alvito, Nicole Reis e Pedro Pinto
+ * @version 1.0 (2024-03-25)
  */
 public class Transform implements ITransform
 {
@@ -8,6 +10,13 @@ public class Transform implements ITransform
     private double angle;
     private double scale;
 
+    /**
+     * Construtor para Transform.
+     * @param p {@code Point}
+     * @param l {@code int}
+     * @param a {@code double}
+     * @param s {@code double}
+     */
     public Transform(Point p, int l, double a, double s)
     {
         position = p;

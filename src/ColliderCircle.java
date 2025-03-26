@@ -1,5 +1,5 @@
-/** Collider em forma de circulo
-    @author     Miguel Alvito
+/** Collider em forma de círculo
+    @author     Miguel Alvito, Nicole Reis e Pedro Pinto
     @version    1.0 (2024-03-25)
     @inv        o raio do circulo é maior que 0
 */
@@ -7,7 +7,7 @@ public class ColliderCircle extends Collider
 {
     private double radius;
     
-    /** Construtor do Collider em circulo
+    /** Construtor do Collider em círculo.
         @param center   o centro do circulo, em Point
         @param radius   o raio do circulo, em double
     */
@@ -20,7 +20,12 @@ public class ColliderCircle extends Collider
         this.angle = 0;
     }
 
-    //TODO: DOCUMENTAR e TESTAR
+    /**
+     * Outro construtor do Collider em círculo.
+     * @param trans {@code Transform}
+     * @param center {@code Point}
+     * @param radius {@code double}
+     */
     public ColliderCircle(Transform trans, Point center, double radius)
     {
         this(trans.position(), radius);
@@ -31,7 +36,7 @@ public class ColliderCircle extends Collider
         this.angle = trans.angle();
     }
 
-    /** Verificar se o raio é maior que 0, caso nao for dá-se uma exceção
+    /** Verificar se o raio é maior que 0, caso não for dá-se uma exceção.
         @param radius   o valor a verificar
     */
     private static void checkRadius(double radius) throws IllegalArgumentException
@@ -39,33 +44,46 @@ public class ColliderCircle extends Collider
         if(radius <= 0) { throw new IllegalArgumentException("O raio dado não é maior que 0: " + radius); }
     }
 
-    /** Devolve o raio do circulo */ 
+    /** Devolve o raio do círculo.
+     * @return radius {@code double}
+     */
     public double radius()
     {
         return this.radius;
     }
 
-    //TODO: DOCUMENTAR e TESTAR
-    //@pre  s > 0
+    /**
+     * Este método múltiplica o raio e a escala por um nº dado.
+     * @pre s > 0
+     * @param dScale {@code double}
+     */
     public void scale(double dScale)
     {
         this.radius *= dScale;
         this.scale *= dScale;
     }
 
-    //TODO: DOCUMENTAR e TESTAR
+    /**
+     * Este método move o Collider.
+     * @param dPos {@code Point}
+     */
     public void move(Point dPos)
     {
         this.centroid.addThis(dPos);
     }
 
-    //TODO: DOCUMENTAR
+    /**
+     * Este método faz a rotação do Collider em determinados graus.
+     * @param dAngle {@code double}
+     */
     public void rotate(double dAngle)
     {
-        this.angle += dAngle;
+        this.angle = (this.angle + dAngle) % 360;
     }
 
-    /** Devolve uma representação em String do Collider, no formato: "<centroid> <radius>" */
+    /** Devolve uma representação em String do Collider, no formato: "<centroid> <radius>"
+     * @return {@code String}
+     */
     @Override
     public String toString()
     {

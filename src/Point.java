@@ -1,5 +1,5 @@
-/** Ponto representado por coordenadas cartesianas
-    @author     Miguel Alvito
+/** Ponto representado por coordenadas cartesianas.
+    @author     Miguel Alvito, Nicole Reis e Pedro Pinto
     @version    1.0 (2024-03-25)
 */
 public class Point implements Cloneable
@@ -29,59 +29,91 @@ public class Point implements Cloneable
         return this.y;
     }
 
-    //TODO: DOCUMENTAR e TESTAR
+    /**
+     * Este método subtrai das coordenadas do ponto as coordenadas de outro ponto.
+     * @param that {@code Point}
+     * @return newPoint {@code Point}
+     */
     public Point subNew(Point that)
     {
         return new Point(this.x - that.x(), this.y - that.y());
     }
 
-    //TODO: DOCUMENTAR e TESTAR
+    /**
+     * Este método adiciona às coordenadas do ponto as coordenadas de outro ponto.
+     * @param that {@code Point}
+     * @return newPoint {@code Point}
+     */
     public Point addNew(Point that)
     {
         return new Point(this.x + that.x(), this.y + that.y());
     }
 
-    //TODO: DOCUMENTAR e TESTAR
+    /**
+     * Este método multiplica as coordenadas do ponto às coordenadas de outro ponto.
+     * @param that {@code Point}
+     * @return newPoint {@code Point}
+     */
     public Point multNew(Point that)
     {
         return new Point(this.x * that.x(), this.y * that.y());
     }
 
-    //TODO: DOCUMENTAR e TESTAR
+    /**
+     * Este método multiplica as coordenadas do ponto por um fator.
+     * @param factor {@code double}
+     * @return newPoint {@code Point}
+     */
     public Point multNew(double factor)
     {
         return new Point(this.x * factor, this.y * factor);
     }
 
-    //TODO: DOCUMENTAR e TESTAR
+    /**
+     * Este método subtrai das coordenadas do ponto as coordenadas de outro ponto.
+     * @param that {@code Point}
+     */
     public void subThis(Point that)
     {
         this.x -= that.x();
         this.y -= that.y();
     }
 
-    //TODO: DOCUMENTAR e TESTAR
+    /**
+     * Este método adiciona às coordenadas do ponto as coordenadas de outro ponto.
+     * @param that {@code Point}
+     */
     public void addThis(Point that)
     {
         this.x += that.x();
         this.y += that.y();
     }
 
-    //TODO: DOCUMENTAR e TESTAR
+    /**
+     * Este método multiplica as coordenadas do ponto às coordenadas de outro ponto.
+     * @param that {@code Point}
+     */
     public void multThis(Point that)
     {
         this.x *= that.x();
         this.y *= that.y();
     }
 
-    //TODO: DOCUMENTAR e TESTAR
+    /**
+     * Este método multiplica as coordenadas do ponto por um fator.
+     * @param factor {@code double}
+     */
     public void multThis(double factor)
     {
         this.x *= factor;
         this.y *= factor;
     }
 
-    //TODO: DOCUMENTAR e TESTAR
+    /**
+     * Este método roda o ponto.
+     * @param axis {@code Point}
+     * @param dAngle {@code double}
+     */
     public void rotateThis(Point axis, double dAngle)
     {
         this.subThis(axis);
@@ -95,7 +127,11 @@ public class Point implements Cloneable
         this.addThis(axis);
     }
 
-    //TODO: DOCUMENTAR e TESTAR
+    /**
+     * Este método altera a escala.
+     * @param axis {@code Point}
+     * @param dScale {@code double}
+     */
     public void scaleThis(Point axis, double dScale)
     {
         Point diff = this.subNew(axis);

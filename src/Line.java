@@ -1,9 +1,14 @@
-public class Line 
+/**
+ * Classe para retas.
+ * @author Miguel Alvito, Nicole Reis e Pedro Pinto
+ * @version 1.0 (2024-03-25)
+ */
+public class Line
 {
     protected Point p1;
     protected Point p2;
 
-    /** Construtor da reta
+    /** Construtor da reta.
         @param p1   o primeiro Point
         @param p2   o segundo Point
     */
@@ -14,7 +19,7 @@ public class Line
         this.p2 = p2.clone();
     }
 
-    /** Verifica se os dois pontos são iguais
+    /** Verifica se os dois pontos são iguais.
         @param p1   o primeiro Point
         @param p2   o segundo Point
     */
@@ -37,7 +42,7 @@ public class Line
     /** Descobre a orientação do tuplo de pontos ordenados (this.p1, this.p2, that)
         @param that o outro Point
         @return     devolve a orientação do tuplo, atravéz de um enumerador do tipo orientation
-        @see        https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect/
+        @see        <a href = "https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect/" a>
      */
     protected orientation pointOrientation(Point that)
     {

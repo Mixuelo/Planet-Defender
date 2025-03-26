@@ -22,16 +22,16 @@ public class Cliente
         aos = s.split(" ");
         if(aos.length == 3)
         {
-            collider = new ColliderCircle(new Point(Double.parseDouble(aos[0]), Double.parseDouble(aos[1])), Double.parseDouble(aos[2]));
+            collider = new ColliderCircle(transform, new Point(Double.parseDouble(aos[0]), Double.parseDouble(aos[1])), Double.parseDouble(aos[2]));
         }
         else if (aos.length >= 6)
         {
             ArrayList<Point> points = new ArrayList<Point>();
-            for(int i = 0; i < aos.length-1; i++)
+            for(int i = 0; i < aos.length; i+=2)
             {
                 points.add(new Point(Double.parseDouble(aos[i]), Double.parseDouble(aos[i+1])));
             }
-            collider = new ColliderPolygon(points);
+            collider = new ColliderPolygon(transform, points);
         }
         else
         {

@@ -1,4 +1,5 @@
-public interface ICollider {
+public interface ICollider
+{
     Point centroid();
 
     // ...

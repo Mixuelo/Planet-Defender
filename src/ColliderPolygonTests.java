@@ -54,4 +54,14 @@ public class ColliderPolygonTests
         assertEquals(new ColliderPolygon(a2).vertices(), a2);
         assertEquals(new ColliderPolygon(a3).vertices(), a3);
     }
+
+    // calculateArea
+
+    // calculateCentroid
+
+    // scale
+
+    // move
+
+    // rotate
 }

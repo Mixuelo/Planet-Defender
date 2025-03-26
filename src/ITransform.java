@@ -1,4 +1,5 @@
-public interface ITransform {
+public interface ITransform
+{
     /**
     * Move this ITransform by dPos.x(), dPos.y() and dlayer
     * @param dPos the 2D differential to move
