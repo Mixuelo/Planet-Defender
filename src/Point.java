@@ -29,6 +29,18 @@ public class Point implements Cloneable
         return this.y;
     }
 
+    //TODO: DOCUMENTAR
+    public Point sub(Point that)
+    {
+        return new Point(this.x - that.x(), this.y - that.y());
+    }
+
+    //TODO: DOCUMENTAR
+    public Point add(Point that)
+    {
+        return new Point(this.x + that.x(), this.y + that.y());
+    }
+
     /** Devolve uma representação em String do ponto, no formato: "(<x>,<y>)" */
     @Override
     public String toString()
