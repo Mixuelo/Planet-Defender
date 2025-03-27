@@ -1,0 +1,110 @@
+@startuml
+
++interface IGameObject {
+    name() : String
+    transform() : ITransform
+    collider() : ICollider
+}
+
++interface ITransform {
+    +move() : void
+    +rotate() : void
+    +scale() : void
+
+    +position() : Point
+    +layer() : int
+    +angle() : double
+    +scale() : double
+}
+
++interface ICollider {
+    centroid() : Point
+}
+
++class GameObject implements IGameObject{
+    -name : String
+
+    +move() : void
+    +rotate() : void
+    +scale() : void
+
+    +toString() : String
+}
+
++class Transform implements ITransform {
+    -layer : int
+    -angle : double
+    -scale : double
+
+    +toString() : String
+}
+
++abstract class Collider implements ICollider {
+    +{abstract} move() : void
+    +{abstract} rotate() : void
+    +{abstract} scale() : void
+
+    +toString() : String
+}
+
++class Point {
+    -x : double
+    -y : double
+
+    +addNew() : Point
+    +subNew() : Point
+    +multNew() : Point
+    +addThis() : void
+    +subThis() : void
+    +multThis() : void
+    +rotateThis() : void
+    +scaleThis() : void
+
+    +x() : double
+    +y() : double
+
+    +toString() : String
+    +equals() : boolean
+    +clone() : Point
+}
+
++class ColliderCircle extends Collider {
+    -radius : double
+
+    -{static} checkRadius() : void
+
+    +radius() : double
+}
+
++class ColliderPolygon extends Collider {
+    -{static} checkVertices() : void
+    -calculateArea() : double
+    -calculateCentroid() : Point
+
+    +vertices() : ArrayList<Point>
+}
+
++class Line{
+    -{static} checkEquals() : void
+    #pointOrientation() : orientation
+    +pointCollinear : boolean
+}
+
++class LineSegment extends Line{
+    +pointOnSegment() : boolean
+    +segmentIntersect() : boolean
+
+    +p1() : Point
+    +p2() : Point
+
+    +toString() : String
+}
+
+GameObject *-- Transform : -transform
+GameObject *-- Collider : -collider
+Transform *-- Point : -position
+Collider *-- Point : -centroid
+ColliderPolygon *-- Point : -ArrayList<> vertices
+Line *-- Point : #p1, p2
+
+@enduml
