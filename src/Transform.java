@@ -41,7 +41,7 @@ public class Transform implements ITransform
      */
     public void move(Point dPos, int dlayer)
     {
-        position.translation(dPos.x(), dPos.y());
+        position.addThis(dPos);
         layer += dlayer;
     }
 

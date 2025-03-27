@@ -26,10 +26,4 @@ public class ColliderCircleTests
             new ColliderCircle(new Point(0, 0), -123);
         });
     }
-
-    // scale
-
-    // move
-
-    // rotate
 }
