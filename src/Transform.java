@@ -52,6 +52,7 @@ public class Transform implements ITransform
      */
     public void rotate(double dTheta)
     {
+        this.angle += dTheta;
         this.angle %= 360;
     }
 

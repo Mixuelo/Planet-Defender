@@ -64,18 +64,12 @@ public class ColliderPolygonTests
         assertEquals("(9.00,7.00) (1.00,7.00) (1.00,11.00) (9.00,11.00)", c.toString());
     }
 
+    /*
     @Test
     public void scaleTest()
-    {/*
-        assertEquals(20, new ColliderPolygon(new ArrayList<Point>(
-                Arrays.asList(new Point (1, 1), new Point(5, 1),
-                        new Point(5, 6), new Point (1, 6)).scale())
-        ));
-        assertEquals(30, new ColliderPolygon(new ArrayList<Point>(
-                Arrays.asList(new Point (1, 1), new Point(11, 1),
-                        new Point(11, 4), new Point (1, 4)))
-        ));*/
+    {
     }
+    */
 
     // move
 
