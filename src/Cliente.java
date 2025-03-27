@@ -35,7 +35,8 @@ public class Cliente
         }
         else
         {
-            // lançar exceção
+            sc.close();
+            throw new IllegalArgumentException("Número de valores inválido: " + aos.length);
         }
 
         GameObject gameObject = new GameObject(name, transform, collider);

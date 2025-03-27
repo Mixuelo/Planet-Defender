@@ -41,18 +41,18 @@ public class GameObject implements IGameObject
     }
 
     /**
-     * @return the Transform of the GameObject {@code ITransform}
+     * @return the Transform of the GameObject {@code Transform}
      */
-    public ITransform transform()
+    public Transform transform()
     {
-        return (ITransform) transform;
+        return (Transform) transform;
     }
 
     /**
-     * @return the Collider of the GameObject with its centroid at this.transform().position() {@code ICollider}
+     * @return the Collider of the GameObject with its centroid at this.transform().position() {@code Collider}
      */
-    public ICollider collider()
+    public Collider collider()
     {
-        return (ICollider) collider;
+        return (Collider) collider;
     }
 }
