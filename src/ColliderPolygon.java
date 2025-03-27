@@ -172,6 +172,7 @@ public class ColliderPolygon extends Collider
         {
             v.addThis(dPos);
         }
+        this.centroid.addThis(dPos);
     }
 
     /**
@@ -185,6 +186,7 @@ public class ColliderPolygon extends Collider
             v.rotateThis(this.centroid, dAngle);
         }
         this.angle += dAngle;
+        this.angle %= 360;
     }
 
     /**

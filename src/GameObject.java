@@ -55,4 +55,22 @@ public class GameObject implements IGameObject
     {
         return (Collider) collider;
     }
+
+    public void move(Point dPos, int dlayer)
+    {
+        this.transform.move(dPos, dlayer);
+        this.collider.move(dPos);
+    }
+
+    public void rotate(double dTheta)
+    {
+        this.transform.rotate(dTheta);
+        this.collider.rotate(dTheta);
+    }
+
+    public void scale(double dScale)
+    {
+        this.transform.scale(dScale);
+        this.collider.scale(dScale);
+    }
 }
