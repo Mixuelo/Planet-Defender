@@ -40,6 +40,29 @@ public class Cliente
         }
 
         GameObject gameObject = new GameObject(name, transform, collider);
+
+        while(sc.hasNextLine())
+        {
+            s = sc.nextLine();
+            aos = s.split(" ");
+            if(aos[0].equals("move"))
+            {
+                //gameObject.move(Double.parseDouble(aos[1]), Double.parseDouble(aos[2]), Integer.parseInt(aos[3]));
+            }
+            else if(aos[0].equals("rotate"))
+            {
+                //gameObject.rotate(Integer.parseInt(aos[1]));
+            }
+            else if(aos[0].equals("scale"))
+            {
+                //gameObject.scale(Double.parseDouble(aos[1]));
+            }
+            else
+            {
+                throw new IllegalArgumentException("Comando inválido");
+            }
+        }
+
         System.out.println(gameObject.toString());
 
         sc.close();

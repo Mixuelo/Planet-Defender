@@ -194,16 +194,5 @@ public class Point implements Cloneable
     public int hashCode()
     {
         return super.hashCode();
-    }
-
-    /**
-     * Este método aplica um deslocamento em x e y ao ponto.
-     * @param dx {@code double}
-     * @param dy {@code double}
-     */
-    public void translation(double dx, double dy)
-    {
-        x += dx;
-        y += dy;
-    }
+    } 
 }
