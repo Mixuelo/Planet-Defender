@@ -29,7 +29,19 @@ public class PointTests
 
     // multThis(double factor)
 
-    // rotateThis
+    @Test
+    public void testRotateThis()
+    {
+        Point p1 = new Point(0,1);
+        p1.rotateThis(new Point(0,0), 90);
+        assertEquals("(-1.00,0.00)", p1.toString());
+    }
 
-    // scaleThis
+    @Test
+    public void testScaleThis()
+    {
+        Point p1 = new Point(0,1);
+        p1.scaleThis(new Point(0,0), 3);
+        assertEquals("(0.00,3.00)", p1.toString());
+    }
 }

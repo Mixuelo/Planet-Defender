@@ -8,11 +8,11 @@ public class ColliderPolygonTests
     @Test
     public void testToString()
     {
-        assertEquals("[(1.00,1.00), (3.00,1.00), (2.00,2.00)]", new ColliderPolygon(new ArrayList<Point>
+        assertEquals("(1.00,1.00) (3.00,1.00) (2.00,2.00)", new ColliderPolygon(new ArrayList<Point>
             (Arrays.asList(new Point(1,1), new Point(3,1), new Point(2,2)))).toString());
-        assertEquals("[(1.00,1.00), (3.00,1.00), (6.00,6.00)]", new ColliderPolygon(new ArrayList<Point>
+        assertEquals("(1.00,1.00) (3.00,1.00) (6.00,6.00)", new ColliderPolygon(new ArrayList<Point>
             (Arrays.asList(new Point(1,1), new Point(3,1), new Point(6,6)))).toString());
-        assertEquals("[(1.00,1.00), (3.00,1.00), (-2.00,-2.00)]", new ColliderPolygon(new ArrayList<Point>
+        assertEquals("(1.00,1.00) (3.00,1.00) (-2.00,-2.00)", new ColliderPolygon(new ArrayList<Point>
             (Arrays.asList(new Point(1,1), new Point(3,1), new Point(-2,-2)))).toString());
     }
 
@@ -53,6 +53,15 @@ public class ColliderPolygonTests
         assertEquals(new ColliderPolygon(a1).vertices(), a1);
         assertEquals(new ColliderPolygon(a2).vertices(), a2);
         assertEquals(new ColliderPolygon(a3).vertices(), a3);
+    }
+
+    @Test
+    public void testTransformConstructor()
+    {
+        Transform t = new Transform(new Point(5,9), 0, 90, 2);
+        ColliderPolygon c = new ColliderPolygon(t, new ArrayList<Point>(
+            Arrays.asList(new Point(2,2), new Point(2,6), new Point(4,6), new Point(4,2))));
+        assertEquals("(9.00,7.00) (1.00,7.00) (1.00,11.00) (9.00,11.00)", c.toString());
     }
 
     // calculateArea

@@ -22,7 +22,7 @@ public class ColliderPolygon extends Collider
         }
 
         this.centroid = this.calculateCentroid();
-        
+
         this.angle = 0;
         this.scale = 1;
     }
@@ -39,6 +39,7 @@ public class ColliderPolygon extends Collider
         Point pDiff = trans.position().subNew(this.centroid);
         double aDiff = trans.angle();
         double sDiff = trans.scale();
+        this.centroid = trans.position().clone();
 
         for(Point v : this.vertices)
         {
@@ -46,7 +47,7 @@ public class ColliderPolygon extends Collider
             v.rotateThis(this.centroid, aDiff);
             v.scaleThis(this.centroid, sDiff);
         }
-        
+
         this.angle = aDiff;
         this.scale = sDiff;
     }
@@ -193,6 +194,13 @@ public class ColliderPolygon extends Collider
     @Override
     public String toString()
     {
-        return this.vertices.toString();
+        String str = "";
+        int n = this.vertices.size();
+        for(int i = 0; i < n; i++)
+        {
+            str += this.vertices.get(i).toString();
+            if(i < n-1) { str += " "; }
+        }
+        return str;
     }
 }

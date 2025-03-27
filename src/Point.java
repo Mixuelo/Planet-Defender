@@ -134,12 +134,9 @@ public class Point implements Cloneable
      */
     public void scaleThis(Point axis, double dScale)
     {
-        Point diff = this.subNew(axis);
-        diff.multThis(dScale);
-        Point res = axis.addNew(diff);
-        
-        this.x = res.x();
-        this.x = res.y();
+        this.subThis(axis);
+        this.multThis(dScale);
+        this.addThis(axis);
     }
 
     /** Devolve uma representação em String do ponto, no formato: "(<x>,<y>)" */
