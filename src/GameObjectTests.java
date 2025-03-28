@@ -14,6 +14,7 @@ public class GameObjectTests
         GameObject go = new GameObject("Alien01", new Transform(new Point(1, 2), 1, 0, 1), new ColliderCircle(new Point(2, 2), 3));
         go.move(new Point(1, 1), 0);
         go.rotate(90);
+        System.out.println(go.transform().position().toString());
         assertEquals("Alien01\n(2.00,3.00) 2 90.00 1.00\n(1.00,2.00) 3.00", go.toString());
     }
 
@@ -36,4 +37,5 @@ public class GameObjectTests
         go.scale(1);
         assertEquals("PlayerOne\n(10.00,16.00) 2 90.00 2.00\n(14.00,14.00) (6.00,14.00) (6.00,18.00) (14.00,18.00)", go.toString());
     }
+
 }
