@@ -59,8 +59,10 @@ public class ColliderCircle extends Collider
      */
     public void scale(double dScale)
     {
-        this.radius *= dScale;
-        this.scale *= dScale;
+        double finalScale = this.scale + dScale;
+        double mult = finalScale / this.scale;
+        this.radius *= mult;
+        this.scale *= mult;
     }
 
     /**

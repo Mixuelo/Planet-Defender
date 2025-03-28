@@ -155,11 +155,13 @@ public class ColliderPolygon extends Collider
      */
     public void scale(double dScale)
     {
+        double finalScale = this.scale + dScale;
+        double mult = finalScale / this.scale;
         for(Point v : this.vertices)
         {
-            v.scaleThis(this.centroid, dScale);
+            v.scaleThis(this.centroid, mult);
         }
-        this.scale *= dScale;
+        this.scale += dScale;
     }
 
     /**
