@@ -45,7 +45,7 @@ public class GameObject implements IGameObject
      */
     public Transform transform()
     {
-        return (Transform) transform;
+        return transform;
     }
 
     /**
@@ -53,7 +53,7 @@ public class GameObject implements IGameObject
      */
     public Collider collider()
     {
-        return (Collider) collider;
+        return collider;
     }
 
     public void move(Point dPos, int dlayer)
