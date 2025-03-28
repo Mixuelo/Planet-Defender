@@ -6,6 +6,4 @@ SEMPRE TESTAR O CODIGO ANTES DE DAR PUSH
 
 ## TODO
 
-- Implementar restantes classes
-- Fazer o Cliente
 - Escrever Testes
