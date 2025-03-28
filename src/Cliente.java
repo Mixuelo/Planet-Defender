@@ -40,7 +40,6 @@ public class Cliente
         }
 
         GameObject gameObject = new GameObject(name, transform, collider);
-
         while(sc.hasNextLine())
         {
             s = sc.nextLine();
@@ -71,3 +70,4 @@ public class Cliente
         return;
     }
 }
+

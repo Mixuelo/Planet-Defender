@@ -168,6 +168,7 @@ public class ColliderPolygon extends Collider
      */
     public void move(Point dPos)
     {
+
         for(Point v : this.vertices)
         {
             v.addThis(dPos);
