@@ -26,4 +26,20 @@ public class ColliderCircleTests
             new ColliderCircle(new Point(0, 0), -123);
         });
     }
+
+    @Test
+    public void moveTest()
+    {
+        ColliderCircle cc = new ColliderCircle(new Transform(new Point(0, 0), 2, 0, 1), new Point(1, 2), 3);
+        cc.move(new Point(3, 7));
+        assertEquals("(3.00,7.00) 3.00", cc.toString());
+    }
+
+    @Test
+    public void scaleTest()
+    {
+        ColliderCircle cc = new ColliderCircle(new Transform(new Point(0, 0), 2, 0, 1), new Point(1, 2), 3);
+        cc.scale(1);
+        assertEquals("(0.00,0.00) 6.00", cc.toString());
+    }
 }

@@ -3,7 +3,11 @@ import org.junit.jupiter.api.Test;
 
 public class LineTests
 {
-    // checkEquals
+    @Test
+    public void pointOrientationTest()
+    {
+
+    }
 
     // pointOrientation
 

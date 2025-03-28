@@ -56,18 +56,31 @@ public class GameObject implements IGameObject
         return collider;
     }
 
+    /**
+     * Este método move o GameObject.
+     * @param dPos {@code Point}
+     * @param dlayer {@code int}
+     */
     public void move(Point dPos, int dlayer)
     {
         this.transform.move(dPos, dlayer);
         this.collider.move(dPos);
     }
 
+    /**
+     * Este método roda o GameObject.
+     * @param dTheta {@code double}
+     */
     public void rotate(double dTheta)
     {
         this.transform.rotate(dTheta);
         this.collider.rotate(dTheta);
     }
 
+    /**
+     * Este método atualiza a escala do GameObject.
+     * @param dScale {@code double}
+     */
     public void scale(double dScale)
     {
         this.transform.scale(dScale);

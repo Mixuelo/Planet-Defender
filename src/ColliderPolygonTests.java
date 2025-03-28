@@ -64,14 +64,33 @@ public class ColliderPolygonTests
         assertEquals("(9.00,7.00) (1.00,7.00) (1.00,11.00) (9.00,11.00)", c.toString());
     }
 
-    /*
+
     @Test
     public void scaleTest()
     {
+        ColliderPolygon cp = new ColliderPolygon(new Transform(new Point(7, 9), 0, 0, 1), new ArrayList<>(
+                Arrays.asList(new Point(2, 2), new Point(2, 6), new Point(4, 6), new Point(4, 2))));
+        cp.scale(1);
+        assertEquals("(5.00,5.00) (5.00,13.00) (9.00,13.00) (9.00,5.00)", cp.toString());
+
     }
-    */
 
-    // move
+    @Test
+    public void moveTest()
+    {
+        ColliderPolygon cp = new ColliderPolygon(new Transform(new Point(7, 9), 0, 0, 1), new ArrayList<>(
+                Arrays.asList(new Point(2, 2), new Point(2, 6), new Point(4, 6), new Point(4, 2))));
+        cp.move(new Point(3, 7));
+        assertEquals("(9.00,14.00) (9.00,18.00) (11.00,18.00) (11.00,14.00)", cp.toString());
 
-    // rotate
+    }
+
+    @Test
+    public void rotateTest()
+    {
+        ColliderPolygon cp = new ColliderPolygon(new Transform(new Point(7, 9), 0, 0, 1), new ArrayList<>(
+                Arrays.asList(new Point(2, 2), new Point(2, 6), new Point(4, 6), new Point(4, 2))));
+        cp.rotate(90);
+        assertEquals("(9.00,8.00) (5.00,8.00) (5.00,10.00) (9.00,10.00)", cp.toString());
+    }
 }
