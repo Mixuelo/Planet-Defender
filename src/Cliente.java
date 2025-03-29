@@ -63,9 +63,7 @@ public class Cliente
                 throw new IllegalArgumentException("Comando inválido");
             }
         }
-
         System.out.println(gameObject.toString());
-
         sc.close();
         return;
     }

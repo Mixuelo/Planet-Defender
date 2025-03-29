@@ -13,21 +13,58 @@ public class PointTests
         assertEquals("(1.00,-9.88)", new Point(1, -9.876543).toString());
     }
 
-    // subNew
+    @Test
+    public void testSubNew()
+    {
+        assertEquals(new Point(4, 2), (new Point(5, 4).subNew(new Point(1, 2))));
+    }
 
-    // addNew
+    @Test
+    public void testAddNew()
+    {
+        assertEquals(new Point(4, 6), (new Point(1, 2)).addNew(new Point(3, 4)));
+    }
 
-    // multNew(Point that)
+    @Test
+    public void testMultNew()
+    {
+        assertEquals(new Point(8, 15), (new Point(2.0, 3.0)).multNew(new Point(4.0, 5.0)));
+        assertEquals(new Point(10, 12), (new Point(5, 6)).multNew(2));
+    }
 
-    // multNew(double factor)
+    @Test
+    public void testSubThis()
+    {
+        Point p1 = new Point(5, 5);
+        Point p2 = new Point(1, 2);
+        p1.subThis(p2);
+        assertEquals(4, p1.x());
+        assertEquals(3, p1.y());
+    }
 
-    // subThis
+    @Test
+    public void testAddThis()
+    {
+        Point p1 = new Point(1, 2);
+        Point p2 = new Point(3, 4);
+        p1.addThis(p2);
+        assertEquals(4, p1.x());
+        assertEquals(6, p1.y());
+    }
 
-    // addThis
+    @Test
+    public void testMultThisWithPoint()
+    {
+        Point p1 = new Point(2, 3);
+        Point p2 = new Point(4, 5);
+        p1.multThis(p2);
+        assertEquals(8, p1.x());
+        assertEquals(15, p1.y());
 
-    // multThis(Point that)
-
-    // multThis(double factor)
+        p1.multThis(10);
+        assertEquals(80, p1.x());
+        assertEquals(150, p1.y());
+    }
 
     @Test
     public void testRotateThis()
