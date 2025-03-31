@@ -100,8 +100,8 @@
     +toString() : String
 }
 
-GameObject *-- Transform : -transform
-GameObject *-- Collider : -collider
+GameObject o-- Transform : -transform
+GameObject o-- Collider : -collider
 Transform *-- Point : -position
 Collider *-- Point : -centroid
 ColliderPolygon *-- Point : -ArrayList<> vertices
