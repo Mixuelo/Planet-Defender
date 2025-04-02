@@ -86,4 +86,18 @@ public class GameObject implements IGameObject
         this.transform.scale(dScale);
         this.collider.scale(dScale);
     }
+
+    /**
+     * Verifica se existe colisão entre este GameObject e outro GameObject.
+     * @param go {@code GameObject}
+     * @return true, se houver colisão, false, se não houver colisão {@code boolean}
+     */
+    public boolean checkColision(GameObject go)
+    {
+        if(go.transform.layer() != this.transform.layer()) return false;
+
+        // IMPLEMENTAR
+
+        return false;
+    }
 }

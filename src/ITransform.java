@@ -1,3 +1,10 @@
+/*
+- ITransform:
+	- move(), rotate(), scale() -> movimenta, roda e escala os gameobjects; devem ser chamados
+	                               para cada um dos gameobjects na lista do gameengine em cada frame
+
+ */
+
 public interface ITransform
 {
     /**
