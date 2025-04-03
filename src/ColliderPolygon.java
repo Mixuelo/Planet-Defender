@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class ColliderPolygon extends Collider
 {
     private ArrayList<Point> vertices;
+    private ArrayList<LineSegment> edges;
 
     /** Contrutor do Collider em polígono.
         @param pontos   um {@code ArrayList} contendo os vértices do poligono, {@code Point}, estes têm que estar ordenados.
@@ -22,6 +23,15 @@ public class ColliderPolygon extends Collider
         }
 
         this.centroid = this.calculateCentroid();
+
+        int n = this.vertices.size();
+        this.edges = new ArrayList<LineSegment>();
+
+        for(int i = 0; i < n; i++)
+        {
+            LineSegment e = new LineSegment(this.vertices.get(i), this.vertices.get((i+1)%n));
+            this.edges.add(e);
+        }
 
         this.angle = 0;
         this.scale = 1;
@@ -46,6 +56,15 @@ public class ColliderPolygon extends Collider
             v.addThis(pDiff);
             v.rotateThis(this.centroid, aDiff);
             v.scaleThis(this.centroid, sDiff);
+        }
+
+        int n = this.vertices.size();
+        this.edges = new ArrayList<LineSegment>();
+
+        for(int i = 0; i < n; i++)
+        {
+            LineSegment e = new LineSegment(this.vertices.get(i), this.vertices.get((i+1)%n));
+            this.edges.add(e);
         }
 
         this.angle = aDiff;
@@ -161,6 +180,10 @@ public class ColliderPolygon extends Collider
         {
             v.scaleThis(this.centroid, mult);
         }
+        for(LineSegment e : this.edges)
+        {
+            e.scale(this.centroid, mult);
+        }
         this.scale += dScale;
     }
 
@@ -175,6 +198,10 @@ public class ColliderPolygon extends Collider
         {
             v.addThis(dPos);
         }
+        for(LineSegment s : this.edges)
+        {
+            s.move(dPos);
+        }
         this.centroid.addThis(dPos);
     }
 
@@ -188,24 +215,63 @@ public class ColliderPolygon extends Collider
         {
             v.rotateThis(this.centroid, dAngle);
         }
+        for(LineSegment e : this.edges)
+        {
+            e.rotate(this.centroid, dAngle);
+        }
         this.angle += dAngle;
         this.angle %= 360;
     }
 
-    // TODO: DOCUMENTAR E TESTAR
+    /** Verifica se o ponto that, esta inserido dentro do poligono
+        @param that o ponto a verificar
+        @return     devolve true caso o ponto estiver dentro do poligono, false caso contrario
+    */
+    private boolean checkPointInside(Point that)
+    {
+        double maxX = that.x();
+
+        for(Point v : this.vertices)
+        {
+            maxX = v.x() > maxX ? v.x() : maxX;
+        }
+        maxX++;
+
+        LineSegment s = new LineSegment(that, new Point(maxX, that.y()));
+
+        int count = 0;
+        for(LineSegment a : this.edges)
+        {
+            if(a.segmentIntersect(s)) { count++; }
+        }
+
+        return (count % 2 != 0);
+    }
+
+    // TODO: TESTAR
+    /** Verificar se existe uma colisão entre este poligono e outro colisor
+        @param that o colisor a verificar
+        @return     return == that.checkCollisionPolygon(this);
+    */
     public boolean checkCollision(Collider that)
     {
         return that.checkCollisionPolygon(this);
     }
 
-    // TODO: DOCUMENTAR
+    /** Verificar se existe uma colisão entre este poligono e outro colisor em poligono
+        @param that o colisor em poligono a verificar
+        @return     return == that.checkCollisionPolygon(this)
+    */
     public boolean checkCollisionPolygon(ColliderPolygon that)
     {
         // TODO: IMPLEMENTAR
         return false;
     }
 
-    // TODO: DOCUMENTAR
+    /** Verificar se existe uma colisão entre este poligono e outro colisor em circulo
+        @param that o colisor em circulo a verificar
+        @return     return == that.checkCollisionPolygon(this)
+    */
     public boolean checkCollisionCircle(ColliderCircle that)
     {
         // TODO: IMPLEMENTAR

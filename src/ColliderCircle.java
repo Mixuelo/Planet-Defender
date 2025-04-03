@@ -82,17 +82,23 @@ public class ColliderCircle extends Collider
         this.angle = (this.angle + dAngle) % 360;
     }
 
-    // TODO: DOCUMENTAR E TESTAR
+    // TODO: TESTAR
+    /** Verificar se existe uma colisão entre este circulo e outro colisor
+        @param that o colisor a verificar
+        @return     return == that.checkCollisionCircle(this);
+    */
     public boolean checkCollision(Collider that)
     {
         return that.checkCollisionCircle(this);
     }
 
-    // TODO: DOCUMENTAR
+    /** Verificar se existe uma colisão entre este circulo e outro colisor em circulo
+        @param that o colisor em circulo a verificar
+        @return     return == that.checkCollisionCircle(this)
+    */
     public boolean checkCollisionCircle(ColliderCircle that)
     {
-        // TODO: IMPLEMENTAR
-        return false;
+        return this.centroid.distFrom(that.centroid()) <= this.radius + that.radius();
     }
 
     /** Devolve uma representação em String do Collider, no formato: "<centroid> <radius>"

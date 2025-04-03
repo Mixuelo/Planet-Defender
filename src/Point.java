@@ -139,6 +139,15 @@ public class Point implements Cloneable
         this.addThis(axis);
     }
 
+    /** Calcula a distancia entre este ponto e o ponto that.
+        @param that o outro ponto
+        @return     return == that.distFrom(this)
+    */
+    public double distFrom(Point that)
+    {
+        return Math.sqrt(Math.pow(this.x - that.x(), 2) + Math.pow(this.y - that.y(), 2));
+    }
+
     /** Devolve uma representação em String do ponto, no formato: "(<x>,<y>)" */
     @Override
     public String toString()

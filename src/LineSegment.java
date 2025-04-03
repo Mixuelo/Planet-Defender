@@ -68,6 +68,27 @@ public class LineSegment extends Line
         return false;
     }
 
+    // TODO: DOCUMENTAR
+    public void move(Point dPos)
+    {
+        this.p1.addThis(dPos);
+        this.p2.addThis(dPos);
+    }
+
+    // TODO: DOCUMENTAR
+    public void rotate(Point axis, double dAngle)
+    {
+        this.p1.rotateThis(axis, dAngle);
+        this.p2.rotateThis(axis, dAngle);
+    }
+
+    // TODO: DOCUMENTAR
+    public void scale(Point axis, double scale)
+    {
+        this.p1.scaleThis(axis, scale);
+        this.p2.scaleThis(axis, scale);
+    }
+
     /** Devolve uma representação, em String, do segmento, no formato: "[<ponto1>,<ponto2>]"*/
     public String toString()
     {
