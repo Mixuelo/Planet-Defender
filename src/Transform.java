@@ -19,7 +19,7 @@ public class Transform implements ITransform
      */
     public Transform(Point p, int l, double a, double s)
     {
-        position = p;
+        position = p.clone();
         layer = l;
         angle = a;
         scale = s;
