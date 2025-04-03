@@ -53,8 +53,7 @@ public class ColliderCircle extends Collider
     }
 
     /**
-     * Este método múltiplica o raio e a escala por um nº dado.
-     * @pre s > 0
+     * Atualizar a escala do circulo, adicionando sScale ao valor da escala.
      * @param dScale {@code double}
      */
     public void scale(double dScale)
@@ -81,6 +80,19 @@ public class ColliderCircle extends Collider
     public void rotate(double dAngle)
     {
         this.angle = (this.angle + dAngle) % 360;
+    }
+
+    // TODO: DOCUMENTAR E TESTAR
+    public boolean checkCollision(Collider that)
+    {
+        return that.checkCollisionCircle(this);
+    }
+
+    // TODO: DOCUMENTAR
+    public boolean checkCollisionCircle(ColliderCircle that)
+    {
+        // TODO: IMPLEMENTAR
+        return false;
     }
 
     /** Devolve uma representação em String do Collider, no formato: "<centroid> <radius>"

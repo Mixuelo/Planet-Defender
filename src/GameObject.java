@@ -57,7 +57,7 @@ public class GameObject implements IGameObject
     }
 
     /**
-     * Este método move o GameObject.
+     * Este método move o GameObject, pelo vetor dPos.
      * @param dPos {@code Point}
      * @param dlayer {@code int}
      */
@@ -68,7 +68,7 @@ public class GameObject implements IGameObject
     }
 
     /**
-     * Este método roda o GameObject.
+     * Este método roda o GameObject, por dTheta graus.
      * @param dTheta {@code double}
      */
     public void rotate(double dTheta)
@@ -78,7 +78,7 @@ public class GameObject implements IGameObject
     }
 
     /**
-     * Este método atualiza a escala do GameObject.
+     * Este método atualiza a escala do GameObject, adicionando dScale ao valor da escala.
      * @param dScale {@code double}
      */
     public void scale(double dScale)

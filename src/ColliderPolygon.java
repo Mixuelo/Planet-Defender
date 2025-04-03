@@ -150,7 +150,7 @@ public class ColliderPolygon extends Collider
     }
 
     /**
-     * Este método altera a escala.
+     * Este método altera a escala, adicionando dScale ao valor da escala.
      * @param dScale {@code double}
      */
     public void scale(double dScale)
@@ -190,6 +190,26 @@ public class ColliderPolygon extends Collider
         }
         this.angle += dAngle;
         this.angle %= 360;
+    }
+
+    // TODO: DOCUMENTAR E TESTAR
+    public boolean checkCollision(Collider that)
+    {
+        return that.checkCollisionPolygon(this);
+    }
+
+    // TODO: DOCUMENTAR
+    public boolean checkCollisionPolygon(ColliderPolygon that)
+    {
+        // TODO: IMPLEMENTAR
+        return false;
+    }
+
+    // TODO: DOCUMENTAR
+    public boolean checkCollisionCircle(ColliderCircle that)
+    {
+        // TODO: IMPLEMENTAR
+        return false;
     }
 
     /**

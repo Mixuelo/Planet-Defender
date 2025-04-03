@@ -17,8 +17,7 @@ public abstract class Collider implements ICollider
     }
 
     /**
-     * Este método altera a escala.
-     * @pre s > 0
+     * Este método altera a escala, adicionando dScale ao valor da escala.
      * @param dScale {@code double}
      */
     public abstract void scale(double dScale);
@@ -34,6 +33,21 @@ public abstract class Collider implements ICollider
      * @param dAngle {@code double}
      */
     public abstract void rotate(double dAngle);
+
+    // TODO: DOCUMENTAR
+    public abstract boolean checkCollision(Collider that);
+
+    // TODO: DOCUMENTAR
+    public boolean checkCollisionCircle(ColliderCircle that)
+    {
+        return this.checkCollision(that);
+    }
+
+    // TODO: DOCUMENTAR
+    public boolean checkCollisionPolygon(ColliderPolygon that)
+    {
+        return this.checkCollision(that);
+    }
 
     /** Devolve uma representação em String do Collider
      * @return {@code String}
