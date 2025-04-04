@@ -17,13 +17,13 @@ public class LineSegment extends Line
     /** Retorna o primeiro ponto */
     public Point p1()
     {
-        return super.p1;
+        return super.p1.clone();
     }
 
     /** Retorna o segundo ponto */
     public Point p2()
     {
-        return super.p2;
+        return super.p2.clone();
     }
 
     /** Verifica se o Point colinear that esta no segmento
@@ -87,6 +87,25 @@ public class LineSegment extends Line
     {
         this.p1.scaleThis(axis, scale);
         this.p2.scaleThis(axis, scale);
+    }
+
+    /** Calcula o ponto inserido no segmento, mais proximo do ponto that 
+        @param that o ponto a verificar
+        @post       this.pointOnSegment(return) == true
+    */
+    public Point closestPointFromPoint(Point that)
+    {
+        Point p = super.closestPointFromPoint(that);
+
+        if(!this.pointOnSegment(p))
+        {
+            double d1 = p.distFrom(this.p1); 
+            double d2 = p.distFrom(this.p2);
+            if(d1 < d2) { return this.p1(); }
+            else        { return this.p2(); }
+        }
+
+        return p;
     }
 
     /** Devolve uma representação, em String, do segmento, no formato: "[<ponto1>,<ponto2>]"*/

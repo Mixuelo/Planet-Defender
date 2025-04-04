@@ -34,16 +34,23 @@ public abstract class Collider implements ICollider
      */
     public abstract void rotate(double dAngle);
 
-    // TODO: DOCUMENTAR
+    /** Verificar se existe uma colisão entre este colisor e outro colisor
+        @param that o colisor a verificar
+        @return     return == that.checkCollision(this);
+    */
     public abstract boolean checkCollision(Collider that);
 
-    // TODO: DOCUMENTAR
+    /** Verificar se existe uma colisão entre este colisor e outro colisor em circulo
+        @param that o colisor em circulo a verificar
+    */
     public boolean checkCollisionCircle(ColliderCircle that)
     {
         return this.checkCollision(that);
     }
 
-    // TODO: DOCUMENTAR
+    /** Verificar se existe uma colisão entre este colisor e outro colisor em poligono
+        @param that o colisor em poligono a verificar
+    */
     public boolean checkCollisionPolygon(ColliderPolygon that)
     {
         return this.checkCollision(that);

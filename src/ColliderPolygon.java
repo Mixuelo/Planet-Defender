@@ -59,7 +59,7 @@ public class ColliderPolygon extends Collider
         }
 
         int n = this.vertices.size();
-        this.edges = new ArrayList<LineSegment>();
+        this.edges = new ArrayList<LineSegment>(n);
 
         for(int i = 0; i < n; i++)
         {
@@ -118,6 +118,23 @@ public class ColliderPolygon extends Collider
         {
             res.add(v.clone());
         }
+        return res;
+    }
+
+    /** Devolve uma cópia do vetor de arestas do polígono.
+     *  @return {@code ArrayList<LineSegment>}
+     */
+    public ArrayList<LineSegment> edges()
+    {
+        int n = this.vertices.size();
+        ArrayList<LineSegment> res = new ArrayList<LineSegment>(n);
+
+        for(int i = 0; i < n; i++)
+        {
+            LineSegment e = new LineSegment(this.vertices.get(i), this.vertices.get((i+1)%n));
+            res.add(e);
+        }
+
         return res;
     }
 
@@ -264,7 +281,18 @@ public class ColliderPolygon extends Collider
     */
     public boolean checkCollisionPolygon(ColliderPolygon that)
     {
-        // TODO: IMPLEMENTAR
+        for(Point p : this.vertices)
+        {
+            if(that.checkPointInside(p)) { return true; }
+        }
+
+		for(LineSegment i : this.edges)
+		{
+            for(LineSegment j : that.edges())
+            {
+			   if(i.segmentIntersect(j)) { return true; }
+            }
+		}
         return false;
     }
 
@@ -274,7 +302,13 @@ public class ColliderPolygon extends Collider
     */
     public boolean checkCollisionCircle(ColliderCircle that)
     {
-        // TODO: IMPLEMENTAR
+        if(this.checkPointInside(that.centroid())) { return true; }
+
+        for(LineSegment i : this.edges)
+        {
+            if(that.segmentIntersect(i)) { return true; }
+        }
+
         return false;
     }
 

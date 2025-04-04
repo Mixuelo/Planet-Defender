@@ -61,4 +61,24 @@ public class Line
     {
         return this.pointOrientation(that) == orientation.COLLINEAR;
     }
+
+    /** Calcula o ponto inserido na reta, mais proximo do ponto that 
+        @param that o ponto a verificar
+        @post       return esta inserido na reta
+    */
+    public Point closestPointFromPoint(Point that)
+    {
+        Point d = this.p2.subNew(this.p1);
+        double dmag = Math.sqrt(d.x()*d.x() + d.y()*d.y());
+        d.multThis(1/dmag);
+
+        Point lhs = that.subNew(this.p1);
+
+        double dot = lhs.x() * d.x() + lhs.y() * d.y();
+        
+        double px = this.p1.x() + d.x() * dot;
+        double py = this.p1.y() + d.y() * dot;
+
+        return new Point(px, py);
+    }
 }

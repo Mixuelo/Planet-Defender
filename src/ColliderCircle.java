@@ -82,6 +82,18 @@ public class ColliderCircle extends Collider
         this.angle = (this.angle + dAngle) % 360;
     }
 
+    /** Verifica se existe uma interseçao deste circulo com o segmento that
+        @param that o segmento a verificar
+        @return     true se existir uma interseçao, false caso contrario.
+        @see        https://mathworld.wolfram.com/Circle-LineIntersection.html
+    */
+    public boolean segmentIntersect(LineSegment that)
+    {
+        Point close = that.closestPointFromPoint(this.centroid);
+        if (close.distFrom(this.centroid) < this.radius)    { return true; }
+        else                                                { return false; }
+    }
+
     // TODO: TESTAR
     /** Verificar se existe uma colisão entre este circulo e outro colisor
         @param that o colisor a verificar
