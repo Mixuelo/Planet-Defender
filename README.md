@@ -6,4 +6,6 @@ SEMPRE TESTAR O CODIGO ANTES DE DAR PUSH
 
 ## TODO
 
-- Escrever Testes
+- Adicionar testes para as colisoes;
+- Adicionar documentaçao para metodos novos na class LineSegment;
+- Modificar o Cliente.
