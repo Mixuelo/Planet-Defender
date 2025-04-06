@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 /**
  *  Classe para o GameObject.
  *  @author Miguel Alvito, Nicole Reis e Pedro Pinto
@@ -20,6 +22,31 @@ public class GameObject implements IGameObject
         name = n;
         transform = t;
         collider = c;
+    }
+
+    /**
+     * Verifica se este {@code GameObject} é igual a outro objeto.
+     * @param obj {@code Object}
+     * @return true se for, false se não {@code boolean}
+     */
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        GameObject that = (GameObject) obj;
+        return name.equals(that.name) && transform.equals(that.transform) && collider.equals(that.collider);
+    }
+
+    /**
+     * Retorna um valor de hash único para este {@code GameObject}.
+     * @return {@code int}
+     */
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(name, transform, collider);
     }
 
     /**
@@ -96,9 +123,8 @@ public class GameObject implements IGameObject
     {
         // TODO: TESTAR
         if(go.transform.layer() != this.transform.layer()) return false;
+        if(this.equals(go))                                return false;
 
-        // IMPLEMENTAR
-
-        return false;
+        return collider.checkCollision(go.collider);
     }
 }
