@@ -48,9 +48,12 @@ public class Cliente
 
             s = sc.nextLine();
             aos = s.split(" ");
-            go.move(new Point(Double.parseDouble(aos[0]), Double.parseDouble(aos[1])), Integer.parseInt(aos[2]));
-            go.rotate(Double.parseDouble(aos[3]));
-            go.scale(Double.parseDouble(aos[4]));
+            for (int f = 0; f < frames; f++)
+            {
+                go.move(new Point(Double.parseDouble(aos[0]), Double.parseDouble(aos[1])), Integer.parseInt(aos[2]));
+                go.rotate(Double.parseDouble(aos[3]));
+                go.scale(Double.parseDouble(aos[4]));
+            }
 
             gameEngine.add(go);
         }
@@ -78,7 +81,7 @@ public class Cliente
                 System.out.println(gameEngine.objects().get(i).name() + " " + names.toString());
             }
         }
-
+        
         sc.close();
         return;
     }
