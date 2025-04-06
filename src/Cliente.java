@@ -64,22 +64,41 @@ public class Cliente
                 throw new IllegalArgumentException("Número de valores inválido: " + aos.length);
             }
 
+            GameObject go = new GameObject(name, transform, collider);
+
             s = sc.nextLine();
             aos = s.split(" ");
-            double velX = Double.parseDouble(aos[0]);
-            double velY = Double.parseDouble(aos[1]);
-            int velLayer = Integer.parseInt(aos[2]);
-            double velAngle = Double.parseDouble(aos[3]);
-            double diferential = Double.parseDouble(aos[4]);
+            go.move(new Point(Double.parseDouble(aos[0]), Double.parseDouble(aos[1])), Integer.parseInt(aos[2]));
+            go.rotate(Double.parseDouble(aos[3]));
+            go.scale(Double.parseDouble(aos[4]));
 
-            gameEngine.add(new GameObject(name, transform, collider));
+            gameEngine.add(go);
         }
 
-        //ArrayList<GameObject> collidingObjects = new ArrayList<>();
-        //ArrayList<GameObject> collidingObjects2 = new ArrayList<>();
-        // boolean colision = gameEngine.objects().get(i).collider().checkCollision(gameEngine.objects().get(j).collider());
+        for (int i = 0; i < n; i++)
+        {
+            ArrayList<GameObject> collidingObjects = new ArrayList<>();
+            for (int j = 0; j < n; j++)
+            {
+                if (j == i) continue;
+                if (gameEngine.objects().get(i).collider().checkCollision(gameEngine.objects().get(j).collider()))
+                {
+                    collidingObjects.add(gameEngine.objects().get(j));
+                }
+            }
 
-
+            if (!collidingObjects.isEmpty())
+            {
+                StringBuilder names = new StringBuilder();
+                for (GameObject g : collidingObjects)
+                {
+                    names.append(g.name() + " ");
+                }
+                names.deleteCharAt(names.length() - 1);
+                System.out.println(gameEngine.objects().get(i).name() + " " + names.toString());
+            }
+        }
+        
         sc.close();
         return;
     }
