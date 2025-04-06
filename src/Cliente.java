@@ -38,7 +38,7 @@ public class Cliente
             String name = sc.nextLine();
 
             s = sc.nextLine();
-            aos = sc.nextLine().split(" ");
+            aos = s.split(" ");
             Transform transform = new Transform(new Point(Double.parseDouble(aos[0]), Double.parseDouble(aos[1])),
                     Integer.parseInt(aos[2]), Double.parseDouble(aos[3]), Double.parseDouble(aos[4]));
 
@@ -64,12 +64,21 @@ public class Cliente
                 throw new IllegalArgumentException("Número de valores inválido: " + aos.length);
             }
 
-            // LER PONTO 4
+            s = sc.nextLine();
+            aos = s.split(" ");
+            double velX = Double.parseDouble(aos[0]);
+            double velY = Double.parseDouble(aos[1]);
+            int velLayer = Integer.parseInt(aos[2]);
+            double velAngle = Double.parseDouble(aos[3]);
+            double diferential = Double.parseDouble(aos[4]);
 
             gameEngine.add(new GameObject(name, transform, collider));
         }
 
-        // SAÍDA
+        //ArrayList<GameObject> collidingObjects = new ArrayList<>();
+        //ArrayList<GameObject> collidingObjects2 = new ArrayList<>();
+        // boolean colision = gameEngine.objects().get(i).collider().checkCollision(gameEngine.objects().get(j).collider());
+
 
         sc.close();
         return;

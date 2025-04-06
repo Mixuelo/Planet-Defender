@@ -85,7 +85,7 @@ public class ColliderCircle extends Collider
     /** Verifica se existe uma interseçao deste circulo com o segmento that
         @param that o segmento a verificar
         @return     true se existir uma interseçao, false caso contrario.
-        @see        https://mathworld.wolfram.com/Circle-LineIntersection.html
+        @see        <a href = https://mathworld.wolfram.com/Circle-LineIntersection.html a>
     */
     public boolean segmentIntersect(LineSegment that)
     {
