@@ -1,26 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/*
-- Cliente:
-ENTRADA:
-	-> n*4+2 linhas:
-	nº de frames a simular f
-	nº de GameObjects a criar (n)
-	-> +4 linhas para cada GameObject:
-	   1) name                                      (GameObject)
-	   2) x y layer rotação fator                   (Transform)
-	   3) x y r (círculo) ou 6/+ doubles (polígono) (Collider)
-	   4) double double int double double -> 3 1ªs informação sobre a velocidade constante do GameObject em cada frame nos eixos x, y e na layer;
-	                                         4º valor é a velocidade de rotação constante no sentido anti-horário em graus (por cada frame);
-	                                         5º valor é um diferencial a ser somado à escala corrente em cada frame
-
-SAÍDA:
-	-> mín 0 e máx n linhas (1 para cada GameObject que esteja em colisão), ordenadas pela ordem dos objetos na entrada
-	-> cada linha tem:
-	nome (GameObject) nome1 nome 2 ... (GameObjects em colisão, após o nº de frames f, indicado da 1ª linha de entrada, ordenados pela ordem de entrada)
-*/
-
 public class Cliente
 {
     public static void main(String[] args)
@@ -98,7 +78,7 @@ public class Cliente
                 System.out.println(gameEngine.objects().get(i).name() + " " + names.toString());
             }
         }
-        
+
         sc.close();
         return;
     }
