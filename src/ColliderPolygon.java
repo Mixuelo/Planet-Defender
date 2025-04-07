@@ -265,7 +265,6 @@ public class ColliderPolygon extends Collider
         return (count % 2 != 0);
     }
 
-    // TODO: TESTAR
     /** Verificar se existe uma colisão entre este poligono e outro colisor
         @param that o colisor a verificar
         @return     return == that.checkCollisionPolygon(this);

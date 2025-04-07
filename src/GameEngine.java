@@ -16,6 +16,11 @@ public class GameEngine
         objects = new ArrayList<>();
     }
 
+    public ArrayList<GameObject> objects()
+    {
+        return this.objects;
+    }
+
     /**
      * Adiciona um {@code GameObject} ao GameEngine.
      * @param go {@code GameObject}

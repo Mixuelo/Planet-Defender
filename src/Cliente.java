@@ -1,26 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/*
-- Cliente:
-ENTRADA:
-	-> n*4+2 linhas:
-	nº de frames a simular f
-	nº de GameObjects a criar (n)
-	-> +4 linhas para cada GameObject:
-	   1) name                                      (GameObject)
-	   2) x y layer rotação fator                   (Transform)
-	   3) x y r (círculo) ou 6/+ doubles (polígono) (Collider)
-	   4) double double int double double -> 3 1ªs informação sobre a velocidade constante do GameObject em cada frame nos eixos x, y e na layer;
-	                                         4º valor é a velocidade de rotação constante no sentido anti-horário em graus (por cada frame);
-	                                         5º valor é um diferencial a ser somado à escala corrente em cada frame
-
-SAÍDA:
-	-> mín 0 e máx n linhas (1 para cada GameObject que esteja em colisão), ordenadas pela ordem dos objetos na entrada
-	-> cada linha tem:
-	nome (GameObject) nome1 nome 2 ... (GameObjects em colisão, após o nº de frames f, indicado da 1ª linha de entrada, ordenados pela ordem de entrada)
-*/
-
 public class Cliente
 {
     public static void main(String[] args)
@@ -28,6 +8,7 @@ public class Cliente
         Scanner sc = new Scanner(System.in);
         String s;
         String [] aos;
+        ArrayList<double[]> velocities = new ArrayList<>();
 
         GameEngine gameEngine = new GameEngine();
         int frames = Integer.parseInt(sc.nextLine());
@@ -38,7 +19,7 @@ public class Cliente
             String name = sc.nextLine();
 
             s = sc.nextLine();
-            aos = sc.nextLine().split(" ");
+            aos = s.split(" ");
             Transform transform = new Transform(new Point(Double.parseDouble(aos[0]), Double.parseDouble(aos[1])),
                     Integer.parseInt(aos[2]), Double.parseDouble(aos[3]), Double.parseDouble(aos[4]));
 
@@ -64,12 +45,49 @@ public class Cliente
                 throw new IllegalArgumentException("Número de valores inválido: " + aos.length);
             }
 
-            // LER PONTO 4
+            s = sc.nextLine();
+            aos = s.split(" ");
+            velocities.add(new double[]{Double.parseDouble(aos[0]), Double.parseDouble(aos[1]),
+                    Integer.parseInt(aos[2]), Double.parseDouble(aos[3]), Double.parseDouble(aos[4])});
 
-            gameEngine.add(new GameObject(name, transform, collider));
+            GameObject go = new GameObject(name, transform, collider);
+            gameEngine.add(go);
         }
 
-        // SAÍDA
+        for (int i = 0; i < frames; i++)
+        {
+            for(int j = 0; j < n; j++)
+            {
+                double[] velocity = velocities.get(j);
+                gameEngine.objects().get(j).move(new Point(velocity[0], velocity[1]), (int) velocity[2]);
+                gameEngine.objects().get(j).rotate(velocity[3]);
+                gameEngine.objects().get(j).scale(velocity[4]);
+            }
+        }
+
+        for (int i = 0; i < n; i++)
+        {
+            ArrayList<GameObject> collidingObjects = new ArrayList<>();
+            for (int j = 0; j < n; j++)
+            {
+                if(i == j) continue;
+                if (gameEngine.objects().get(i).collider().checkCollision(gameEngine.objects().get(j).collider()))
+                {
+                    collidingObjects.add(gameEngine.objects().get(j));
+                }
+            }
+
+            if (!collidingObjects.isEmpty())
+            {
+                StringBuilder names = new StringBuilder();
+                for (GameObject g : collidingObjects)
+                {
+                    names.append(g.name() + " ");
+                }
+                names.deleteCharAt(names.length() - 1);
+                System.out.println(gameEngine.objects().get(i).name() + " " + names.toString());
+            }
+        }
 
         sc.close();
         return;
