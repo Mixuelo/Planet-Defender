@@ -68,21 +68,32 @@ public class LineSegment extends Line
         return false;
     }
 
-    // TODO: DOCUMENTAR
+    /**
+     * Este método move o segmento.
+     * @param dPos {@code Point}
+     */
     public void move(Point dPos)
     {
         this.p1.addThis(dPos);
         this.p2.addThis(dPos);
     }
 
-    // TODO: DOCUMENTAR
+    /**
+     * Este método roda o segmento.
+     * @param axis {@code Point}
+     * @param dAngle {@code double}
+     */
     public void rotate(Point axis, double dAngle)
     {
         this.p1.rotateThis(axis, dAngle);
         this.p2.rotateThis(axis, dAngle);
     }
 
-    // TODO: DOCUMENTAR
+    /**
+     * Este método atualiza a escala do segmento.
+     * @param axis {@code Point}
+     * @param scale {@code double}
+     */
     public void scale(Point axis, double scale)
     {
         this.p1.scaleThis(axis, scale);

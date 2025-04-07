@@ -60,4 +60,41 @@ public class LineSegmentTests
 		assertFalse(new LineSegment(new Point(1,1), new Point(5,1)).segmentIntersect(new LineSegment(new Point(1,2), new Point(4,1))));
 		assertTrue(new LineSegment(new Point(1,1), new Point(5,5)).segmentIntersect(new LineSegment(new Point(1,5), new Point(5,1))));
 	}
+
+	@Test
+	public void testMove()
+	{
+		LineSegment segment = new LineSegment(new Point(1, 1), new Point(4, 3));
+
+		segment.move(new Point(2, -1));
+
+		assertEquals(3.0, segment.p1().x());
+		assertEquals(0.0, segment.p1().y());
+		assertEquals(6.0, segment.p2().x());
+		assertEquals(2.0, segment.p2().y());
+	}
+
+	@Test
+	public void testScale()
+	{
+		LineSegment segment = new LineSegment(new Point(1, 1), new Point(3, 3));
+
+		segment.scale(new Point(2, 2), 0.5);
+
+		assertEquals(1.5, segment.p1().x());
+		assertEquals(1.5, segment.p1().y());
+		assertEquals(2.5, segment.p2().x());
+		assertEquals(2.5, segment.p2().y());
+	}
+
+	@Test
+	public void testClosestPointFromPointOnDiagonalSegment()
+	{
+		LineSegment segment = new LineSegment(new Point(0, 0), new Point(4, 4));
+
+		Point result = segment.closestPointFromPoint(new Point(0, 4));
+
+		assertEquals(2, result.x(), 1e-10);
+		assertEquals(2, result.y(), 1e-10);
+	}
 }
