@@ -9,7 +9,7 @@ public class ColliderPolygon extends Collider
     private ArrayList<Point> vertices;
     private ArrayList<LineSegment> edges;
 
-    /** Contrutor do Collider em polígono.
+    /** Construtor do Collider em polígono.
         @param pontos   um {@code ArrayList} contendo os vértices do poligono, {@code Point}, estes têm que estar ordenados.
     */
     public ColliderPolygon(ArrayList<Point> pontos) 
