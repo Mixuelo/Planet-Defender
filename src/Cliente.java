@@ -70,8 +70,7 @@ public class Cliente
             ArrayList<GameObject> collidingObjects = new ArrayList<>();
             for (int j = 0; j < n; j++)
             {
-                if(i == j) continue;
-                if (gameEngine.objects().get(i).collider().checkCollision(gameEngine.objects().get(j).collider()))
+                if (gameEngine.objects().get(i).checkCollision(gameEngine.objects().get(j)))
                 {
                     collidingObjects.add(gameEngine.objects().get(j));
                 }

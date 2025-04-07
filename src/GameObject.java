@@ -36,7 +36,7 @@ public class GameObject implements IGameObject
         if (obj == null || getClass() != obj.getClass()) return false;
 
         GameObject that = (GameObject) obj;
-        return name.equals(that.name) && transform.equals(that.transform) && collider.equals(that.collider);
+        return name.equals(that.name);
     }
 
     /**
@@ -119,7 +119,7 @@ public class GameObject implements IGameObject
      * @param go {@code GameObject}
      * @return true, se houver colisão, false, se não houver colisão {@code boolean}
      */
-    public boolean checkColision(GameObject go)
+    public boolean checkCollision(GameObject go)
     {
         if(go.transform.layer() != this.transform.layer()) return false;
         if(this.equals(go))                                return false;

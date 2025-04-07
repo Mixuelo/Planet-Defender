@@ -65,9 +65,9 @@ public class GameObjectTests
             g3.scale(0);
         }
 
-        assertTrue(g2.checkColision(g3));
-        assertFalse(g2.checkColision(g1));
-        assertFalse(g1.checkColision(g3));
+        assertTrue(g2.checkCollision(g3));
+        assertFalse(g2.checkCollision(g1));
+        assertFalse(g1.checkCollision(g3));
     }
 
     @Test
@@ -103,20 +103,20 @@ public class GameObjectTests
             g4.scale(0);
         }
 
-        assertTrue(g1.checkColision(g2));
-        assertFalse(g1.checkColision(g3));
-        assertFalse(g1.checkColision(g4));
+        assertTrue(g1.checkCollision(g2));
+        assertFalse(g1.checkCollision(g3));
+        assertFalse(g1.checkCollision(g4));
 
-        assertTrue(g2.checkColision(g1));
-        assertFalse(g2.checkColision(g3));
-        assertFalse(g2.checkColision(g4));
+        assertTrue(g2.checkCollision(g1));
+        assertFalse(g2.checkCollision(g3));
+        assertFalse(g2.checkCollision(g4));
 
-        assertTrue(g3.checkColision(g4));
-        assertFalse(g3.checkColision(g1));
-        assertFalse(g3.checkColision(g2));
+        assertTrue(g3.checkCollision(g4));
+        assertFalse(g3.checkCollision(g1));
+        assertFalse(g3.checkCollision(g2));
 
-        assertTrue(g4.checkColision(g3));
-        assertFalse(g4.checkColision(g1));
-        assertFalse(g4.checkColision(g2));
+        assertTrue(g4.checkCollision(g3));
+        assertFalse(g4.checkCollision(g1));
+        assertFalse(g4.checkCollision(g2));
     }
 }
