@@ -1,6 +1,9 @@
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class ColliderCircleTests 
 {
     @Test
@@ -42,4 +45,23 @@ public class ColliderCircleTests
         cc.scale(1);
         assertEquals("(0.00,0.00) 6.00", cc.toString());
     }
+
+    @Test
+    public void checkColisionTest()
+    {
+        ColliderCircle c1 = new ColliderCircle(new Point(2, 2), 3);
+        ColliderCircle c2 = new ColliderCircle(new Point(1, 3), 2);
+
+        assertTrue(c1.checkCollision(new ColliderPolygon(new ArrayList<>(Arrays.asList(new Point(1, 1), new Point(3, 3), new Point(2, 4))))));
+        assertFalse(c2.checkCollision(new ColliderCircle(new Point(10, 10), 1)));
+    }
+
+    @Test
+    public void checkCollisionCircleTest()
+    {
+        ColliderCircle c1 = new ColliderCircle(new Point(2, 2), 3);
+        assertFalse(c1.checkCollisionCircle(new ColliderCircle(new Point(10, 10), 1)));
+        assertTrue(c1.checkCollisionCircle(new ColliderCircle(new Point (1, 1), 2)));
+    }
+
 }

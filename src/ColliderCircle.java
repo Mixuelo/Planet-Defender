@@ -94,7 +94,6 @@ public class ColliderCircle extends Collider
         else                                                { return false; }
     }
 
-    // TODO: TESTAR
     /** Verificar se existe uma colisão entre este circulo e outro colisor
         @param that o colisor a verificar
         @return     return == that.checkCollisionCircle(this);

@@ -8,6 +8,7 @@ public class Cliente
         Scanner sc = new Scanner(System.in);
         String s;
         String [] aos;
+        ArrayList<double[]> velocities = new ArrayList<>();
 
         GameEngine gameEngine = new GameEngine();
         int frames = Integer.parseInt(sc.nextLine());
@@ -44,18 +45,24 @@ public class Cliente
                 throw new IllegalArgumentException("Número de valores inválido: " + aos.length);
             }
 
-            GameObject go = new GameObject(name, transform, collider);
-
             s = sc.nextLine();
             aos = s.split(" ");
-            for (int f = 0; f < frames; f++)
-            {
-                go.move(new Point(Double.parseDouble(aos[0]), Double.parseDouble(aos[1])), Integer.parseInt(aos[2]));
-                go.rotate(Double.parseDouble(aos[3]));
-                go.scale(Double.parseDouble(aos[4]));
-            }
+            velocities.add(new double[]{Double.parseDouble(aos[0]), Double.parseDouble(aos[1]),
+                    Integer.parseInt(aos[2]), Double.parseDouble(aos[3]), Double.parseDouble(aos[4])});
 
+            GameObject go = new GameObject(name, transform, collider);
             gameEngine.add(go);
+        }
+
+        for (int i = 0; i < frames; i++)
+        {
+            for(int j = 0; j < n; j++)
+            {
+                double[] velocity = velocities.get(j);
+                gameEngine.objects().get(j).move(new Point(velocity[0], velocity[1]), (int) velocity[2]);
+                gameEngine.objects().get(j).rotate(velocity[3]);
+                gameEngine.objects().get(j).scale(velocity[4]);
+            }
         }
 
         for (int i = 0; i < n; i++)
@@ -63,7 +70,7 @@ public class Cliente
             ArrayList<GameObject> collidingObjects = new ArrayList<>();
             for (int j = 0; j < n; j++)
             {
-                if (j == i) continue;
+                if(i == j) continue;
                 if (gameEngine.objects().get(i).collider().checkCollision(gameEngine.objects().get(j).collider()))
                 {
                     collidingObjects.add(gameEngine.objects().get(j));
@@ -81,7 +88,7 @@ public class Cliente
                 System.out.println(gameEngine.objects().get(i).name() + " " + names.toString());
             }
         }
-        
+
         sc.close();
         return;
     }

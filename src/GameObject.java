@@ -121,10 +121,8 @@ public class GameObject implements IGameObject
      */
     public boolean checkColision(GameObject go)
     {
-        // TODO: TESTAR
         if(go.transform.layer() != this.transform.layer()) return false;
         if(this.equals(go))                                return false;
-
         return collider.checkCollision(go.collider);
     }
 }

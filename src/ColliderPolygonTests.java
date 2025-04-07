@@ -93,4 +93,25 @@ public class ColliderPolygonTests
         cp.rotate(90);
         assertEquals("(9.00,8.00) (5.00,8.00) (5.00,10.00) (9.00,10.00)", cp.toString());
     }
+
+    @Test
+    public void checkCollisionTest()
+    {
+        ColliderPolygon p1 = new ColliderPolygon(new ArrayList<>(Arrays.asList(new Point(1, 1), new Point(3, 3), new Point(2, 4))));
+        ColliderPolygon p2 = new ColliderPolygon(new ArrayList<>(Arrays.asList(new Point(1, 2), new Point(3, 2), new Point(3, 4), new Point(1, 4))));
+
+        assertTrue(p1.checkCollision(new ColliderCircle(new Point(2, 2), 3)));
+        assertTrue(p2.checkCollision(p1));
+    }
+
+    @Test
+    public void checkCollisionCircleTest()
+    {
+        ColliderPolygon p1 = new ColliderPolygon(new ArrayList<>(Arrays.asList(new Point(1, 1), new Point(3, 3), new Point(2, 4))));
+        ColliderPolygon p2 = new ColliderPolygon(new ArrayList<>(Arrays.asList(new Point(1, 2), new Point(3, 2), new Point(3, 4), new Point(1, 4))));
+
+        assertTrue(p1.checkCollisionCircle(new ColliderCircle(new Point(2, 2), 3)));
+        assertFalse(p2.checkCollisionCircle(new ColliderCircle(new Point(11, 12), 2)));
+
+    }
 }
