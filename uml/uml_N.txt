@@ -24,10 +24,14 @@
 +class GameEngine {
     +add() : void
     +destroy() : void
+
+    +objects() : ArrayList<GameObject>
 }
 
 +class GameObject implements IGameObject{
-    -name : String
+    +name : String
+    +transform : Transform
+    +collider : Collider
 
     +move() : void
     +rotate() : void
@@ -35,6 +39,8 @@
     +checkCollision() : boolean
 
     +toString() : String
+    +equals() : boolean
+    +hashCode() : boolean
 }
 
 +class Transform implements ITransform {
@@ -46,10 +52,15 @@
 }
 
 +abstract class Collider implements ICollider {
+    #scale : double
+    #angle : double
+
     +{abstract} move() : void
     +{abstract} rotate() : void
     +{abstract} scale() : void
     +{abstract} checkCollision() : boolean
+    +checkCollisionCircle() : boolean
+    +checkCollisionPolygon() : boolean
 
     +toString() : String
 }
@@ -66,6 +77,7 @@
     +multThis() : void
     +rotateThis() : void
     +scaleThis() : void
+    +distFrom() : double
 
     +x() : double
     +y() : double
@@ -79,6 +91,7 @@
     -radius : double
 
     -{static} checkRadius() : void
+    +segmentIntersect() : boolean
 
     +radius() : double
 }
@@ -87,14 +100,17 @@
     -{static} checkVertices() : void
     -calculateArea() : double
     -calculateCentroid() : Point
+    -checkPointInside() : boolean
 
     +vertices() : ArrayList<Point>
+    +edges() : ArrayList<LineSegment>
 }
 
 +class Line{
     -{static} checkEquals() : void
     #pointOrientation() : orientation
     +pointCollinear : boolean
+    +closestPointFromPoint : Point
 }
 
 +class LineSegment extends Line{
@@ -111,8 +127,9 @@ GameEngine o-- GameObject : -ArrayList<> objects
 GameObject o-- Transform : -transform
 GameObject o-- Collider : -collider
 Transform *-- Point : -position
-Collider *-- Point : -centroid
+Collider *-- Point : #centroid
 ColliderPolygon *-- Point : -ArrayList<> vertices
+ColliderPolygon *-- LineSegment : -ArrayList<> edges
 Line *-- Point : #p1, p2
 
 @enduml
