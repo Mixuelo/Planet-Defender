@@ -6,8 +6,12 @@ public abstract class CharacterBehaviour extends Behaviour
     {
         this.health = health;
     }
+    public int health()
+    {
+        return this.health;
+    }
 
-    void takeDamage()
+    void takeDamage(int damage)
     {
         //TODO
     }

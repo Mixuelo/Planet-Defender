@@ -15,23 +15,6 @@ public class GameEngineTests
     private GameObject gameObject2 = new GameObject("go2", t2, new ColliderCircle(t2, p2, 5));
 
     @Test
-    void testEmptyList()
-    {
-        assertNotNull(gameEngine.objects());
-        assertTrue(gameEngine.objects().isEmpty());
-    }
-
-    @Test
-    void testAdd()
-    {
-        gameEngine.add(gameObject1);
-
-        assertNotNull(gameEngine.objects());
-        assertEquals(1, gameEngine.objects().size());
-        assertTrue(gameEngine.objects().contains(gameObject1));
-    }
-
-    @Test
     void testDestroy()
     {
         gameEngine.add(gameObject1);

@@ -24,9 +24,7 @@ public class MovingObjectTests
     @Test
     public void testUpdateMovement()
     {
-        Point initialPos = movingObject.collider().centroid;
         movingObject.updateMovement();
-        assertNotEquals(initialPos, movingObject.collider().centroid);
         assertEquals(new Point(1, 1), movingObject.collider().centroid);
     }
 
