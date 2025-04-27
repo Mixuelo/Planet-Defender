@@ -2,9 +2,9 @@ import java.util.List;
 
 public interface IGameEngine
 {
-    public void addEnable();
+    public void addEnable(GameObject go);
 
-    public void addDisable();
+    public void addDisable(GameObject go);
 
     public void enable();
 

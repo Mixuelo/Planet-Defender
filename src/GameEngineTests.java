@@ -1,13 +1,18 @@
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 public class GameEngineTests
 {
     Point p = new Point(0, 0);
     Transform t = new Transform(p, 0, 0.0, 1.0);
+    Point p2 = new Point(1, 1);
+    Transform t2 = new Transform(p2, 0, 0.0, 1.0);
 
     private GameEngine gameEngine =  new GameEngine();
-    private GameObject gameObject = new GameObject("go", t, new ColliderCircle(t, p, 10));
+    private GameObject gameObject1 = new GameObject("go", t, new ColliderCircle(t, p, 10));
+    private GameObject gameObject2 = new GameObject("go2", t2, new ColliderCircle(t2, p2, 5));
 
     @Test
     void testEmptyList()
@@ -19,27 +24,152 @@ public class GameEngineTests
     @Test
     void testAdd()
     {
-        gameEngine.add(gameObject);
+        gameEngine.add(gameObject1);
 
         assertNotNull(gameEngine.objects());
         assertEquals(1, gameEngine.objects().size());
-        assertTrue(gameEngine.objects().contains(gameObject));
+        assertTrue(gameEngine.objects().contains(gameObject1));
     }
 
     @Test
     void testDestroy()
     {
-        gameEngine.add(gameObject);
-        gameEngine.destroy(gameObject);
+        gameEngine.add(gameObject1);
+        gameEngine.destroy(gameObject1);
 
         assertEquals(0, gameEngine.objects().size());
         assertTrue(gameEngine.objects().isEmpty());
 
-        Point p2 = new Point(1, 1);
-        Transform t2 = new Transform(p2, 0, 0.0, 1.0);
-        GameObject gameObject2 = new GameObject("go2", t2, new ColliderCircle(t2, p2, 5));
-
         gameEngine.destroy(gameObject2);
         assertTrue(gameEngine.objects().isEmpty());
     }
+
+    @Test
+    void testAddEnable()
+    {
+        gameEngine.add(gameObject1);
+        gameEngine.add(gameObject2);
+
+        gameEngine.addEnable(gameObject1);
+        assertTrue(gameEngine.getEnabled().contains(gameObject1));
+        assertFalse(gameEngine.getEnabled().contains(gameObject2));
+    }
+
+    @Test
+    void testAddDesable()
+    {
+        gameEngine.add(gameObject1);
+        gameEngine.add(gameObject2);
+
+        gameEngine.addDisable(gameObject2);
+        assertTrue(gameEngine.getDisabled().contains(gameObject2));
+        assertFalse(gameEngine.getDisabled().contains(gameObject1));
+    }
+
+    @Test
+    void testEnable()
+    {
+        gameEngine.add(gameObject1);
+        gameEngine.addDisable(gameObject1);
+
+        assertTrue(gameEngine.isDisabled(gameObject1));
+        assertFalse(gameEngine.isEnabled(gameObject1));
+
+        gameEngine.enable();
+        assertTrue(gameEngine.isEnabled(gameObject1));
+        assertFalse(gameEngine.isDisabled(gameObject1));
+    }
+
+    @Test
+    void testDisable()
+    {
+        gameEngine.add(gameObject1);
+        gameEngine.addDisable(gameObject1);
+
+        assertTrue(gameEngine.isDisabled(gameObject1));
+        assertFalse(gameEngine.isEnabled(gameObject1));
+
+        gameEngine.disable();
+        assertTrue(gameEngine.isDisabled(gameObject1));
+        assertFalse(gameEngine.isEnabled(gameObject1));
+    }
+
+    @Test
+    void testIsEnabled()
+    {
+        gameEngine.add(gameObject1);
+        gameEngine.add(gameObject2);
+        gameEngine.addEnable(gameObject1);
+        gameEngine.addDisable(gameObject2);
+
+        assertTrue(gameEngine.isEnabled(gameObject1));
+        assertFalse(gameEngine.isEnabled(gameObject2));
+    }
+
+    @Test
+    void testIsDisabled()
+    {
+        gameEngine.add(gameObject1);
+        gameEngine.add(gameObject2);
+        gameEngine.addEnable(gameObject1);
+        gameEngine.addDisable(gameObject2);
+
+        assertFalse(gameEngine.isDisabled(gameObject1));
+        assertTrue(gameEngine.isDisabled(gameObject2));
+    }
+
+    @Test
+    void testGetEnabled()
+    {
+        gameEngine.add(gameObject1);
+        gameEngine.add(gameObject2);
+
+        gameEngine.addEnable(gameObject1);
+
+        List<IGameObject> enabled = gameEngine.getEnabled();
+
+        assertEquals(1, enabled.size());
+        assertTrue(enabled.contains(gameObject1));
+        assertFalse(enabled.contains(gameObject2));
+    }
+
+    @Test
+    void testGetDisabled()
+    {
+        gameEngine.add(gameObject1);
+        gameEngine.add(gameObject2);
+
+        gameEngine.addDisable(gameObject2);
+
+        List<IGameObject> disabled = gameEngine.getDisabled();
+
+        assertEquals(1, disabled.size());
+        assertTrue(disabled.contains(gameObject2));
+        assertFalse(disabled.contains(gameObject1));
+    }
+
+    @Test
+    void testDestroyAll()
+    {
+        gameEngine.add(gameObject1);
+        gameEngine.add(gameObject2);
+        gameEngine.destroyAll();
+        assertTrue(gameEngine.objects().isEmpty());
+    }
+
+    @Test
+    void testRun()
+    {
+        gameEngine.add(gameObject1);
+        gameEngine.add(gameObject2);
+
+        assertDoesNotThrow(() -> gameEngine.run());
+    }
+
+    @Test
+    void testCheckCollisions()
+    {
+        //TODO
+    }
+
 }
