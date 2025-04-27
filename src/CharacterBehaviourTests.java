@@ -25,9 +25,6 @@ public class CharacterBehaviourTests
         ship1.takeDamage(10);
         ship2.takeDamage(14);
 
-        ship1.onDefeat();
-        ship2.onDefeat();
-
         assertNull(ship1.gameObject());
         assertNull(ship2.gameObject());
     }
