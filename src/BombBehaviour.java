@@ -1,4 +1,4 @@
-public class BombBehaviour
+public class BombBehaviour extends Behaviour
 {
 
 }

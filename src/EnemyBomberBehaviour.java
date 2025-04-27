@@ -1,4 +1,4 @@
-public class EnemyBomberBehaviour
+public class EnemyBomberBehaviour extends CharacterBehaviour
 {
 
 }

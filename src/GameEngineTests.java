@@ -154,4 +154,12 @@ public class GameEngineTests
         gameEngine.add(gameObject2);
         assertDoesNotThrow(() -> gameEngine.run());
     }
+
+    @Test
+    void testCheckCollisions()
+    {
+        gameEngine.add(gameObject1);
+        gameEngine.add(gameObject2);
+        assertDoesNotThrow(() -> gameEngine.checkCollisions());
+    }
 }

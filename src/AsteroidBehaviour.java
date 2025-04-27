@@ -1,4 +1,4 @@
-public class AsteroidBehaviour
+public class AsteroidBehaviour extends CharacterBehaviour
 {
 
 }

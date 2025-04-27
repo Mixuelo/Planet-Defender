@@ -1,4 +1,4 @@
-public abstract class CharacterBehaviour
+public abstract class CharacterBehaviour extends Behaviour
 {
     private int health;
 

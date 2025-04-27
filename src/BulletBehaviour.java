@@ -1,4 +1,4 @@
-public class BulletBehaviour
+public class BulletBehaviour extends Behaviour
 {
 
 }

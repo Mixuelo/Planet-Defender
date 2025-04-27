@@ -1,4 +1,4 @@
-public class PlanetBehaviour
+public class PlanetBehaviour extends CharacterBehaviour
 {
 
 }

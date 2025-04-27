@@ -1,4 +1,4 @@
-public class EnemyShipBehaviour
+public class EnemyShipBehaviour extends CharacterBehaviour
 {
 
 }
