@@ -69,6 +69,7 @@ public class ColliderPolygon extends Collider
 
         this.angle = aDiff;
         this.scale = sDiff;
+        this.transform = trans;
     }
 
     /**

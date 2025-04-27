@@ -34,6 +34,7 @@ public class ColliderCircle extends Collider
         this.scale *= trans.scale();
 
         this.angle = trans.angle();
+        this.transform = trans;
     }
 
     /** Verificar se o raio é maior que 0, caso não for dá-se uma exceção.

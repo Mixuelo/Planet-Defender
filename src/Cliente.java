@@ -47,7 +47,7 @@ public class Cliente
 
             s = sc.nextLine();
             aos = s.split(" ");
-            velocities.add(new double[]{Double.parseDouble(aos[0]), Double.parseDouble(aos[1]),
+            velocities.add(new double[] {Double.parseDouble(aos[0]), Double.parseDouble(aos[1]),
                     Integer.parseInt(aos[2]), Double.parseDouble(aos[3]), Double.parseDouble(aos[4])});
 
             GameObject go = new GameObject(name, transform, collider);

@@ -7,6 +7,7 @@ public abstract class Collider implements ICollider
     protected Point centroid;
     protected double scale;
     protected double angle;
+    protected Transform transform;
 
     /** Devolve o centroide do Collider.
      * @return centroid {@code Point}
