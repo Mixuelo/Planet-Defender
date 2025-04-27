@@ -15,10 +15,11 @@ public interface IGameObject
     */
     ICollider collider();
 
+    /*
     /**
      * @return the Behaviour of the GameObject
      */
-    IBehaviour behaviour();
+    //IBehaviour behaviour();
 
     // ...
 }
