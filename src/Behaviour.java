@@ -1,7 +1,7 @@
 import java.awt.event.InputEvent;
 import java.util.List;
 
-public class Behaviour implements IBehaviour
+public abstract class Behaviour implements IBehaviour
 {
     public IGameObject gameObject()
     {
