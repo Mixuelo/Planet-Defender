@@ -1,5 +1,19 @@
+import java.awt.event.InputEvent;
+import java.util.List;
+
 public class Behaviour implements IBehaviour
 {
+    public IGameObject gameObject()
+    {
+        //TODO
+        return null;
+    }
+
+    public void gameObject(IGameObject go)
+    {
+        //TODO
+    }
+
     public void onInit()
     {
         //TODO
@@ -20,12 +34,12 @@ public class Behaviour implements IBehaviour
         //TODO
     }
 
-    public void onUpdate()
+    public void onUpdate(double dT, InputEvent ie)
     {
         //TODO
     }
 
-    public void onCollision()
+    public void onCollision(List<IGameObject> gol)
     {
         //TODO
     }

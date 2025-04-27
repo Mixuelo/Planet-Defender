@@ -1,4 +1,4 @@
-public class EnemySpawnerBehaviour
+public class EnemySpawnerBehaviour extends Behaviour
 {
 
 }

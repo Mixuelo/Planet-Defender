@@ -40,33 +40,33 @@ public class GameEngine implements IGameEngine
         objects.remove(go);
     }
 
-    public void addEnable(GameObject go)
+    public void addEnabled(IGameObject go)
     {
         //TODO
     }
 
-    public void addDisable(GameObject go)
+    public void addDisabled(IGameObject go)
     {
         //TODO
     }
 
-    public void enable()
+    public void enable(IGameObject go)
     {
         //TODO
     }
 
-    public void disable()
+    public void disable(IGameObject go)
     {
         //TODO
     }
 
-    public boolean isEnabled(GameObject go)
+    public boolean isEnabled(IGameObject go)
     {
         //TODO
         return false;
     }
 
-    public boolean isDisabled(GameObject go)
+    public boolean isDisabled(IGameObject go)
     {
         //TODO
         return false;
@@ -84,6 +84,11 @@ public class GameEngine implements IGameEngine
         return null;
     }
 
+    public void destroy(IGameObject go)
+    {
+        //TODO
+    }
+
     public void destroyAll()
     {
         //TODO
@@ -91,7 +96,22 @@ public class GameEngine implements IGameEngine
 
     public void run()
     {
-        //TODO
+        /*
+        for(;;)
+        {
+            ie = getUserInput();
+            for(IGameObject go : enabled)
+            {
+                go.behaviour().onUpdate(dt, ie);
+                go.collisor().onUpdate();
+            }
+
+            // envia lista de colisões para todos os
+            // IGameObject em enabled
+
+            // envia a lista de IGameObjects em enabled para o GUI
+        }
+        */
     }
 
     public void checkCollisions()

@@ -1,5 +1,12 @@
+import java.awt.event.InputEvent;
+import java.util.List;
+
 public interface IBehaviour
 {
+    public IGameObject gameObject();
+
+    public void gameObject(IGameObject go);
+
     void onInit();
 
     void onEnabled();
@@ -8,7 +15,7 @@ public interface IBehaviour
 
     void onDestroy();
 
-    void onUpdate();
+    void onUpdate(double dT, InputEvent ie);
 
-    void onCollision();
+    void onCollision(List<IGameObject> gol);
 }
