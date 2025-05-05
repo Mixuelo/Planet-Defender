@@ -3,25 +3,49 @@ import java.util.Objects;
 /**
  *  Classe para o GameObject.
  *  @author Miguel Alvito, Nicole Reis e Pedro Pinto
- *  @version 1.0 (2024-03-25)
+ *  @version 1.1 (2025-05-05)
  */
 public class GameObject implements IGameObject
 {
     private String name;
     private Transform transform;
     private Collider collider;
+    private Behaviour behaviour;
+    private GameEngine engine;
 
     /**
-     * Contrutor de um GameObject.
+     * Contrutor de um GameObject. (EVITAR USAR)
      * @param n {@code String}
      * @param t {@code Transform}
      * @param c {@code Collider}
      */
     public GameObject(String n, Transform t, Collider c)
     {
-        name = n;
-        transform = t;
-        collider = c;
+        this.name = n;
+        this.transform = t;
+        this.collider = c;
+        this.engine = null;
+    }
+
+    /**
+     * Contrutor de um GameObject.
+     * @param n {@code String}
+     * @param t {@code Transform}
+     * @param c {@code Collider}
+     * @param e {@code GameEngine}
+     */
+    public GameObject(String n, Transform t, Collider c, GameEngine e)
+    {
+        this.name = n;
+        this.transform = t;
+        this.collider = c;
+        this.engine = e;
+    }
+
+    /** Retorna a GameEngine ao qual o GameObject pertence */
+    public IGameEngine engine() 
+    {
+        return this.engine;
     }
 
     /**
@@ -81,6 +105,12 @@ public class GameObject implements IGameObject
     public Collider collider()
     {
         return collider;
+    }
+
+    /** Retorna o objecto Behaviour do GameObject */
+    public Behaviour behaviour()
+    {
+        return behaviour;
     }
 
     /**

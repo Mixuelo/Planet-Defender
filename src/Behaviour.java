@@ -3,15 +3,16 @@ import java.util.List;
 
 public abstract class Behaviour implements IBehaviour
 {
-    public IGameObject gameObject()
+    protected GameObject parent;
+
+    public GameObject gameObject()
     {
-        //TODO
-        return null;
+        return parent;
     }
 
     public void gameObject(IGameObject go)
     {
-        //TODO
+        this.parent = (GameObject) go;
     }
 
     public void onInit()

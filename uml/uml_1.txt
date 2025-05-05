@@ -1,0 +1,243 @@
+@startuml
+
+skinparam style strictuml
+
++interface IGameObject <<interface>> {
+    name() : String
+    transform() : ITransform
+    shape() : IShape
+    collider() : ICollider
+    behaviour() : IBehaviour
+}
+
++interface ITransform <<interface>> {
+    +move() : void
+    +rotate() : void
+    +scale() : void
+
+    +position() : Point
+    +layer() : int
+    +angle() : double
+    +scale() : double
+}
+
++interface ICollider <<interface>> {
+    centroid() : Point
+}
+
++class GameEngine implements IGameEngine {
+}
+
++class GameObject implements IGameObject{
+    -name : String
+
+    +move() : void
+    +rotate() : void
+    +scale() : void
+    +checkCollision() : boolean
+
+    +toString() : String
+    +equals() : boolean
+    +hashCode() : boolean
+}
+
++class Transform implements ITransform {
+    -layer : int
+    -angle : double
+    -scale : double
+
+    +toString() : String
+}
+
++abstract class Collider implements ICollider {
+    #scale : double
+    #angle : double
+
+    +{abstract} move() : void
+    +{abstract} rotate() : void
+    +{abstract} scale() : void
+    +{abstract} checkCollision() : boolean
+    +checkCollisionCircle() : boolean
+    +checkCollisionPolygon() : boolean
+
+    +toString() : String
+}
+
++class Point {
+    -x : double
+    -y : double
+
+    +addNew() : Point
+    +subNew() : Point
+    +multNew() : Point
+    +addThis() : void
+    +subThis() : void
+    +multThis() : void
+    +rotateThis() : void
+    +scaleThis() : void
+    +distFrom() : double
+
+    +x() : double
+    +y() : double
+
+    +toString() : String
+    +equals() : boolean
+    +clone() : Point
+}
+
++class ColliderCircle {
+    -radius : double
+
+    -{static} checkRadius() : void
+    +segmentIntersect() : boolean
+
+    +radius() : double
+}
+
++class ColliderPolygon {
+    -{static} checkVertices() : void
+    -calculateArea() : double
+    -calculateCentroid() : Point
+    -checkPointInside() : boolean
+
+    +vertices() : ArrayList<Point>
+    +edges() : ArrayList<LineSegment>
+}
+
++class Line{
+    -{static} checkEquals() : void
+    #pointOrientation() : orientation
+    +pointCollinear : boolean
+    +closestPointFromPoint : Point
+}
+
++class LineSegment extends Line{
+    +pointOnSegment() : boolean
+    +segmentIntersect() : boolean
+
+    +p1() : Point
+    +p2() : Point
+
+    +toString() : String
+}
+
++interface IGameEngine <<interface>> {
+    +addEnabled() : void
+    +addDisabled() : void
+    +enable() : void
+    +disable() : void
+    +isEnabled() : boolean
+    +isDisabled() : boolean
+    +getEnabled() : List<IGameObject>
+    +getDisabled() : List<IGameObject>
+    +destroy() : void
+    +destroyAll() : void
+    +run() : void
+    +checkCollisions() : void
+}
+
++interface IBehaviour <<interface>> {
+    onInit() : void
+    onEnabled() : void
+    onDisabled() : void
+    onDestroy() : void
+    onUpdate() : void
+    onCollision() : void
+}
+
++abstract class BaseBehaviour implements IBehaviour{
+}
+
+GameEngine o-- GameObject : -ArrayList<> enabled, ArrayList<> disabled
+GameObject o-- Transform : -transform
+GameObject o-- Collider : -collider
+GameObject o-- BaseBehaviour : -behaviour
+GameObject --o BaseBehaviour : #parent
+Transform *-- Point : -position
+Collider *-- Point : #centroid
+ColliderPolygon *-- Point : -ArrayList<> vertices
+ColliderPolygon *-- LineSegment : -ArrayList<> edges
+Collider <|-- ColliderPolygon
+ColliderCircle -- (Collider, ColliderPolygon)
+Line *-- Point : #p1, p2
+
+' JOGO
+
+abstract class CharacterBehaviour {
+    -health : int
+
+    takeDamage() : void
+    onDefeat() : void
+}
+
+class EffectBehaviour {
+    -time : int
+}
+
+class PlayerShipBehaviour {
+}
+
+class EnemyShipBehaviour {
+}
+
+class AsteroidBehaviour {
+}
+
+class EnemyBomberBehaviour {
+}
+
+class PlanetBehaviour {
+}
+
+class BulletBehaviour {
+}
+
+class BombBehaviour {
+}
+
+class EnemySpawnerBehaviour {
+}
+
+class MovingObject {
+    #velocity : Point
+    #topVelocity : double
+    #friction : double
+
+    updateMovement() : void
+    addVelocity() : void
+    setVelocity() : void
+}
+
+class UIObject {
+}
+
+class EffectObject {
+}
+
+class BaseEnemy extends MovingObject {
+}
+
+<> circ
+<> beha
+<> chara
+
+GameObject <|-- circ
+circ -- MovingObject
+circ -- UIObject
+circ -- EffectObject
+
+BaseBehaviour <|-- beha
+beha -- EnemySpawnerBehaviour
+beha -- BulletBehaviour
+beha -- CharacterBehaviour
+beha -- BombBehaviour
+beha -- EffectBehaviour
+
+CharacterBehaviour <|-- chara
+chara -- AsteroidBehaviour
+chara -- EnemyShipBehaviour
+chara -- EnemyBomberBehaviour
+chara -- PlayerShipBehaviour
+chara -- PlanetBehaviour
+
+@enduml
