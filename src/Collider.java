@@ -17,6 +17,27 @@ public abstract class Collider implements ICollider
         return this.centroid;
     }
 
+    public void transform(Transform t) 
+    {
+        this.transform = t;
+    }
+
+    public Transform transform() 
+    {
+        return this.transform;
+    }
+
+    public void onUpdate()
+    {
+        Point dPos = this.transform.position().subNew(this.centroid); 
+        double dScale = this.transform.scale() - this.scale;
+        double dAngle = this.transform.angle() - this.angle;
+
+        this.move(dPos);
+        this.rotate(dAngle);
+        this.scale(dScale);
+    }
+
     /**
      * Este método altera a escala, adicionando dScale ao valor da escala.
      * @param dScale {@code double}

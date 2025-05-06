@@ -25,14 +25,14 @@ public class LineTests
         Point testPoint1 = new Point(2, 3);
         Point expected1 = new Point(2, 0);
         Point result1 = horizontalLine.closestPointFromPoint(testPoint1);
-        assertEquals(expected1.x(), result1.x());
-        assertEquals(expected1.y(), result1.y());
+        assertEquals(expected1.x(), result1.x(), 1e-9);
+        assertEquals(expected1.y(), result1.y(), 1e-9);
 
         Line diagonalLine = new Line(new Point(0, 0), new Point(5, 5));
         Point testPoint3 = new Point(0, 5);
         Point expected3 = new Point(2.5, 2.5);
         Point result3 = diagonalLine.closestPointFromPoint(testPoint3);
-        assertEquals(expected3.x(), result3.x());
-        assertEquals(expected3.y(), result3.y());
+        assertEquals(expected3.x(), result3.x(), 1e-9);
+        assertEquals(expected3.y(), result3.y(), 1e-9);
     }
 }

@@ -20,11 +20,11 @@ public class GameEngineTests
         gameEngine.add(gameObject1);
         gameEngine.destroy(gameObject1);
 
-        assertEquals(0, gameEngine.objects().size());
-        assertTrue(gameEngine.objects().isEmpty());
+        assertEquals(0, gameEngine.getEnabled().size());
+        assertTrue(gameEngine.getEnabled().isEmpty());
 
         gameEngine.destroy(gameObject2);
-        assertTrue(gameEngine.objects().isEmpty());
+        assertTrue(gameEngine.getEnabled().isEmpty());
     }
 
     @Test
@@ -130,13 +130,15 @@ public class GameEngineTests
         assertTrue(gameEngine.objects().isEmpty());
     }
 
+    /*
     @Test
     void testRun()
     {
         gameEngine.add(gameObject1);
         gameEngine.add(gameObject2);
-        assertDoesNotThrow(() -> gameEngine.run());
+        assertDoesNotThrow(() -> gameEngine.run()); // ah ya bora testar a funçao q corre para sempre
     }
+    */
 
     @Test
     void testCheckCollisions()

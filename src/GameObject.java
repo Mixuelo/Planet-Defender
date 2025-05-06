@@ -39,6 +39,8 @@ public class GameObject implements IGameObject
         this.name = n;
         this.transform = t;
         this.collider = c;
+        // if (this.collider.transform() == null) this.collider().transform(t);
+        if (this.collider.transform == null) this.collider.transform = t;
         this.engine = e;
     }
 
@@ -121,7 +123,7 @@ public class GameObject implements IGameObject
     public void move(Point dPos, int dlayer)
     {
         this.transform.move(dPos, dlayer);
-        this.collider.move(dPos);
+        //this.collider.move(dPos);
     }
 
     /**
@@ -131,7 +133,7 @@ public class GameObject implements IGameObject
     public void rotate(double dTheta)
     {
         this.transform.rotate(dTheta);
-        this.collider.rotate(dTheta);
+        //this.collider.rotate(dTheta);
     }
 
     /**
@@ -141,7 +143,7 @@ public class GameObject implements IGameObject
     public void scale(double dScale)
     {
         this.transform.scale(dScale);
-        this.collider.scale(dScale);
+        //this.collider.scale(dScale);
     }
 
     /**

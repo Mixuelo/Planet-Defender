@@ -7,28 +7,33 @@ import java.util.List;
  */
 public class GameEngine implements IGameEngine
 {
-    private ArrayList<GameObject> objects;
+    private ArrayList<GameObject> enabled;
+    private ArrayList<GameObject> disabled;
+
+    private final double dt = 0.0166666f;
 
     /**
      * Construtor para o GameEngine.
      */
     public GameEngine()
     {
-        objects = new ArrayList<>();
+        enabled = new ArrayList<>();
+        disabled = new ArrayList<>();
     }
 
+    /** TODO: REMOVER ESTA FUNÇAO */
     public ArrayList<GameObject> objects()
     {
-        return this.objects;
+        return this.enabled;
     }
 
-    /**
+    /** TODO: REMOVER ESTA FUNÇAO
      * Adiciona um {@code GameObject} ao GameEngine.
      * @param go {@code GameObject}
      */
     public void add(GameObject go)
     {
-        objects.add(go);
+        this.addEnabled(go);
     }
 
     /**
@@ -37,7 +42,8 @@ public class GameEngine implements IGameEngine
      */
     public void destroy(GameObject go)
     {
-        objects.remove(go);
+        this.enabled.remove(go);
+        this.disabled.remove(go);
     }
 
     public void addEnabled(IGameObject go)
@@ -96,26 +102,40 @@ public class GameEngine implements IGameEngine
 
     public void run()
     {
-        /*
         for(;;)
         {
-            ie = getUserInput();
+            // ie = getUserInput();
+            
             for(IGameObject go : enabled)
             {
-                go.behaviour().onUpdate(dt, ie);
-                go.collisor().onUpdate();
+                //go.behaviour().onUpdate(dt, ie);
+                go.collider().onUpdate();
             }
 
             // envia lista de colisões para todos os
             // IGameObject em enabled
+            this.checkCollisions();
 
             // envia a lista de IGameObjects em enabled para o GUI
         }
-        */
     }
 
     public void checkCollisions()
     {
-        //TODO
+        // TODO: ver se existe uma forma melhor de fazer isto em causar um desperdicio de memoria de O(n²)
+        for(GameObject go : enabled)
+        {
+            ArrayList<IGameObject> list = new ArrayList<>();
+
+            for(GameObject other : enabled)
+            {
+                if(go != other && go.transform().layer() == other.transform().layer() && go.checkCollision(other))
+                {
+                    list.add(other);
+                }
+            }
+
+            go.behaviour().onCollision(list);
+        }
     }
 }
