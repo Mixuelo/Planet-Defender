@@ -3,8 +3,14 @@ import java.util.List;
 
 public class BulletBehaviour extends Behaviour
 {
+    /**
+     * Método para atualizar o estado da bala a cada frame
+     * @param dT {@code double}
+     * @param ie {@code InputEvent}
+     */
     @Override
-    public void onUpdate(double dT, InputEvent ie) {
+    public void onUpdate(double dT, InputEvent ie)
+    {
         super.onUpdate(dT, ie);
 
         Point pos = this.gameObject().transform().position();
@@ -15,8 +21,13 @@ public class BulletBehaviour extends Behaviour
         }
     }
 
+    /**
+     * Método usado para reagir a colisões com outros GameObjects
+     * @param gol {@code List<IGameObject>}
+     */
     @Override
-    public void onCollision(List<IGameObject> gol) {
+    public void onCollision(List<IGameObject> gol)
+    {
         super.onCollision(gol);
 
         for(IGameObject go : gol)
@@ -28,8 +39,6 @@ public class BulletBehaviour extends Behaviour
                 cb.takeDamage(1);
             }
         }
-
         this.gameObject().engine().destroy(this.gameObject());
     }
-
 }

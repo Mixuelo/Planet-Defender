@@ -9,7 +9,8 @@ public abstract class Collider implements ICollider
     protected double angle;
     protected Transform transform;
 
-    /** Devolve o centroide do Collider.
+    /**
+     * Devolve o centroide do Collider.
      * @return centroid {@code Point}
      * */
     public Point centroid()
@@ -17,16 +18,27 @@ public abstract class Collider implements ICollider
         return this.centroid;
     }
 
+    /**
+     * Define uma transform para o Collider (setter).
+     * @param t {@code Transform}
+     */
     public void transform(Transform t) 
     {
         this.transform = t;
     }
 
+    /**
+     * Devolve a transform do Collider (getter).
+     * @return transform {@code Transform}
+     * */
     public Transform transform() 
     {
         return this.transform;
     }
 
+    /**
+     * Atualiza as informações do Collider de acordo com a sua Transform.
+     */
     public void onUpdate()
     {
         Point dPos = this.transform.position().subNew(this.centroid); 

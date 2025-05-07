@@ -134,7 +134,6 @@ public class GameEngine implements IGameEngine
                     list.add(other);
                 }
             }
-
             go.behaviour().onCollision(list);
         }
     }
