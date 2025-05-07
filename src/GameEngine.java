@@ -58,6 +58,7 @@ public class GameEngine implements IGameEngine
         {
             this.enabled.add((GameObject) go);
             ((GameObject) go).engine(this);
+            if(go.behaviour() != null) go.behaviour().onInit();
         }
     }
 
@@ -67,17 +68,26 @@ public class GameEngine implements IGameEngine
         {
             this.disabled.add((GameObject) go);
             ((GameObject) go).engine(this);
+            if(go.behaviour() != null) go.behaviour().onInit();
         }
     }
 
     public void enable(IGameObject go)
     {
-        if(this.disabled.remove(go)) { this.enabled.add((GameObject) go); }
+        if(this.disabled.remove(go)) 
+        { 
+            this.enabled.add((GameObject) go); 
+            if(go.behaviour() != null) go.behaviour().onEnabled();
+        }
     }
 
     public void disable(IGameObject go)
     {
-        if(this.enabled.remove(go)) { this.disabled.add((GameObject) go); }
+        if(this.enabled.remove(go)) 
+        {
+            this.disabled.add((GameObject) go); 
+            if(go.behaviour() != null) go.behaviour().onDisabled();
+        }
     }
 
     public boolean isEnabled(IGameObject go)
