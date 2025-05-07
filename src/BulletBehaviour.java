@@ -27,6 +27,10 @@ public class BulletBehaviour extends Behaviour
                 CharacterBehaviour cb = (CharacterBehaviour) b;
                 cb.takeDamage(1);
             }
+            else if(b instanceof BombBehaviour)
+            {
+                ((BombBehaviour) b).explode();
+            }
         }
 
         this.gameObject().engine().destroy(this.gameObject());

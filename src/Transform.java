@@ -3,7 +3,7 @@
  * @author Miguel Alvito, Nicole Reis e Pedro Pinto
  * @version 1.0 (2024-03-25)
  */
-public class Transform implements ITransform
+public class Transform implements ITransform, Cloneable
 {
     private Point position;
     private int layer;
@@ -95,5 +95,24 @@ public class Transform implements ITransform
     public double scale()
     {
         return scale;
+    }
+
+    /** Clona este objeto, copiando os valores */
+    @Override
+    public Transform clone()
+    {
+        try
+        {
+            Transform res = (Transform) super.clone();
+            res.position = this.position.clone();
+            res.layer = this.layer;
+            res.angle = this.angle;
+            res.scale = this.scale;
+            return res;
+        }
+        catch(CloneNotSupportedException e)
+        {
+            throw new InternalError();
+        }
     }
 }

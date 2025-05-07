@@ -7,11 +7,9 @@ public class EffectObjectTests
     public void testConstructor()
     {
         Transform t = new Transform(new Point(0, 0), 0, 0, 1);
-        Collider c = new ColliderCircle(t, new Point(0, 0), 2);
-        EffectObject effectObject = new EffectObject("teste", t, c);
+        EffectObject effectObject = new EffectObject("teste", t, 1);
 
         assertEquals("teste", effectObject.name());
         assertEquals(t.toString(), effectObject.transform().toString());
-        assertEquals(c.toString(), effectObject.collider().toString());
     }
 }
