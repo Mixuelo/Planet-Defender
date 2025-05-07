@@ -17,7 +17,7 @@ public class GameEngineTests
     @Test
     void testDestroy()
     {
-        gameEngine.add(gameObject1);
+        gameEngine.addEnabled(gameObject1);
         gameEngine.destroy(gameObject1);
 
         assertEquals(0, gameEngine.getEnabled().size());
@@ -30,9 +30,7 @@ public class GameEngineTests
     @Test
     void testAddEnabled()
     {
-        gameEngine.add(gameObject1);
-        gameEngine.add(gameObject2);
-
+        gameEngine.addDisabled(gameObject2);
         gameEngine.addEnabled(gameObject1);
         assertTrue(gameEngine.getEnabled().contains(gameObject1));
         assertFalse(gameEngine.getEnabled().contains(gameObject2));
@@ -41,9 +39,7 @@ public class GameEngineTests
     @Test
     void testAddDesabled()
     {
-        gameEngine.add(gameObject1);
-        gameEngine.add(gameObject2);
-
+        gameEngine.addEnabled(gameObject1);
         gameEngine.addDisabled(gameObject2);
         assertTrue(gameEngine.getDisabled().contains(gameObject2));
         assertFalse(gameEngine.getDisabled().contains(gameObject1));
@@ -52,7 +48,7 @@ public class GameEngineTests
     @Test
     void testEnable()
     {
-        gameEngine.add(gameObject1);
+        gameEngine.addDisabled(gameObject1);
         gameEngine.enable(gameObject1);
         assertTrue(gameEngine.isEnabled(gameObject1));
         assertFalse(gameEngine.isDisabled(gameObject1));
@@ -61,7 +57,7 @@ public class GameEngineTests
     @Test
     void testDisable()
     {
-        gameEngine.add(gameObject1);
+        gameEngine.addEnabled(gameObject1);
         gameEngine.disable(gameObject1);
         assertTrue(gameEngine.isDisabled(gameObject1));
         assertFalse(gameEngine.isEnabled(gameObject1));
@@ -70,8 +66,6 @@ public class GameEngineTests
     @Test
     void testIsEnabled()
     {
-        gameEngine.add(gameObject1);
-        gameEngine.add(gameObject2);
         gameEngine.addEnabled(gameObject1);
         gameEngine.addDisabled(gameObject2);
 
@@ -82,8 +76,6 @@ public class GameEngineTests
     @Test
     void testIsDisabled()
     {
-        gameEngine.add(gameObject1);
-        gameEngine.add(gameObject2);
         gameEngine.addEnabled(gameObject1);
         gameEngine.addDisabled(gameObject2);
 
@@ -94,9 +86,7 @@ public class GameEngineTests
     @Test
     void testGetEnabled()
     {
-        gameEngine.add(gameObject1);
-        gameEngine.add(gameObject2);
-
+        gameEngine.addDisabled(gameObject2);
         gameEngine.addEnabled(gameObject1);
 
         List<IGameObject> enabled = gameEngine.getEnabled();
@@ -109,9 +99,7 @@ public class GameEngineTests
     @Test
     void testGetDisabled()
     {
-        gameEngine.add(gameObject1);
-        gameEngine.add(gameObject2);
-
+        gameEngine.addEnabled(gameObject1);
         gameEngine.addDisabled(gameObject2);
 
         List<IGameObject> disabled = gameEngine.getDisabled();
@@ -124,8 +112,8 @@ public class GameEngineTests
     @Test
     void testDestroyAll()
     {
-        gameEngine.add(gameObject1);
-        gameEngine.add(gameObject2);
+        gameEngine.addEnabled(gameObject1);
+        gameEngine.addEnabled(gameObject2);
         gameEngine.destroyAll();
         assertTrue(gameEngine.objects().isEmpty());
     }
@@ -143,8 +131,8 @@ public class GameEngineTests
     @Test
     void testCheckCollisions()
     {
-        gameEngine.add(gameObject1);
-        gameEngine.add(gameObject2);
+        gameEngine.addEnabled(gameObject1);
+        gameEngine.addEnabled(gameObject2);
         assertDoesNotThrow(() -> gameEngine.checkCollisions());
     }
 }
