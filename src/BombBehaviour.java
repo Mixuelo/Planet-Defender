@@ -27,7 +27,8 @@ public class BombBehaviour extends Behaviour
     }
 
     @Override
-    public void onCollision(List<IGameObject> gol) {
+    public void onCollision(List<IGameObject> gol)
+    {
         super.onCollision(gol);
 
         for(IGameObject go : gol)
@@ -44,7 +45,6 @@ public class BombBehaviour extends Behaviour
                 }
             }
         }
-
         if(this.explode) { this.parent.engine().destroy(this.parent); }
     }
 
