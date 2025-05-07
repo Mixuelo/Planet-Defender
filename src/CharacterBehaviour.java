@@ -13,11 +13,12 @@ public abstract class CharacterBehaviour extends Behaviour
 
     void takeDamage(int damage)
     {
-        //TODO
+        this.health -= damage;
+        if(this.health <= 0) { onDefeat(); }
     }
 
     void onDefeat()
     {
-        //TODO
+        this.parent.engine().destroy(this.parent);
     }
 }

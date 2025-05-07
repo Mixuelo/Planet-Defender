@@ -54,14 +54,20 @@ public class GameEngine implements IGameEngine
 
     public void addEnabled(IGameObject go)
     {
-        if(!this.exists(go))
+        if(!this.exists(go)) 
+        {
             this.enabled.add((GameObject) go);
+            ((GameObject) go).engine(this);
+        }
     }
 
     public void addDisabled(IGameObject go)
     {
         if(!this.exists(go))
+        {
             this.disabled.add((GameObject) go);
+            ((GameObject) go).engine(this);
+        }
     }
 
     public void enable(IGameObject go)
