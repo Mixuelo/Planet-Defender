@@ -40,64 +40,95 @@ public class GameEngine implements IGameEngine
      * Remove um {@code GameObject} do GameEngine.
      * @param go {@code GameObject}
      */
-    public void destroy(GameObject go)
+    public void destroy(IGameObject go)
     {
-        this.enabled.remove(go);
+        if(go.behaviour() != null) { go.behaviour().onDestroy(); }
+        if(this.enabled.remove(go)) { return; }
         this.disabled.remove(go);
+    }
+
+    private boolean exists(IGameObject go)
+    {
+        return this.enabled.contains(go) || this.disabled.contains(go);
     }
 
     public void addEnabled(IGameObject go)
     {
-        //TODO
+        if(!this.exists(go)) 
+        {
+            this.enabled.add((GameObject) go);
+            ((GameObject) go).engine(this);
+        }
     }
 
     public void addDisabled(IGameObject go)
     {
-        //TODO
+        if(!this.exists(go))
+        {
+            this.disabled.add((GameObject) go);
+            ((GameObject) go).engine(this);
+        }
     }
 
     public void enable(IGameObject go)
     {
-        //TODO
+        if(this.disabled.remove(go)) { this.enabled.add((GameObject) go); }
     }
 
     public void disable(IGameObject go)
     {
-        //TODO
+        if(this.enabled.remove(go)) { this.disabled.add((GameObject) go); }
     }
 
     public boolean isEnabled(IGameObject go)
     {
-        //TODO
+        if(this.enabled.contains(go)) { return true; }
         return false;
     }
 
     public boolean isDisabled(IGameObject go)
     {
-        //TODO
+        if(this.disabled.contains(go)) { return true; }
         return false;
     }
 
     public List<IGameObject> getEnabled()
     {
-        //TODO
-        return null;
+        List<IGameObject> list = new ArrayList<>();
+
+        for(GameObject go : enabled)
+        {
+            list.add((IGameObject) go);
+        }
+
+        return list;
     }
 
     public List<IGameObject> getDisabled()
     {
-        //TODO
-        return null;
-    }
+        List<IGameObject> list = new ArrayList<>();
 
-    public void destroy(IGameObject go)
-    {
-        //TODO
+        for(GameObject go : disabled)
+        {
+            list.add((IGameObject) go);
+        }
+
+        return list;
     }
 
     public void destroyAll()
     {
-        //TODO
+        for(IGameObject go : enabled)
+        {
+            if(go.behaviour() != null) { go.behaviour().onDestroy(); }
+        }
+        for(IGameObject go : disabled)
+        {
+            if(go.behaviour() != null) { go.behaviour().onDestroy(); }
+        }
+
+        enabled = new ArrayList<>();
+        disabled = new ArrayList<>();
     }
 
     public void run()
@@ -108,8 +139,9 @@ public class GameEngine implements IGameEngine
             
             for(IGameObject go : enabled)
             {
-                //go.behaviour().onUpdate(dt, ie);
+                if(go instanceof MovingObject) { ((MovingObject) go).updateMovement(); }
                 go.collider().onUpdate();
+                //go.behaviour().onUpdate(dt, ie);
             }
 
             // envia lista de colisões para todos os
@@ -134,7 +166,12 @@ public class GameEngine implements IGameEngine
                     list.add(other);
                 }
             }
+<<<<<<< HEAD
             go.behaviour().onCollision(list);
+=======
+
+            if (go.behaviour() != null) { go.behaviour().onCollision(list); }
+>>>>>>> 67e55f285421673062c81764e84bb35d4cf398b1
         }
     }
 }

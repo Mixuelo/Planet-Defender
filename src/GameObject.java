@@ -39,15 +39,37 @@ public class GameObject implements IGameObject
         this.name = n;
         this.transform = t;
         this.collider = c;
-        // if (this.collider.transform() == null) this.collider().transform(t);
-        if (this.collider.transform == null) this.collider.transform = t;
+        if (this.collider != null && this.collider.transform == null) this.collider.transform = t;
         this.engine = e;
+    }
+
+    /**
+     * Contrutor de um GameObject.
+     * @param n {@code String}
+     * @param t {@code Transform}
+     * @param c {@code Collider}
+     * @param b {@code Behaviour}
+     */
+    public GameObject(String n, Transform t, Collider c, Behaviour b)
+    {
+        this.name = n;
+        this.transform = t;
+        this.collider = c;
+        if (this.collider != null && this.collider.transform == null) this.collider.transform = t;
+        this.behaviour = b;
+        if (this.behaviour != null) this.behaviour.parent = this;
     }
 
     /** Retorna a GameEngine ao qual o GameObject pertence */
     public IGameEngine engine() 
     {
         return this.engine;
+    }
+
+    /** Define a GameEngine ao qual o GameObject pertence */
+    public void engine(GameEngine e) 
+    {
+        this.engine = e;
     }
 
     /**

@@ -19,13 +19,16 @@ public class CharacterBehaviourTests
     @Test
     public void testOnDefeat()
     {
-        PlayerShipBehaviour ship1 = new PlayerShipBehaviour(10);
-        PlayerShipBehaviour ship2 = new PlayerShipBehaviour(14);
+        GameEngine eng = new GameEngine();
+        GameObject ship1 = new GameObject("s1", null, null, new PlayerShipBehaviour(10));
+        GameObject ship2 = new GameObject("s2", null, null, new PlayerShipBehaviour(12));
+        eng.addEnabled(ship1);
+        eng.addEnabled(ship2);
 
-        ship1.takeDamage(10);
-        ship2.takeDamage(14);
+        ((PlayerShipBehaviour) ship1.behaviour()).takeDamage(10);
+        ((PlayerShipBehaviour) ship2.behaviour()).takeDamage(14);
 
-        assertNull(ship1.gameObject());
-        assertNull(ship2.gameObject());
+        assertFalse(eng.isEnabled(ship1));
+        assertFalse(eng.isEnabled(ship2));
     }
 }
