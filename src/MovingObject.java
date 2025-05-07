@@ -7,23 +7,35 @@ public class MovingObject extends GameObject
     public MovingObject(String n, Transform t, Collider c, Point velocity, double topVelocity, double friction)
     {
         super(n, t, c);
-        this.velocity = velocity;
+        this.velocity = velocity.clone();
         this.topVelocity = topVelocity;
         this.friction = friction;
     }
 
-    void updateMovement()
+    public void updateMovement()
     {
-        //TODO
+        this.transform().position().addThis(velocity);
+        this.velocity.multThis(this.friction);
     }
 
-    void addVelocity(Point dVelocity)
+    public void addVelocity(Point dVelocity)
     {
-        //TODO
+        this.velocity.addThis(dVelocity);
+        this.capVelocity();
     }
 
-    void setVelocity(Point dVelocity)
+    public void setVelocity(Point velocity)
     {
-        //TODO
+        this.velocity = velocity.clone();
+        this.capVelocity();
+    }
+
+    private void capVelocity()
+    {
+        double curr = this.velocity.distFrom(new Point(0, 0));
+        if(curr <= this.topVelocity) return;
+
+        double scale = this.topVelocity / curr;
+        this.velocity.multThis(scale);
     }
 }

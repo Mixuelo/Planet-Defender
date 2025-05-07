@@ -133,8 +133,9 @@ public class GameEngine implements IGameEngine
             
             for(IGameObject go : enabled)
             {
-                //go.behaviour().onUpdate(dt, ie);
+                if(go instanceof MovingObject) { ((MovingObject) go).updateMovement(); }
                 go.collider().onUpdate();
+                //go.behaviour().onUpdate(dt, ie);
             }
 
             // envia lista de colisões para todos os
