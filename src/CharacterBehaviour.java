@@ -16,8 +16,8 @@ public abstract class CharacterBehaviour extends Behaviour
         this.health -= damage;
         if(this.health <= 0)
         {
-            onDefeat();
             if(this instanceof PlanetBehaviour) { ((PlanetBehaviour) this).gameOver(); }
+            onDefeat();
         }
     }
 

@@ -1,10 +1,8 @@
-import java.util.List;
-
 public class PlanetBehaviour extends CharacterBehaviour
 {
     private static final int INITIAL_HEALTH = 100;
 
-    public PlanetBehaviour(int health)
+    public PlanetBehaviour()
     {
         super(INITIAL_HEALTH);
     }
@@ -14,4 +12,3 @@ public class PlanetBehaviour extends CharacterBehaviour
         parent.engine().destroyAll();
     }
 }
-

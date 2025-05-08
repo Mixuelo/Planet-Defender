@@ -14,12 +14,12 @@ public class GameObject implements IGameObject
     private GameEngine engine;
 
     /**
-     * Contrutor de um GameObject. (EVITAR USAR)
+     * Contrutor de um GameObject.
      * @param n {@code String}
      * @param t {@code Transform}
      * @param c {@code Collider}
      */
-    public GameObject(String n, Transform t, Collider c)
+    public GameObject(String n, Transform t, Collider c) // (EVITAR USAR)
     {
         this.name = n;
         this.transform = t;
