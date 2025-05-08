@@ -1,21 +1,60 @@
 import java.util.List;
 
+/**
+ * Interface implementada pela classe GameEngine.
+ * @author Miguel Alvito, Nicole Reis e Pedro Pinto
+ * @version 1.0 (08/05/2025)
+ */
 public interface IGameEngine
 {
+    /**
+     * Adiciona um novo IGameObject à lista de ativos.
+     * @param go {@code IGameObject}
+     */
     public void addEnabled(IGameObject go);
 
+    /**
+     * Adiciona um novo IGameObject à lista de inativos.
+     * @param go {@code IGameObject}
+     */
     public void addDisabled(IGameObject go);
 
+    /**
+     * Ativa um IGameObject da IGameEngine.
+     * @param go {@code IGameObject}
+     */
     public void enable(IGameObject go);
 
+    /**
+     * Desativa um IGameObject da IGameEngine.
+     * @param go {@code IGameObject}
+     */
     public void disable(IGameObject go);
 
+    /**
+     * Verifica se um IGameObject está ativo.
+     * @param go {@code IGameObject}
+     * @return true se estiver ativo, false se não {@code boolean}
+     */
     public boolean isEnabled(IGameObject go);
 
+    /**
+     * Verifica se um IGameObject está inativo.
+     * @param go {@code IGameObject}
+     * @return true se estiver inativo, false se não {@code boolean}
+     */
     public boolean isDisabled(IGameObject go);
 
+    /**
+     * Devolve todos os IGameObject's ativos.
+     * @return {@code List<IGameObject>}
+     */
     public List<IGameObject> getEnabled();
 
+    /**
+     * Devolve todos os IGameObject's inativos.
+     * @return {@code List<IGameObject>}
+     */
     public List<IGameObject> getDisabled();
 
     /**

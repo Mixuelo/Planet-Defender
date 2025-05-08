@@ -1,15 +1,26 @@
 import java.util.List;
 
+/**
+ * Subclasse de Behaviour responsável pelo comportamento das bombas.
+ * @author Miguel Alvito, Nicole Reis, Pedro Pinto
+ * @version 1.0 (08/05/2025)
+ */
 public class BombBehaviour extends Behaviour
 {
     private boolean explode;
     private static final double explodeScale = 5;
 
+    /**
+     * Construtor (inicializa a bomba como "não explodida").
+     */
     public BombBehaviour() 
     {
         this.explode = false;
     }
 
+    /**
+     * Executa uma explosão.
+     */
     public void explode() 
     {
         if(this.explode) { return; }
@@ -26,6 +37,10 @@ public class BombBehaviour extends Behaviour
         this.parent.scale(explodeScale - this.parent.transform().scale());
     }
 
+    /**
+     * Método usado para reagir a colisões.
+     * @param gol {@code List<IGameObject>}
+     */
     @Override
     public void onCollision(List<IGameObject> gol)
     {
@@ -47,5 +62,4 @@ public class BombBehaviour extends Behaviour
         }
         if(this.explode) { this.parent.engine().destroy(this.parent); }
     }
-
 }

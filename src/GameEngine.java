@@ -47,11 +47,20 @@ public class GameEngine implements IGameEngine
         this.disabled.remove(go);
     }
 
+    /**
+     * Verifica se um IGameObject existe.
+     * @param go {@code IGameObject}
+     * @return true se existir, false se não {@code boolean}
+     */
     private boolean exists(IGameObject go)
     {
         return this.enabled.contains(go) || this.disabled.contains(go);
     }
 
+    /**
+     * Adiciona um novo IGameObject à lista de ativos.
+     * @param go {@code IGameObject}
+     */
     public void addEnabled(IGameObject go)
     {
         if(!this.exists(go)) 
@@ -62,6 +71,10 @@ public class GameEngine implements IGameEngine
         }
     }
 
+    /**
+     * Adiciona um novo IGameObject à lista de inativos.
+     * @param go {@code IGameObject}
+     */
     public void addDisabled(IGameObject go)
     {
         if(!this.exists(go))
@@ -72,6 +85,10 @@ public class GameEngine implements IGameEngine
         }
     }
 
+    /**
+     * Ativa um IGameObject da GameEngine.
+     * @param go {@code IGameObject}
+     */
     public void enable(IGameObject go)
     {
         if(this.disabled.remove(go)) 
@@ -81,6 +98,10 @@ public class GameEngine implements IGameEngine
         }
     }
 
+    /**
+     * Desativa um IGameObject da GameEngine.
+     * @param go {@code IGameObject}
+     */
     public void disable(IGameObject go)
     {
         if(this.enabled.remove(go)) 
@@ -90,18 +111,32 @@ public class GameEngine implements IGameEngine
         }
     }
 
+    /**
+     * Verifica se um IGameObject está ativo.
+     * @param go {@code IGameObject}
+     * @return true se estiver ativo, false se não {@code boolean}
+     */
     public boolean isEnabled(IGameObject go)
     {
         if(this.enabled.contains(go)) { return true; }
         return false;
     }
 
+    /**
+     * Verifica se um IGameObject está inativo.
+     * @param go {@code IGameObject}
+     * @return true se estiver inativo, false se não {@code boolean}
+     */
     public boolean isDisabled(IGameObject go)
     {
         if(this.disabled.contains(go)) { return true; }
         return false;
     }
 
+    /**
+     * Devolve todos os IGameObject's ativos.
+     * @return {@code List<IGameObject>}
+     */
     public List<IGameObject> getEnabled()
     {
         List<IGameObject> list = new ArrayList<>();
@@ -110,10 +145,13 @@ public class GameEngine implements IGameEngine
         {
             list.add((IGameObject) go);
         }
-
         return list;
     }
 
+    /**
+     * Devolve todos os IGameObject's inativos.
+     * @return {@code List<IGameObject>}
+     */
     public List<IGameObject> getDisabled()
     {
         List<IGameObject> list = new ArrayList<>();
@@ -126,6 +164,10 @@ public class GameEngine implements IGameEngine
         return list;
     }
 
+    /**
+     * Destroy all IGameObjects
+     * pos: calls onDestroy() for each IGameObject
+     */
     public void destroyAll()
     {
         for(IGameObject go : enabled)
@@ -141,6 +183,17 @@ public class GameEngine implements IGameEngine
         disabled = new ArrayList<>();
     }
 
+    /**
+     * Generates a new frame:
+     * Get user input from UI
+     * update all the enabled GameObjects
+     * check collisions and send info to GameObjects
+     * update UI
+     * pos: UI.input() &&
+     *      calls Behaviour.onUpdate() for all enabled objects &&
+     *      Behaviour.checkCollisions() &&
+     *      UI.draw()
+     */
     public void run()
     {
         for(;;)
@@ -162,6 +215,11 @@ public class GameEngine implements IGameEngine
         }
     }
 
+    /**
+     * Check collisions for all the enabled objects
+     * pos: calls Behaviour.onCollision(gol) for all enabled GameObjects
+     *      passing in the list of all the objects that collided with each IGameObject
+     */
     public void checkCollisions()
     {
         // TODO: ver se existe uma forma melhor de fazer isto em causar um desperdicio de memoria de O(n²)
@@ -176,7 +234,6 @@ public class GameEngine implements IGameEngine
                     list.add(other);
                 }
             }
-
             if (go.behaviour() != null) { go.behaviour().onCollision(list); }
         }
     }

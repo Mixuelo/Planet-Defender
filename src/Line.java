@@ -1,7 +1,7 @@
 /**
  * Classe para retas.
  * @author Miguel Alvito, Nicole Reis e Pedro Pinto
- * @version 1.0 (2024-03-25)
+ * @version 1.0 (2025-03-25)
  */
 public class Line
 {

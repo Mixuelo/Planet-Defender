@@ -1,15 +1,29 @@
 import java.util.List;
 
+/**
+ * Subclasse de CharacterBehaviour responsável pelo comportamento dos asteróides.
+ * @author Miguel Alvito, Nicole Reis, Pedro Pinto
+ * @version 1.0 (08/05/2025)
+ */
 public class AsteroidBehaviour extends CharacterBehaviour
 {
     private boolean large;
 
+    /**
+     * Construtor.
+     * @param health {@code int}
+     * @param large {@code boolean}
+     */
     public AsteroidBehaviour(int health, boolean large)
     {
         super(health);
         this.large = large;
     }
 
+    /**
+     * Reage a colisões.
+     * @param gol {@code List<IGameObject>}
+     */
     @Override
     public void onCollision(List<IGameObject> gol)
     {
@@ -32,6 +46,9 @@ public class AsteroidBehaviour extends CharacterBehaviour
         }
     }
 
+    /**
+     * Se este asteróide for grande, divide-o em dois novos asteróides pequenos (apaga o original).
+     */
     private void divide()
     {
         if(this.large)

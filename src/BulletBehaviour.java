@@ -1,10 +1,15 @@
 import java.awt.event.InputEvent;
 import java.util.List;
 
+/**
+ * Subclasse de Behaviour responsável pelo comportamento dos tiros disparados.
+ * @author Miguel Alvito, Nicole Reis e Pedro Pinto
+ * @version 1.0 (08/05/2025)
+ */
 public class BulletBehaviour extends Behaviour
 {
     /**
-     * Método para atualizar o estado da bala a cada frame
+     * Método para atualizar o estado da bala a cada frame.
      * @param dT {@code double}
      * @param ie {@code InputEvent}
      */
@@ -22,7 +27,7 @@ public class BulletBehaviour extends Behaviour
     }
 
     /**
-     * Método usado para reagir a colisões com outros GameObjects
+     * Método usado para reagir a colisões.
      * @param gol {@code List<IGameObject>}
      */
     @Override

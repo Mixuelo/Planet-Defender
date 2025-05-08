@@ -1,3 +1,8 @@
+/**
+ * Interface implementada pela classe Transform.
+ * @author Miguel Alvito, Nicole Reis e Pedro Pinto
+ * @version 1.0 (08/05/2025)
+ */
 public interface ITransform
 {
     /**
