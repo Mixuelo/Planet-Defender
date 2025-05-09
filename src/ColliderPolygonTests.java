@@ -64,7 +64,6 @@ public class ColliderPolygonTests
         assertEquals("(9.00,7.00) (1.00,7.00) (1.00,11.00) (9.00,11.00)", c.toString());
     }
 
-
     @Test
     public void scaleTest()
     {
@@ -113,5 +112,32 @@ public class ColliderPolygonTests
         assertTrue(p1.checkCollisionCircle(new ColliderCircle(new Point(2, 2), 3)));
         assertFalse(p2.checkCollisionCircle(new ColliderCircle(new Point(11, 12), 2)));
 
+    }
+
+    @Test
+    public void onUpdateTest()
+    {
+        ColliderPolygon polygon = new ColliderPolygon(new ArrayList<>(Arrays.asList(
+                new Point(0.0, 0.0), new Point(2.0, 0.0),
+                new Point(2.0, 2.0), new Point(0.0, 2.0)))
+        );
+        Transform transform = new Transform(new Point(5.0, 5.0), 1, 45.0, 2.0);
+
+        polygon.transform(transform);
+        polygon.onUpdate();
+
+        assertEquals(transform.position().x(), polygon.centroid().x());
+        assertEquals(transform.position().y(), polygon.centroid().y());
+        assertEquals(transform.scale(), polygon.scale);
+        assertEquals(transform.angle(), polygon.angle);
+
+        assertEquals(5.00, polygon.vertices().get(0).x(), 0.01);
+        assertEquals(2.17, polygon.vertices().get(0).y(), 0.01);
+        assertEquals(7.83, polygon.vertices().get(1).x(), 0.01);
+        assertEquals(5.00, polygon.vertices().get(1).y(), 0.01);
+        assertEquals(5.00, polygon.vertices().get(2).x(), 0.01);
+        assertEquals(7.83, polygon.vertices().get(2).y(), 0.01);
+        assertEquals(2.17, polygon.vertices().get(3).x(), 0.01);
+        assertEquals(5.00, polygon.vertices().get(3).y(), 0.01);
     }
 }

@@ -46,4 +46,31 @@ public class TransformTests
         t.scale(-0.7);
         assertEquals(0.8, t.scale(), 0.0001);
     }
+
+    @Test
+    public void cloneTest()
+    {
+        Transform original = new Transform(new Point(10, 20), 3, 45.5, 2.0);
+        Transform cloned = original.clone();
+
+        assertNotSame(original, cloned);
+        assertNotSame(original.position(), cloned.position());
+
+        assertEquals(original.toString(), cloned.toString());
+        assertEquals(original.position().x(), cloned.position().x());
+        assertEquals(original.position().y(), cloned.position().y());
+        assertEquals(original.layer(), cloned.layer());
+        assertEquals(original.angle(), cloned.angle());
+        assertEquals(original.scale(), cloned.scale());
+
+        original.move(new Point(5, 5), 1);
+        original.rotate(10);
+        original.scale(0.5);
+
+        assertEquals(10, cloned.position().x());
+        assertEquals(20, cloned.position().y());
+        assertEquals(3, cloned.layer());
+        assertEquals(45.5, cloned.angle());
+        assertEquals(2.0, cloned.scale());
+    }
 }

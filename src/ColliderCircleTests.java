@@ -64,4 +64,19 @@ public class ColliderCircleTests
         assertTrue(c1.checkCollisionCircle(new ColliderCircle(new Point (1, 1), 2)));
     }
 
+    @Test
+    public void circleOnUpdateTest()
+    {
+        ColliderCircle circle = new ColliderCircle(new Point(10, 10), 5.0);
+        Transform transform = new Transform(new Point(15, 20), 1, 45.0, 2.0);
+
+        circle.transform(transform);
+        circle.onUpdate();
+
+        assertEquals(transform.position().x(), circle.centroid().x());
+        assertEquals(transform.position().y(), circle.centroid().y());
+        assertEquals(10.0, circle.radius());
+        assertEquals(transform.scale(), circle.scale);
+        assertEquals(transform.angle(), circle.angle);
+    }
 }

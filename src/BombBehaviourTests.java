@@ -6,5 +6,15 @@ import java.util.Arrays;
 
 public class BombBehaviourTests
 {
+    @Test
+    public void explodeTest()
+    {
 
+    }
+
+    @Test
+    public void onCollisionTest()
+    {
+
+    }
 }
