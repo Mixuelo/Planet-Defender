@@ -1,3 +1,4 @@
+import java.awt.event.InputEvent;
 import java.util.List;
 
 /**
@@ -5,7 +6,7 @@ import java.util.List;
  * @author Miguel Alvito, Nicole Reis, Pedro Pinto
  * @version 1.0 (08/05/2025)
  */
-public class AsteroidBehaviour extends CharacterBehaviour
+public class AsteroidBehaviour extends EnemyBehaviour
 {
     private double size;
     private static final double SCALE_FACTOR = 0.1;
@@ -28,6 +29,21 @@ public class AsteroidBehaviour extends CharacterBehaviour
 
         double wantedScale = size * SCALE_FACTOR;
         this.parent.scale(wantedScale - this.parent.transform().scale());
+    }
+
+    @Override
+    public void onUpdate(double dT, InputEvent ie) {
+        MovingObject p = (MovingObject) this.parent;
+
+        Point dist = this.target.transform().position().subNew(this.parent.transform().position());
+        double mag = dist.distFrom(new Point(0,0));
+
+        double speed = (DISTANCE_CUTOFF - mag) * ACCELERATION * dT;
+        if(speed <= 0) { return; } 
+
+        Point norm = dist.multNew(1 / mag);
+        Point res = norm.multNew(speed);
+        p.addVelocity(res);
     }
 
     /**
