@@ -7,17 +7,27 @@ import java.util.List;
  */
 public class AsteroidBehaviour extends CharacterBehaviour
 {
-    private boolean large;
+    private double size;
+    private static final double SCALE_FACTOR = 0.1;
+    private static final double HEALTH_FACTOR = 5;
+    private static final double DIVIDE_FACTOR = 0.4;
+    private static final double SIZE_CUTOFF = 20;
+    private static final double DISTANCE_CUTOFF = 1000;
+    private static final double ACCELERATION = 5;
+    private static final double COLLIDER_RADIUS = 10;
 
-    /**
-     * Construtor.
-     * @param health {@code int}
-     * @param large {@code boolean}
-     */
-    public AsteroidBehaviour(int health, boolean large)
+    public AsteroidBehaviour(double size)
     {
-        super(health);
-        this.large = large;
+        super((int) (size * HEALTH_FACTOR));
+        this.size = size;
+    }
+
+    @Override
+    public void onInit() {
+        super.onInit();
+
+        double wantedScale = size * SCALE_FACTOR;
+        this.parent.scale(wantedScale - this.parent.transform().scale());
     }
 
     /**
@@ -38,12 +48,13 @@ public class AsteroidBehaviour extends CharacterBehaviour
                 cb.takeDamage(5);
                 this.gameObject().engine().destroy(this.gameObject());
             }
-            else if(b instanceof BulletBehaviour)
-            {
-                divide();
-                this.gameObject().engine().destroy(go);
-            }
         }
+    }
+
+    @Override
+    void onDefeat() {
+        this.divide();
+        this.parent.engine().destroy(this.parent);
     }
 
     /**
@@ -51,32 +62,20 @@ public class AsteroidBehaviour extends CharacterBehaviour
      */
     private void divide()
     {
-        if(this.large)
-        {
-            Transform parentTransform = this.gameObject().transform();
-            Point parentPos = parentTransform.position();
+        double childSize = this.size * DIVIDE_FACTOR;
+        if(childSize < SIZE_CUTOFF) { return; }
 
-            int layer = parentTransform.layer();
-            double angle = parentTransform.angle();
-            double scale = parentTransform.scale() * 0.5f;
+        Transform parentTransform = this.gameObject().transform();
 
-            Transform t1 = new Transform(
-                    new Point(parentPos.x() + (Math.random()*20 - 10), parentPos.y() + (Math.random()*20 - 10)),
-                    layer, angle, scale
-            );
-            //TODO: definir um raio para os asteroids pequenos
-            GameObject asteroid1 = new GameObject("Small Asteroid 1", t1, new ColliderCircle(t1, t1.position(), 2), new AsteroidBehaviour(this.health()/2, false));
+        Transform t1 = parentTransform.clone();
+        t1.move(new Point(Math.random()*20 - 10, Math.random()*20 - 10), 0);
+        GameObject asteroid1 = new GameObject("Small Asteroid 1", t1, new ColliderCircle(t1, t1.position(), COLLIDER_RADIUS), new AsteroidBehaviour(childSize));
 
-            Transform t2 = new Transform(
-                    new Point(parentPos.x() + (Math.random()*20 - 10), parentPos.y() + (Math.random()*20 - 10)),
-                    layer, angle, scale
-            );
-            //TODO: definir um raio para os asteroids pequenos
-            GameObject asteroid2 = new GameObject("Small Asteroid 2", t2, new ColliderCircle(t2, t2.position(), 2), new AsteroidBehaviour(this.health()/2, false));
+        Transform t2 = parentTransform.clone();
+        t2.move(new Point(Math.random()*20 - 10, Math.random()*20 - 10), 0);
+        GameObject asteroid2 = new GameObject("Small Asteroid 2", t2, new ColliderCircle(t2, t2.position(), COLLIDER_RADIUS), new AsteroidBehaviour(childSize));
 
-            this.gameObject().engine().addEnabled(asteroid1);
-            this.gameObject().engine().addEnabled(asteroid2);
-            this.gameObject().engine().destroy(this.gameObject());
-        }
+        this.gameObject().engine().addEnabled(asteroid1);
+        this.gameObject().engine().addEnabled(asteroid2);
     }
 }
