@@ -9,10 +9,10 @@ public class UIObject extends GameObject
      * Construtor.
      * @param n {@code String}
      * @param t {@code Transform}
-     * @param c {@code Collider}
+     * @param b {@code Behaviour}
      */
-    public UIObject(String n, Transform t, Collider c)
+    public UIObject(String n, Transform t, Behaviour b)
     {
-        super(n, t, c);
+        super(n, t, (Collider) null, b);
     }
 }
