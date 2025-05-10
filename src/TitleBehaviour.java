@@ -3,11 +3,11 @@ import java.util.Arrays;
 import java.util.ArrayList;
 
 /**
- * Subclasse abstrata de Behaviour responsável pelo comportamento do ecrã inicial do jogo.
+ * Subclasse de Behaviour responsável pelo comportamento do ecrã inicial do jogo.
  * @author Miguel Alvito, Nicole Reis, Pedro Pinto
  * @version 1.0 (08/05/2025)
  */
-public abstract class TitleBehaviour extends Behaviour
+public class TitleBehaviour extends Behaviour
 {
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
