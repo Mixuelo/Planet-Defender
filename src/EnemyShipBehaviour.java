@@ -2,7 +2,7 @@ import java.awt.event.InputEvent;
 import java.util.Random;
 
 /**
- * Subclasse de CharacterBehaviour responsável pelo comportamento dos inimigos.
+ * Subclasse de EnenmyBehaviour responsável pelo comportamento das naves dos inimigos.
  * @author Miguel Alvito, Nicole Reis e Pedro Pinto
  * @version 1.0 (08/05/2025)
  */
@@ -47,13 +47,21 @@ public class EnemyShipBehaviour extends EnemyBehaviour
         this.boredom = 0;
     }
 
+    /**
+     * Define um player para este EnemyShipBehaviour (setter).
+     * @param p {@code GameObject}
+     */
     public void player(GameObject p)
     {
         this.player = p;
     }
 
+    /**
+     * Inicializa este EnemyShipBehaviour.
+     */
     @Override
-    public void onInit() {
+    public void onInit()
+    {
         super.onInit();
 
         int firstState = rng.nextInt(3);
@@ -67,6 +75,11 @@ public class EnemyShipBehaviour extends EnemyBehaviour
         }
     }
 
+    /**
+     * Roda em direção a um determinado GameObject.
+     * @param go {@code GameObject}
+     * @param dT {@code double}
+     */
     private void rotateTowards(GameObject go, double dT)
     {
         double dAngle = go.transform().angle() - this.parent.transform().angle();
@@ -88,6 +101,11 @@ public class EnemyShipBehaviour extends EnemyBehaviour
         this.parent.rotate(dAngle * dT);
     }
 
+    /**
+     * Indica se está apontado a um determinado GameObject.
+     * @param go {@code GameObject}
+     * @return true se estiver, false se não {@code boolean}
+     */
     private boolean lookingTowards(GameObject go)
     {
         double goAngle = go.transform().angle();
@@ -98,6 +116,10 @@ public class EnemyShipBehaviour extends EnemyBehaviour
         return false;
     }
 
+    /**
+     * Acelera a nave inimiga.
+     * @param dT {@code double}
+     */
     private void accelerate(double dT)
     {
         double ang = Math.toRadians(this.parent.transform().angle());
@@ -110,6 +132,11 @@ public class EnemyShipBehaviour extends EnemyBehaviour
         );
     }
 
+    /**
+     * Faz com que a nave inimiga vá em direção e ataque um determinado GameObject.
+     * @param go {@code GameObject}
+     * @param dT {@code double}
+     */
     private void chase(GameObject go, double dT)
     {
         boolean chasePlayer = (go == this.player);
@@ -138,6 +165,9 @@ public class EnemyShipBehaviour extends EnemyBehaviour
         }
     }
 
+    /**
+     * Faz com que a nave inimiga dispare uma bala.
+     */
     private void shoot()
     {
         double ang = Math.toRadians(this.parent.transform().angle());
@@ -157,6 +187,11 @@ public class EnemyShipBehaviour extends EnemyBehaviour
         this.cooldown = FIRE_COOLDOWN;
     }
 
+    /**
+     * Faz com que a nave inimiga ataque um determinado GameObject.
+     * @param go {@code GameObject}
+     * @param dT {@code double}
+     */
     private void attack(GameObject go, double dT)
     {
         if(!lookingTowards(go)) { rotateTowards(go, dT); }
@@ -169,6 +204,11 @@ public class EnemyShipBehaviour extends EnemyBehaviour
         }
     }
 
+    /**
+     * Atualiza este EnemyShipBehaviour com base no tempo e input.
+     * @param dT {@code double}
+     * @param ie {@code InputEvent}
+     */
     @Override
     public void onUpdate(double dT, InputEvent ie) 
     {

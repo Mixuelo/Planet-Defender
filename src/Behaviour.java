@@ -41,7 +41,7 @@ public abstract class Behaviour implements IBehaviour
      */
     public void onEnabled()
     {
-        //TODO
+
     }
 
     /**
@@ -49,7 +49,7 @@ public abstract class Behaviour implements IBehaviour
      */
     public void onDisabled()
     {
-        //TODO
+
     }
 
     /**
@@ -57,7 +57,7 @@ public abstract class Behaviour implements IBehaviour
      */
     public void onDestroy()
     {
-        //TODO
+
     }
 
     /**
@@ -67,7 +67,7 @@ public abstract class Behaviour implements IBehaviour
      */
     public void onUpdate(double dT, InputEvent ie)
     {
-        //TODO
+
     }
 
     /**
