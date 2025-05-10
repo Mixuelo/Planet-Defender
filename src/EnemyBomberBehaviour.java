@@ -14,6 +14,7 @@ public class EnemyBomberBehaviour extends EnemyBehaviour
     private static final double SPEED = 15;
     private static final double BOMB_SPEED = 10;
     private static final double BOMB_RADIUS = 10;
+    private static final double OUT_OF_BOUNDS_DIST = 700;
 
     /**
      * Construtor.
@@ -79,5 +80,15 @@ public class EnemyBomberBehaviour extends EnemyBehaviour
         }
 
         this.lastDist = currDist;
+
+        this.checkOutOfBounds();
+    }
+
+    private void checkOutOfBounds()
+    {
+        if(this.parent.transform().position().distFrom(this.target.transform().position()) > OUT_OF_BOUNDS_DIST)
+        {
+            this.takeDamage(999);
+        }
     }
 }

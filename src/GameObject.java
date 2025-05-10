@@ -14,12 +14,13 @@ public class GameObject implements IGameObject
     private GameEngine engine;
 
     /**
-     * Contrutor de um GameObject.
+     * Contrutor de um GameObject. TODO: REMOVER ESTA FUNÇAO
      * @param n {@code String}
      * @param t {@code Transform}
      * @param c {@code Collider}
      */
-    public GameObject(String n, Transform t, Collider c) // (EVITAR USAR)
+    @Deprecated
+    public GameObject(String n, Transform t, Collider c)
     {
         this.name = n;
         this.transform = t;

@@ -15,6 +15,7 @@ public class PlayerShipBehaviour extends CharacterBehaviour
     private static final double FIRE_COOLDOWN = 0.5;
     private static final double ROTATION_SPEED = 90;
     private static final double BULLET_SPEED = 10;
+    private static final double OUT_OF_BOUNDS_DIST = 600;
 
     /**
      * Construtor.  TODO: APAGAR ESTA FUNÇAO
@@ -93,6 +94,7 @@ public class PlayerShipBehaviour extends CharacterBehaviour
         if(fire && this.cooldown <= 0) { this.shoot(); }
 
         if(this.cooldown > 0) { this.cooldown -= dT; }
+        this.checkOutOfBounds();
     }
 
     @Override
@@ -107,5 +109,13 @@ public class PlayerShipBehaviour extends CharacterBehaviour
     public void onEnabled() {
         this.health = HEALTH;
         this.cooldown = 0;
+    }
+
+    private void checkOutOfBounds()
+    {
+        if(this.parent.transform().position().distFrom(this.planet.transform().position()) > OUT_OF_BOUNDS_DIST)
+        {
+            this.takeDamage(999);
+        }
     }
 }

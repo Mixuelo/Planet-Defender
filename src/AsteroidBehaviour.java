@@ -17,6 +17,7 @@ public class AsteroidBehaviour extends EnemyBehaviour
     private static final double DISTANCE_CUTOFF = 1000;
     private static final double ACCELERATION = 5;
     private static final double COLLIDER_RADIUS = 10;
+    private static final double OUT_OF_BOUNDS_DIST = 700;
 
     /**
      * Construtor.
@@ -59,6 +60,8 @@ public class AsteroidBehaviour extends EnemyBehaviour
         Point norm = dist.multNew(1 / mag);
         Point res = norm.multNew(speed);
         p.addVelocity(res);
+
+        this.checkOutOfBounds();
     }
 
     /**
@@ -112,5 +115,13 @@ public class AsteroidBehaviour extends EnemyBehaviour
 
         this.gameObject().engine().addEnabled(asteroid1);
         this.gameObject().engine().addEnabled(asteroid2);
+    }
+
+    private void checkOutOfBounds()
+    {
+        if(this.parent.transform().position().distFrom(this.target.transform().position()) > OUT_OF_BOUNDS_DIST)
+        {
+            this.takeDamage(999);
+        }
     }
 }

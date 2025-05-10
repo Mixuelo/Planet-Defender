@@ -8,6 +8,12 @@ import java.util.List;
  */
 public class BulletBehaviour extends Behaviour
 {
+    //TODO: ajustar valores com base nas dimensoes do ecra
+    private static final int LEFT_BORDER = -50;
+    private static final int RIGHT_BORDER = 850;
+    private static final int UP_BORDER = -50;
+    private static final int DOWN_BORDER = 650;
+
     /**
      * Método para atualizar o estado da bala a cada frame.
      * @param dT {@code double}
@@ -20,7 +26,7 @@ public class BulletBehaviour extends Behaviour
 
         Point pos = this.gameObject().transform().position();
 
-        if(pos.x() < -50 || pos.x() > 850 || pos.y() < -50 || pos.y() > 650)
+        if(pos.x() < LEFT_BORDER || pos.x() > RIGHT_BORDER || pos.y() < UP_BORDER || pos.y() > DOWN_BORDER)
         {
             this.gameObject().engine().destroy(this.gameObject());
         }
