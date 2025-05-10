@@ -27,6 +27,23 @@ public class MovingObject extends GameObject
     }
 
     /**
+     * Construtor.
+     * @param n {@code String}
+     * @param t {@code Transform}
+     * @param c {@code Collider}
+     * @param velocity {@code Point}
+     * @param topVelocity {@code double}
+     * @param friction {@code double}
+     */
+    public MovingObject(String n, Transform t, Collider c, Behaviour b, Point velocity, double topVelocity, double friction)
+    {
+        super(n, t, c, b);
+        this.velocity = velocity.clone();
+        this.topVelocity = topVelocity;
+        this.friction = friction;
+    }
+
+    /**
      * Atualiza o movimento deste MovingObject.
      */
     public void updateMovement()
