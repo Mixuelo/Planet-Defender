@@ -59,7 +59,6 @@ public class EnemySpawnerBehaviour extends Behaviour
         this.timer -= dT;
         if(this.timer > 0) { return; }
 
-
         Transform t = new Transform(new Point(0, 0), 1, 0, 1);
 
         int side = this.rng.nextInt(4);
@@ -147,7 +146,7 @@ public class EnemySpawnerBehaviour extends Behaviour
             f = 1;
         }
 
-        MovingObject enemy = new MovingObject(this.parent.name() + Integer.toString(this.enemyID), t, c, b, v, maxv, f);
+        MovingObject enemy = new MovingObject(this.parent.name() + Integer.toString(this.enemyID++), t, c, b, v, maxv, f);
 
         ((EnemyBehaviour) enemy.behaviour()).target(this.planet);
 

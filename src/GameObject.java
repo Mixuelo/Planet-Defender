@@ -33,22 +33,6 @@ public class GameObject implements IGameObject
      * @param n {@code String}
      * @param t {@code Transform}
      * @param c {@code Collider}
-     * @param e {@code GameEngine}
-     */
-    public GameObject(String n, Transform t, Collider c, GameEngine e)
-    {
-        this.name = n;
-        this.transform = t;
-        this.collider = c;
-        if (this.collider != null && this.collider.transform == null) this.collider.transform = t;
-        this.engine = e;
-    }
-
-    /**
-     * Contrutor de um GameObject.
-     * @param n {@code String}
-     * @param t {@code Transform}
-     * @param c {@code Collider}
      * @param b {@code Behaviour}
      */
     public GameObject(String n, Transform t, Collider c, Behaviour b)

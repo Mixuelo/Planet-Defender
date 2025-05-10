@@ -11,7 +11,6 @@ public class EffectBehaviourTests
         EffectBehaviour effectBehaviour = new EffectBehaviour(1.0);
         GameObject effectObject = new GameObject("Object", transform, new ColliderCircle(transform, new Point(0, 0), 10), effectBehaviour);
 
-        effectObject.engine(engine);
         engine.addEnabled(effectObject);
 
         assertTrue(engine.getEnabled().contains(effectObject));

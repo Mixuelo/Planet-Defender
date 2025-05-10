@@ -6,27 +6,31 @@ public class CharacterBehaviourTests
     @Test
     public void testTakeDamage()
     {
-        PlayerShipBehaviour ship1 = new PlayerShipBehaviour(10);
-        PlayerShipBehaviour ship2 = new PlayerShipBehaviour(14);
+        PlayerShipBehaviour ship1 = new PlayerShipBehaviour();
+        PlayerShipBehaviour ship2 = new PlayerShipBehaviour();
+
+        int initialHealth = ship1.health();
 
         ship1.takeDamage(3);
         ship2.takeDamage(10);
 
-        assertEquals(7, ship1.health());
-        assertEquals(4, ship2.health());
+        assertEquals(initialHealth - 3, ship1.health());
+        assertEquals(initialHealth - 10, ship2.health());
     }
 
     @Test
     public void testOnDefeat()
     {
         GameEngine eng = new GameEngine();
-        GameObject ship1 = new GameObject("s1", null, null, new PlayerShipBehaviour(10));
-        GameObject ship2 = new GameObject("s2", null, null, new PlayerShipBehaviour(12));
+        GameObject ship1 = new GameObject("s1", null, null, new PlayerShipBehaviour());
+        GameObject ship2 = new GameObject("s2", null, null, new PlayerShipBehaviour());
         eng.addEnabled(ship1);
         eng.addEnabled(ship2);
 
-        ((PlayerShipBehaviour) ship1.behaviour()).takeDamage(10);
-        ((PlayerShipBehaviour) ship2.behaviour()).takeDamage(14);
+        int initialHealth = ((CharacterBehaviour) ship1.behaviour()).health();
+
+        ((PlayerShipBehaviour) ship1.behaviour()).takeDamage(initialHealth);
+        ((PlayerShipBehaviour) ship2.behaviour()).takeDamage(initialHealth + 5);
 
         assertFalse(eng.isEnabled(ship1));
         assertFalse(eng.isEnabled(ship2));

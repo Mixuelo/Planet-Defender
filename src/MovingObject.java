@@ -10,7 +10,7 @@ public class MovingObject extends GameObject
     protected double friction;
 
     /**
-     * Construtor.
+     * Construtor.  //TODO: REMOVER ESTA FUNÇAO
      * @param n {@code String}
      * @param t {@code Transform}
      * @param c {@code Collider}
@@ -18,6 +18,7 @@ public class MovingObject extends GameObject
      * @param topVelocity {@code double}
      * @param friction {@code double}
      */
+    @Deprecated
     public MovingObject(String n, Transform t, Collider c, Point velocity, double topVelocity, double friction)
     {
         super(n, t, c);

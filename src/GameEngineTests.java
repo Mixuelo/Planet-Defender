@@ -11,8 +11,8 @@ public class GameEngineTests
     Transform t2 = new Transform(p2, 0, 0.0, 1.0);
 
     private GameEngine gameEngine =  new GameEngine();
-    private GameObject gameObject1 = new GameObject("go", t, new ColliderCircle(t, p, 10));
-    private GameObject gameObject2 = new GameObject("go2", t2, new ColliderCircle(t2, p2, 5));
+    private GameObject gameObject1 = new GameObject("go", t, new ColliderCircle(t, p, 10), null);
+    private GameObject gameObject2 = new GameObject("go2", t2, new ColliderCircle(t2, p2, 5), null);
 
     @Test
     void testDestroy()
@@ -115,18 +115,9 @@ public class GameEngineTests
         gameEngine.addEnabled(gameObject1);
         gameEngine.addEnabled(gameObject2);
         gameEngine.destroyAll();
-        assertTrue(gameEngine.objects().isEmpty());
+        assertTrue(gameEngine.getEnabled().isEmpty());
+        assertTrue(gameEngine.getDisabled().isEmpty());
     }
-
-    /*
-    @Test
-    void testRun()
-    {
-        gameEngine.add(gameObject1);
-        gameEngine.add(gameObject2);
-        assertDoesNotThrow(() -> gameEngine.run()); // ah ya bora testar a funçao q corre para sempre
-    }
-    */
 
     @Test
     void testCheckCollisions()

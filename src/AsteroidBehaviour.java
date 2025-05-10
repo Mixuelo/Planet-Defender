@@ -9,12 +9,12 @@ import java.util.List;
 public class AsteroidBehaviour extends EnemyBehaviour
 {
     private double size;
-    private static final double SCALE_FACTOR = 0.1;
+    private static final double SCALE_FACTOR = 10;
     private static final double HEALTH_FACTOR = 5;
     private static final double DAMAGE_FACTOR = 5;
     private static final double DIVIDE_FACTOR = 0.4;
-    private static final double SIZE_CUTOFF = 20;
-    private static final double DISTANCE_CUTOFF = 1000;
+    private static final double SIZE_CUTOFF = 3;
+    private static final double DISTANCE_CUTOFF = 700;
     private static final double ACCELERATION = 5;
     private static final double COLLIDER_RADIUS = 10;
     private static final double OUT_OF_BOUNDS_DIST = 700;

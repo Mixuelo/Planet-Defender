@@ -1,14 +1,11 @@
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class MovingObjectTests
 {
     private Transform t = new Transform(new Point(0, 0), 0, 0, 1);
     private Collider c = new ColliderCircle(t, new Point(0, 0), 2);
-    private MovingObject movingObject = new MovingObject("teste", t, c, new Point(1, 1), 10, 0);
+    private MovingObject movingObject = new MovingObject("teste", t, c, null, new Point(1, 1), 10, 1);
 
     @Test
     public void testConstructor()
@@ -18,7 +15,7 @@ public class MovingObjectTests
         assertEquals(c.toString(), movingObject.collider().toString());
         assertEquals(new Point(1, 1), movingObject.velocity);
         assertEquals(10, movingObject.topVelocity);
-        assertEquals(0, movingObject.friction);
+        assertEquals(1, movingObject.friction);
     }
 
     @Test

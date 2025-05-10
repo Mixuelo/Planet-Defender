@@ -7,11 +7,9 @@ public class UIObjectTests
     public void testConstructor()
     {
         Transform t = new Transform(new Point(0, 0), 0, 0, 1);
-        Collider c = new ColliderCircle(t, new Point(0, 0), 2);
-        UIObject uiObject = new UIObject("teste", t, c);
+        UIObject uiObject = new UIObject("teste", t, null);
 
         assertEquals("teste", uiObject.name());
         assertEquals(t.toString(), uiObject.transform().toString());
-        assertEquals(c.toString(), uiObject.collider().toString());
     }
 }

@@ -1,6 +1,5 @@
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-import java.awt.event.InputEvent;
 
 public class EnemyBomberBehaviourTests
 {
@@ -11,10 +10,9 @@ public class EnemyBomberBehaviourTests
         EnemyBomberBehaviour bomberBehaviour = new EnemyBomberBehaviour();
         Transform transform = new Transform(new Point(0, 0), 0, 45, 0);
         MovingObject bomber = new MovingObject("Bomber", transform, new ColliderCircle(new Point(0, 0), 5), bomberBehaviour, new Point(0, 0), 100, 0);
-        bomber.engine(engine);
 
-        bomberBehaviour.onInit();
-
+        engine.addEnabled(bomber);
+            
         assertEquals(-Math.sin(Math.toRadians(45)) * 15, bomber.velocity.x());
         assertEquals(Math.cos(Math.toRadians(45)) * 15, bomber.velocity.y());
     }
@@ -26,12 +24,10 @@ public class EnemyBomberBehaviourTests
         EnemyBomberBehaviour bomberBehaviour = new EnemyBomberBehaviour();
         Transform bomberTransform = new Transform(new Point(100, 100), 0, 1, 0);
         MovingObject bomber = new MovingObject("Bomber", bomberTransform, new ColliderCircle(new Point(0, 0), 5), bomberBehaviour, new Point(0,0), 100, 0);
-        bomber.engine(engine);
 
-        PlayerShipBehaviour playerBehaviour = new PlayerShipBehaviour(100);
+        PlayerShipBehaviour playerBehaviour = new PlayerShipBehaviour();
         Transform targetTransform = new Transform(new Point(200, 150), 0, 1, 0);
         GameObject target = new GameObject("Target", targetTransform, new ColliderCircle(new Point(0, 0), 5), playerBehaviour);
-        target.engine(engine);
 
         bomberBehaviour.target(target);
 
