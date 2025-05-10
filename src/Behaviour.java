@@ -33,7 +33,7 @@ public abstract class Behaviour implements IBehaviour
      */
     public void onInit()
     {
-        //TODO
+        
     }
 
     /**
@@ -76,6 +76,6 @@ public abstract class Behaviour implements IBehaviour
      */
     public void onCollision(List<IGameObject> gol)
     {
-        //TODO
+
     }
 }
