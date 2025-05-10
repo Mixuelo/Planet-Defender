@@ -14,11 +14,12 @@ public class EnemySpawnerBehaviour extends Behaviour
     private double timer;
     private Random rng;
     private GameObject planet;
+    private GameObject player;
     //TODO: ajustar valores com base nas dimensoes do ecra
-    private static final int LEFT_BORDER = -20;
-    private static final int RIGHT_BORDER = 820;
-    private static final int UP_BORDER = -20;
-    private static final int DOWN_BORDER = 620;
+    private static final int LEFT_BORDER = -50;
+    private static final int RIGHT_BORDER = 850;
+    private static final int UP_BORDER = -50;
+    private static final int DOWN_BORDER = 650;
     private static final double INITIAL_TIMER = 5;
     private static final double MIN_TIMER = 2.5;
     private static final double TIME_DECREASE = 0.05;
@@ -40,6 +41,11 @@ public class EnemySpawnerBehaviour extends Behaviour
     public void planet(GameObject p)
     {
         this.planet = p;
+    }
+
+    public void player(GameObject p)
+    {
+        this.player = p;
     }
 
     /**
@@ -110,6 +116,7 @@ public class EnemySpawnerBehaviour extends Behaviour
             c = new ColliderPolygon(new ArrayList<>(Arrays.asList(new Point(0, 20), new Point(-10, 0), new Point(10, 0))));
 
             b = new EnemyShipBehaviour();
+            ((EnemyShipBehaviour) b).player(this.player);
 
             v = new Point(0,0);
             
@@ -140,7 +147,7 @@ public class EnemySpawnerBehaviour extends Behaviour
             f = 1;
         }
 
-        MovingObject enemy = new MovingObject("enemy" + Integer.toString(this.enemyID), t, c, b, v, maxv, f);
+        MovingObject enemy = new MovingObject(this.parent.name() + Integer.toString(this.enemyID), t, c, b, v, maxv, f);
 
         ((EnemyBehaviour) enemy.behaviour()).target(this.planet);
 
