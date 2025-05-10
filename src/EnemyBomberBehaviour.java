@@ -25,6 +25,9 @@ public class EnemyBomberBehaviour extends EnemyBehaviour
         this.hasBomb = true;
     }
 
+    /**
+     * Inicializa este EnemyBomberBehaviour.
+     */
     @Override
     public void onInit() 
     {
@@ -38,6 +41,9 @@ public class EnemyBomberBehaviour extends EnemyBehaviour
         );
     }
 
+    /**
+     * Faz com que este bombardeiro "largue" uma bomba.
+     */
     private void dropBomb()
     {
         Point dist = this.target.transform().position().subNew(this.parent.transform().position());
@@ -56,6 +62,11 @@ public class EnemyBomberBehaviour extends EnemyBehaviour
         this.parent.engine().addEnabled(bomb);
     }
 
+    /**
+     * Atualiza este EnemyBomberBehaviour com base em tempo e input.
+     * @param dT {@code double}
+     * @param ie {@code InputEvent}
+     */
     @Override
     public void onUpdate(double dT, InputEvent ie) 
     {

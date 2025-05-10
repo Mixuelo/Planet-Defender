@@ -1,16 +1,54 @@
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+import java.awt.event.InputEvent;
 
 public class EnemyBomberBehaviourTests
 {
     @Test
-    public void constructorTest()
+    public void onInitTest()
     {
-        EnemyBomberBehaviour enemy1 = new EnemyBomberBehaviour(100);
-        EnemyBomberBehaviour enemy2 = new EnemyBomberBehaviour(40);
+        GameEngine engine = new GameEngine();
+        EnemyBomberBehaviour bomberBehaviour = new EnemyBomberBehaviour();
+        Transform transform = new Transform(new Point(0, 0), 0, 45, 0);
+        MovingObject bomber = new MovingObject("Bomber", transform, new ColliderCircle(new Point(0, 0), 5), bomberBehaviour, new Point(0, 0), 100, 0);
+        bomber.engine(engine);
 
-        assertEquals(100, enemy1.health());
-        assertEquals(40, enemy2.health());
+        bomberBehaviour.onInit();
+
+        assertEquals(-Math.sin(Math.toRadians(45)) * 15, bomber.velocity.x());
+        assertEquals(Math.cos(Math.toRadians(45)) * 15, bomber.velocity.y());
     }
 
+    @Test
+    public void onUpdateTest()
+    {
+        GameEngine engine = new GameEngine();
+        EnemyBomberBehaviour bomberBehaviour = new EnemyBomberBehaviour();
+        Transform bomberTransform = new Transform(new Point(100, 100), 0, 1, 0);
+        MovingObject bomber = new MovingObject("Bomber", bomberTransform, new ColliderCircle(new Point(0, 0), 5), bomberBehaviour, new Point(0,0), 100, 0);
+        bomber.engine(engine);
+
+        PlayerShipBehaviour playerBehaviour = new PlayerShipBehaviour(100);
+        Transform targetTransform = new Transform(new Point(200, 150), 0, 1, 0);
+        GameObject target = new GameObject("Target", targetTransform, new ColliderCircle(new Point(0, 0), 5), playerBehaviour);
+        target.engine(engine);
+
+        bomberBehaviour.target(target);
+
+        engine.addEnabled(bomber);
+        engine.addEnabled(target);
+
+        bomberTransform.move(new Point(10, 0), 0);
+        bomberBehaviour.onUpdate(0.1, null);
+
+        assertEquals(2, engine.getEnabled().size()); // sem bomba
+
+        bomberTransform.move(new Point(-20, 0), 0);
+        bomberBehaviour.onUpdate(0.1, null);
+
+        assertEquals(3, engine.getEnabled().size()); // boom
+
+        MovingObject bomb = (MovingObject) engine.getEnabled().get(2);
+        assertEquals("Bomber_bomb", bomb.name());
+    }
 }

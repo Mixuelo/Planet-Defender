@@ -33,7 +33,7 @@ public abstract class Behaviour implements IBehaviour
      */
     public void onInit()
     {
-        
+
     }
 
     /**

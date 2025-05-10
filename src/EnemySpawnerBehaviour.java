@@ -23,6 +23,9 @@ public class EnemySpawnerBehaviour extends Behaviour
     private static final double MIN_TIMER = 2.5;
     private static final double TIME_DECREASE = 0.05;
 
+    /**
+     * Construtor.
+     */
     public EnemySpawnerBehaviour()
     {
         this.enemyID = 0;
@@ -30,13 +33,23 @@ public class EnemySpawnerBehaviour extends Behaviour
         this.rng = new Random();
     }
 
+    /**
+     * Define um GameObject como planeta (setter).
+     * @param p {@code GameObject}
+     */
     public void planet(GameObject p)
     {
         this.planet = p;
     }
 
+    /**
+     * Atualiza este EnemySpawnerBehaviour com base em tempo e input.
+     * @param dT {@code double}
+     * @param ie {@code InputEvent}
+     */
     @Override
-    public void onUpdate(double dT, InputEvent ie) {
+    public void onUpdate(double dT, InputEvent ie)
+    {
         this.timer -= dT;
         if(this.timer > 0) { return; }
 
