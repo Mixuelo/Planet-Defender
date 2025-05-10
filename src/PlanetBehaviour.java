@@ -54,7 +54,7 @@ public class PlanetBehaviour extends CharacterBehaviour
     }
 
     /**
-     * Declara Game Ove.
+     * Declara Game Over.
      */
     protected void gameOver()
     {
