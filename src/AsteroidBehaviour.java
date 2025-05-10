@@ -18,22 +18,36 @@ public class AsteroidBehaviour extends EnemyBehaviour
     private static final double ACCELERATION = 5;
     private static final double COLLIDER_RADIUS = 10;
 
+    /**
+     * Construtor.
+     * @param size {@code double}
+     */
     public AsteroidBehaviour(double size)
     {
         super((int) (size * HEALTH_FACTOR));
         this.size = size;
     }
 
+    /**
+     * Inicializa este AsteroidBehaviour.
+     */
     @Override
-    public void onInit() {
+    public void onInit()
+    {
         super.onInit();
 
         double wantedScale = size * SCALE_FACTOR;
         this.parent.scale(wantedScale - this.parent.transform().scale());
     }
 
+    /**
+     * Atualiza este AsteroidBehaviour com base no tempo e input.
+     * @param dT {@code double}
+     * @param ie {@code InputEvent}
+     */
     @Override
-    public void onUpdate(double dT, InputEvent ie) {
+    public void onUpdate(double dT, InputEvent ie)
+    {
         MovingObject p = (MovingObject) this.parent;
 
         Point dist = this.target.transform().position().subNew(this.parent.transform().position());
@@ -68,14 +82,18 @@ public class AsteroidBehaviour extends EnemyBehaviour
         }
     }
 
+    /**
+     * Destroi o GameObject associado a este CharacterBehaviour.
+     */
     @Override
-    void onDefeat() {
+    void onDefeat()
+    {
         this.divide();
         this.parent.engine().destroy(this.parent);
     }
 
     /**
-     * Se este asteróide for grande, divide-o em dois novos asteróides pequenos (apaga o original).
+     * Divide o asteróide em dois novos asteróides pequenos.
      */
     private void divide()
     {

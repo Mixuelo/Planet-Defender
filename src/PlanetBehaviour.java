@@ -17,22 +17,32 @@ public class PlanetBehaviour extends CharacterBehaviour
         super(INITIAL_HEALTH);
     }
 
+    /**
+     * Atualiza este PlanetBehaviour com base no tempo e input.
+     * @param dT {@code double}
+     * @param ie {@code InputEvent}
+     */
     @Override
-    public void onUpdate(double dT, InputEvent ie) {
+    public void onUpdate(double dT, InputEvent ie)
+    {
         super.onUpdate(dT, ie);
 
         // TODO: atualizar UIObject que apresenta a vida do planeta
     }
 
+    /**
+     * Declara Game Over e apaga este PlanetBehaviour.
+     */
     @Override
-    void onDefeat() {
+    void onDefeat()
+    {
         // TODO: criar efeito de destruiçao do planeta
         this.gameOver();
         this.parent.engine().destroy(this.parent);
     }
 
     /**
-     * Destroi todos os elementos da engine quando o planeta fica sem saúde.
+     * Declara Game Ove.
      */
     protected void gameOver()
     {
