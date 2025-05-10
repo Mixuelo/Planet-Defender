@@ -28,36 +28,20 @@ public abstract class Behaviour implements IBehaviour
         this.parent = (GameObject) go;
     }
 
-    /**
-     * Inicializa este Behaviour.
-     */
     public void onInit()
     {
-        //TODO
     }
 
-    /**
-     * Ativa este Behaviour.
-     */
     public void onEnabled()
     {
-        //TODO
     }
 
-    /**
-     * Desativa este Behaviour.
-     */
     public void onDisabled()
     {
-        //TODO
     }
 
-    /**
-     * Destroi este Behaviour.
-     */
     public void onDestroy()
     {
-        //TODO
     }
 
     /**

@@ -22,6 +22,7 @@ public class EnemyShipBehaviour extends EnemyBehaviour
     private actionState state;
     private Random rng;
     private int bulletID;
+    private static final int HEALTH = 5;
     private static final double ACCELERATION = 5;
     private static final double PATIENCE = 7;
     private static final double FIRE_COOLDOWN = 0.5;
@@ -36,11 +37,10 @@ public class EnemyShipBehaviour extends EnemyBehaviour
 
     /**
      * Construtor.
-     * @param health {@code int}
      */
-    public EnemyShipBehaviour(int health)
+    public EnemyShipBehaviour()
     {
-        super(health);
+        super(HEALTH);
         this.boredom = 0;
         this.cooldown = START_COOLDOWN;
         this.rng = new Random();
@@ -69,7 +69,11 @@ public class EnemyShipBehaviour extends EnemyBehaviour
 
     private void rotateTowards(GameObject go, double dT)
     {
-        double dAngle = go.transform().angle() - this.parent.transform().angle();
+        Point dist = go.transform().position().subNew(this.parent.transform().position());
+        double desiredAngle = Math.toDegrees(Math.atan2(dist.y(), dist.x())) - 90;
+        desiredAngle %= 360;
+
+        double dAngle = desiredAngle - this.parent.transform().angle();
         
         if(dAngle > 180) 
         {
