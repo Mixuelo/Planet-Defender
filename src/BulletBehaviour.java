@@ -37,6 +37,7 @@ public class BulletBehaviour extends Behaviour
 
         for(IGameObject go : gol)
         {
+            //TODO: fazer com que balas nao colidam com o proprio pai nos primeiros instantes da sua criaçao
             IBehaviour b = go.behaviour();
             if(b instanceof CharacterBehaviour)
             {

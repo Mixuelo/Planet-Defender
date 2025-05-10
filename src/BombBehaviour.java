@@ -48,6 +48,7 @@ public class BombBehaviour extends Behaviour
 
         for(IGameObject go : gol)
         {
+            //TODO: fazer com que bombas nao colidem com o proprio pai nos primeiros instantes da sua criaçao
             if(go.behaviour() instanceof CharacterBehaviour)
             {
                 if(this.explode) 

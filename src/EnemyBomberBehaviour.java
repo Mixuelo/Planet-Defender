@@ -1,16 +1,72 @@
+import java.awt.event.InputEvent;
+
 /**
  * Subclasse de CharacterBehaviour responsável pelo comportamento dos bombardeiros.
  * @author Miguel Alvito, Nicole Reis e Pedro Pinto
  * @version 1.0 (08/05/2025)
  */
-public class EnemyBomberBehaviour extends CharacterBehaviour
+public class EnemyBomberBehaviour extends EnemyBehaviour
 {
+
+    private double lastDist;
+    private boolean hasBomb;
+    private static final int HEALTH = 5;
+    private static final double SPEED = 15;
+    private static final double BOMB_SPEED = 10;
+    private static final double BOMB_RADIUS = 10;
+
     /**
      * Construtor.
-     * @param health {@code int}
      */
-    public EnemyBomberBehaviour(int health)
+    public EnemyBomberBehaviour()
     {
-        super(health);
+        super(HEALTH);
+        this.lastDist = Integer.MAX_VALUE;
+        this.hasBomb = true;
+    }
+
+    @Override
+    public void onInit() 
+    {
+        double ang = Math.toRadians(this.parent.transform().angle());
+
+        ((MovingObject) this.parent).setVelocity(
+            new Point(
+                -Math.sin(ang) * SPEED,
+                Math.cos(ang) * SPEED
+            )
+        );
+    }
+
+    private void dropBomb()
+    {
+        Point dist = this.target.transform().position().subNew(this.parent.transform().position());
+        double ang = Math.toDegrees(Math.atan2(dist.y(), dist.x())) - 90;
+        ang %= 360;
+        
+        MovingObject bomb = new MovingObject(this.parent.name() + "_bomb", this.parent.transform().clone(), new ColliderCircle(new Point(0,0), BOMB_RADIUS), new BombBehaviour(), new Point(0,0), BOMB_SPEED, 1);
+
+        bomb.setVelocity(
+            new Point(
+                -Math.sin(ang) * BOMB_SPEED,
+                Math.cos(ang) * BOMB_SPEED
+            )
+        );
+
+        this.parent.engine().addEnabled(bomb);
+    }
+
+    @Override
+    public void onUpdate(double dT, InputEvent ie) 
+    {
+        double currDist = this.parent.transform().position().distFrom(this.target.transform().position());
+
+        if(this.hasBomb && currDist > lastDist)
+        {
+            this.hasBomb = false;
+            this.dropBomb();
+        }
+
+        this.lastDist = currDist;
     }
 }
