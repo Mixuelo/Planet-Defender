@@ -5,7 +5,7 @@
  */
 public abstract class CharacterBehaviour extends Behaviour
 {
-    private int health;
+    public int health;
 
     /**
      * Construtor.

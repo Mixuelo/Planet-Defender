@@ -1,3 +1,4 @@
+import java.awt.event.InputEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class GameEngine implements IGameEngine
     }
 
     /** TODO: REMOVER ESTA FUNÇAO */
+    @Deprecated
     public ArrayList<GameObject> objects()
     {
         return this.enabled;
@@ -31,6 +33,7 @@ public class GameEngine implements IGameEngine
      * Adiciona um {@code GameObject} ao GameEngine.
      * @param go {@code GameObject}
      */
+    @Deprecated
     public void add(GameObject go)
     {
         this.addEnabled(go);

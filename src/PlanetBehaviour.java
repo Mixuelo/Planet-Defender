@@ -7,14 +7,25 @@ import java.awt.event.InputEvent;
  */
 public class PlanetBehaviour extends CharacterBehaviour
 {
-    private static final int INITIAL_HEALTH = 100;
+    private MovingObject player;
+    private boolean playerAlive;
+    private double playerRecovery;
+    private static final int HEALTH = 150;
+    private static final double PLAYER_RECOVERY_TIME = 7;
 
     /**
      * Construtor.
      */
     public PlanetBehaviour()
     {
-        super(INITIAL_HEALTH);
+        super(HEALTH);
+        this.playerAlive = true;
+        this.playerRecovery = 0;
+    }
+
+    public void player(MovingObject p) 
+    {
+        this.player = p;
     }
 
     /**
@@ -25,7 +36,8 @@ public class PlanetBehaviour extends CharacterBehaviour
     @Override
     public void onUpdate(double dT, InputEvent ie)
     {
-        super.onUpdate(dT, ie);
+        if(!this.playerAlive) { this.playerRecovery -= dT; }
+        if(this.playerRecovery <= 0) { this.recoverPlayer(); }
 
         // TODO: atualizar UIObject que apresenta a vida do planeta
     }
@@ -47,5 +59,20 @@ public class PlanetBehaviour extends CharacterBehaviour
     protected void gameOver()
     {
         // TODO: criar UIObject com mensagem de Game Over
+    }
+
+    public void onPlayerDefeat()
+    {
+        this.playerAlive = false;
+        this.playerRecovery = PLAYER_RECOVERY_TIME;
+    }
+
+    private void recoverPlayer()
+    {
+        this.player.move(this.parent.transform().position().subNew(this.player.transform().position()), 0);
+        this.player.setVelocity(new Point(0,0));
+        this.player.transform().rotate(-this.player.transform().angle());
+        this.playerAlive = true;
+        this.parent.engine().enable(this.player);
     }
 }
