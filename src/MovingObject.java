@@ -10,24 +10,6 @@ public class MovingObject extends GameObject
     protected double friction;
 
     /**
-     * Construtor.  //TODO: REMOVER ESTA FUNÇAO
-     * @param n {@code String}
-     * @param t {@code Transform}
-     * @param c {@code Collider}
-     * @param velocity {@code Point}
-     * @param topVelocity {@code double}
-     * @param friction {@code double}
-     */
-    @Deprecated
-    public MovingObject(String n, Transform t, Collider c, Point velocity, double topVelocity, double friction)
-    {
-        super(n, t, c);
-        this.velocity = velocity.clone();
-        this.topVelocity = topVelocity;
-        this.friction = friction;
-    }
-
-    /**
      * Construtor.
      * @param n {@code String}
      * @param t {@code Transform}

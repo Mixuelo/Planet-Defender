@@ -14,21 +14,6 @@ public class GameObject implements IGameObject
     private GameEngine engine;
 
     /**
-     * Contrutor de um GameObject. TODO: REMOVER ESTA FUNÇAO
-     * @param n {@code String}
-     * @param t {@code Transform}
-     * @param c {@code Collider}
-     */
-    @Deprecated
-    public GameObject(String n, Transform t, Collider c)
-    {
-        this.name = n;
-        this.transform = t;
-        this.collider = c;
-        this.engine = null;
-    }
-
-    /**
      * Contrutor de um GameObject.
      * @param n {@code String}
      * @param t {@code Transform}

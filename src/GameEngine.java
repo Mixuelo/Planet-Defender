@@ -22,23 +22,6 @@ public class GameEngine implements IGameEngine
         disabled = new ArrayList<>();
     }
 
-    /** TODO: REMOVER ESTA FUNÇAO */
-    @Deprecated
-    public ArrayList<GameObject> objects()
-    {
-        return this.enabled;
-    }
-
-    /** TODO: REMOVER ESTA FUNÇAO
-     * Adiciona um {@code GameObject} ao GameEngine.
-     * @param go {@code GameObject}
-     */
-    @Deprecated
-    public void add(GameObject go)
-    {
-        this.addEnabled(go);
-    }
-
     /**
      * Remove um {@code GameObject} do GameEngine.
      * @param go {@code GameObject}

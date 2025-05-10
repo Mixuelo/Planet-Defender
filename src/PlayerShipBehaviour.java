@@ -18,18 +18,6 @@ public class PlayerShipBehaviour extends CharacterBehaviour
     private static final double OUT_OF_BOUNDS_DIST = 600;
 
     /**
-     * Construtor.  TODO: APAGAR ESTA FUNÇAO
-     * @param health {@code int}
-     */
-    @Deprecated
-    public PlayerShipBehaviour(int health)
-    {
-        super(health);
-        this.cooldown = 0;
-        this.bulletID = 0;
-    }
-
-    /**
      * Construtor.
      * @param health {@code int}
      */
