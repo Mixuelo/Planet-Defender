@@ -41,7 +41,7 @@ public abstract class CharacterBehaviour extends Behaviour
     /**
      * Destroi o GameObject associado a este CharacterBehaviour.
      */
-    public void onDefeat()
+    protected void onDefeat()
     {
         this.parent.engine().destroy(this.parent);
     }
