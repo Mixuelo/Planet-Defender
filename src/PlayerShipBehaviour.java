@@ -71,7 +71,7 @@ public class PlayerShipBehaviour extends CharacterBehaviour
         double ang = Math.toRadians(this.parent.transform().angle());
 
         // TODO: definir raio universal para balas, inimigos podem ter balas com colisores menor que o jogador, para facilitar o jogo
-        MovingObject bullet = new MovingObject(this.parent.name() + "_bullet" + Integer.toString(this.bulletID++), this.parent.transform().clone(), new ColliderCircle(new Point(0,0), 5), new BulletBehaviour(this), new Point(0,0), BULLET_SPEED, 1);
+        MovingObject bullet = new MovingObject(this.parent.name() + "_bullet" + Integer.toString(this.bulletID++), this.parent.transform().clone(), new ColliderCircle(new Point(0,0), 5), new BulletBehaviour(this.parent), new Point(0,0), BULLET_SPEED, 1);
 
         bullet.setVelocity(
             new Point(

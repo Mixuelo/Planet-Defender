@@ -51,7 +51,7 @@ public class EnemyBomberBehaviour extends EnemyBehaviour
         double ang = Math.toDegrees(Math.atan2(dist.y(), dist.x())) - 90;
         ang %= 360;
         
-        MovingObject bomb = new MovingObject(this.parent.name() + "_bomb", this.parent.transform().clone(), new ColliderCircle(new Point(0,0), BOMB_RADIUS), new BombBehaviour(this), new Point(0,0), BOMB_SPEED, 1);
+        MovingObject bomb = new MovingObject(this.parent.name() + "_bomb", this.parent.transform().clone(), new ColliderCircle(new Point(0,0), BOMB_RADIUS), new BombBehaviour(this.parent), new Point(0,0), BOMB_SPEED, 1);
 
         bomb.setVelocity(
             new Point(

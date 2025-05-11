@@ -8,7 +8,7 @@ import java.util.List;
 public class BombBehaviour extends Behaviour
 {
     private boolean explode;
-    private EnemyBomberBehaviour owner;
+    private GameObject owner;
     private static final double EXPLODE_SCALE = 5;
     private static final int BOMB_EFFECT_TIME = 12;
 
@@ -16,7 +16,7 @@ public class BombBehaviour extends Behaviour
      * Construtor (inicializa a bomba como "não explodida").
      * @param owner {@code EnemyBomberBehaviour}
      */
-    public BombBehaviour(EnemyBomberBehaviour owner)
+    public BombBehaviour(GameObject owner)
     {
         this.owner = owner;
         this.explode = false;

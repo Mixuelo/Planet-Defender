@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class BulletBehaviour extends Behaviour
 {
-    private CharacterBehaviour owner;
+    private GameObject owner;
 
     private static final int SCREEN_WIDTH = 800;
     private static final int SCREEN_HEIGHT = 600;
@@ -21,11 +21,10 @@ public class BulletBehaviour extends Behaviour
 
     /**
      * Construtor.
-     * @param owner {@code EnemyShipBehaviour}
+     * @param owner {@code GameObject}
      */
-    public BulletBehaviour(CharacterBehaviour owner)
+    public BulletBehaviour(GameObject owner)
     {
-        if(!(owner instanceof PlayerShipBehaviour) && !(owner instanceof EnemyShipBehaviour)) throw new IllegalArgumentException();
         this.owner = owner;
     }
 
