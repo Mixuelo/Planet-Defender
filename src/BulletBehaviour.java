@@ -8,11 +8,26 @@ import java.util.List;
  */
 public class BulletBehaviour extends Behaviour
 {
-    //TODO: ajustar valores com base nas dimensoes do ecra
-    private static final int LEFT_BORDER = -50;
-    private static final int RIGHT_BORDER = 850;
-    private static final int UP_BORDER = -50;
-    private static final int DOWN_BORDER = 650;
+    private CharacterBehaviour owner;
+
+    private static final int SCREEN_WIDTH = 800;
+    private static final int SCREEN_HEIGHT = 600;
+    private static final int MARGIN = 50;
+
+    private static final int LEFT_BORDER = -MARGIN;
+    private static final int RIGHT_BORDER = SCREEN_WIDTH + MARGIN;
+    private static final int UP_BORDER = -MARGIN;
+    private static final int DOWN_BORDER = SCREEN_HEIGHT + MARGIN;
+
+    /**
+     * Construtor.
+     * @param owner {@code EnemyShipBehaviour}
+     */
+    public BulletBehaviour(CharacterBehaviour owner)
+    {
+        if(!(owner instanceof PlayerShipBehaviour) && !(owner instanceof EnemyShipBehaviour)) throw new IllegalArgumentException();
+        this.owner = owner;
+    }
 
     /**
      * Método para atualizar o estado da bala a cada frame.
@@ -43,9 +58,8 @@ public class BulletBehaviour extends Behaviour
 
         for(IGameObject go : gol)
         {
-            //TODO: fazer com que balas nao colidam com o proprio pai nos primeiros instantes da sua criaçao
             IBehaviour b = go.behaviour();
-            if(b instanceof CharacterBehaviour)
+            if(b instanceof CharacterBehaviour && !go.equals(this.owner))
             {
                 CharacterBehaviour cb = (CharacterBehaviour) b;
                 cb.takeDamage(1);

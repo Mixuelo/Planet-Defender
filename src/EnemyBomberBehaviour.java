@@ -51,7 +51,7 @@ public class EnemyBomberBehaviour extends EnemyBehaviour
         double ang = Math.toDegrees(Math.atan2(dist.y(), dist.x())) - 90;
         ang %= 360;
         
-        MovingObject bomb = new MovingObject(this.parent.name() + "_bomb", this.parent.transform().clone(), new ColliderCircle(new Point(0,0), BOMB_RADIUS), new BombBehaviour(), new Point(0,0), BOMB_SPEED, 1);
+        MovingObject bomb = new MovingObject(this.parent.name() + "_bomb", this.parent.transform().clone(), new ColliderCircle(new Point(0,0), BOMB_RADIUS), new BombBehaviour(this), new Point(0,0), BOMB_SPEED, 1);
 
         bomb.setVelocity(
             new Point(
@@ -84,6 +84,9 @@ public class EnemyBomberBehaviour extends EnemyBehaviour
         this.checkOutOfBounds();
     }
 
+    /**
+     * Verifica se a distância entre o bombardeiro e o target ultrapassa os limites definidos.
+     */
     private void checkOutOfBounds()
     {
         if(this.parent.transform().position().distFrom(this.target.transform().position()) > OUT_OF_BOUNDS_DIST)

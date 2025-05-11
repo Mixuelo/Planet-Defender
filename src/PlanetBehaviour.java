@@ -12,6 +12,7 @@ public class PlanetBehaviour extends CharacterBehaviour
     private double playerRecovery;
     private static final int HEALTH = 150;
     private static final double PLAYER_RECOVERY_TIME = 7;
+    private static final int DESTRUCTION_EFFECT_TIME = 5;
 
     /**
      * Construtor.
@@ -23,6 +24,10 @@ public class PlanetBehaviour extends CharacterBehaviour
         this.playerRecovery = 0;
     }
 
+    /**
+     * Define um objeto como player (setter).
+     * @param p {@code MovingObject}
+     */
     public void player(MovingObject p) 
     {
         this.player = p;
@@ -48,7 +53,12 @@ public class PlanetBehaviour extends CharacterBehaviour
     @Override
     void onDefeat()
     {
-        // TODO: criar efeito de destruiçao do planeta
+        Transform effectTransform = this.parent.transform().clone();
+        effectTransform.move(new Point(0,0), 2);
+        // TODO: definir tempo com base no tamanho da animaçao
+        EffectObject effect = new EffectObject(this.parent.name() + "_effect", effectTransform, DESTRUCTION_EFFECT_TIME);
+        this.parent.engine().addEnabled(effect);
+
         this.gameOver();
         this.parent.engine().destroy(this.parent);
     }
@@ -58,15 +68,22 @@ public class PlanetBehaviour extends CharacterBehaviour
      */
     protected void gameOver()
     {
-        // TODO: criar UIObject com mensagem de Game Over
+        UIObject uiObject = new UIObject("GameOver", this.parent.transform().clone(), new TitleBehaviour());
+        this.parent.engine().addEnabled(uiObject);
     }
 
+    /**
+     * Método chamado quando há defeat por parte da nave do jogador.
+     */
     public void onPlayerDefeat()
     {
         this.playerAlive = false;
         this.playerRecovery = PLAYER_RECOVERY_TIME;
     }
 
+    /**
+     * Revive a nave do jogador.
+     */
     private void recoverPlayer()
     {
         this.player.move(this.parent.transform().position().subNew(this.player.transform().position()), 0);

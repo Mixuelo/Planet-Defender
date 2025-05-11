@@ -10,7 +10,7 @@ public class BulletBehaviourTests
     public void onUpdateTest()
     {
         GameEngine engine = new GameEngine();
-        BulletBehaviour bulletBehaviour = new BulletBehaviour();
+        BulletBehaviour bulletBehaviour = new BulletBehaviour(null);
 
         Transform insideTransform = new Transform(new Point(100, 100), 0, 1, 0);
         GameObject insideBullet = new GameObject("InsideBullet", insideTransform, new ColliderCircle(insideTransform, new Point(0, 0), 2), bulletBehaviour);
@@ -51,7 +51,7 @@ public class BulletBehaviourTests
     public void onCollisionWithPlayerTest()
     {
         GameEngine engine = new GameEngine();
-        BulletBehaviour bulletBehaviour = new BulletBehaviour();
+        BulletBehaviour bulletBehaviour = new BulletBehaviour(null);
         Transform bulletTransform = new Transform(new Point(100, 100), 0, 1, 0);
         GameObject bullet = new GameObject("Bullet", bulletTransform, new ColliderCircle(bulletTransform, new Point(0, 0), 2), bulletBehaviour);
         engine.addEnabled(bullet);
@@ -74,13 +74,13 @@ public class BulletBehaviourTests
     public void onCollisionWithBombTest()
     {
         GameEngine engine = new GameEngine();
-        BulletBehaviour bulletBehaviour = new BulletBehaviour();
+        BulletBehaviour bulletBehaviour = new BulletBehaviour(null);
         Transform bulletTransform = new Transform(new Point(100, 100), 0, 1, 0);
         GameObject bullet = new GameObject("Bullet", bulletTransform, new ColliderCircle(bulletTransform, new Point(0, 0), 2), bulletBehaviour);
         engine.addEnabled(bullet);
 
         Transform bombTransform = new Transform(new Point(100, 100), 0, 1, 1);
-        BombBehaviour bombBehaviour = new BombBehaviour();
+        BombBehaviour bombBehaviour = new BombBehaviour(null);
         GameObject bomb = new GameObject("Bomb", bombTransform, new ColliderCircle(bombTransform, new Point(0, 0), 5), bombBehaviour);
         engine.addEnabled(bomb);
 

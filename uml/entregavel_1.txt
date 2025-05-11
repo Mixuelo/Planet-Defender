@@ -153,7 +153,7 @@ package "Engine"
 }
 }
 
-package "Planet Defender" 
+package "PlanetDefender"
 {
 GameEngine o-- GameObject : -ArrayList<> enabled, ArrayList<> disabled
 GameObject o-- Transform : -transform
@@ -170,59 +170,143 @@ Line *-- Point : #p1, p2
 
 ' JOGO
 
-abstract class CharacterBehaviour {
-    -health : int
++abstract class CharacterBehaviour {
+    +health : int
 
-    health() : int
+    +health() : int
     takeDamage() : void
     onDefeat() : void
 }
 
-abstract class EffectBehaviour {
++abstract class EffectBehaviour {
     -time : int
+
+    onUpdate() : void
 }
 
-class PlayerShipBehaviour {
++class PlayerShipBehaviour {
+    -cooldown : double
+    - bulletID : int
+
+    +planet() : void
+    -rotate() : void
+    -accelerate() : void
+    -shoot() : void
+    +onUpdate() : void
+    onDefeat() : void
+    +onEnabled() : void
+    -checkOutOfBounds() : void
+}
+PlayerShipBehaviour o-- GameObject : -planet
+
++class EnemyShipBehaviour extends EnemyBehaviour {
+    -boredom : double
+    -cooldown : double
+    -state : actionState
+    -rng : Random
+    -bulletID : int
+
+    +player() : void
+    +onInit() : void
+    -rotateTowards() : void
+    -lookingTowards() : boolean
+    -accelerate() : void
+    -chase() : void
+    -shoot() : void
+    -attack() : void
+    +onUpdate() : void
+}
+EnemyShipBehaviour o-- GameObject : -player
+
+
++class AsteroidBehaviour extends EnemyBehaviour {
+    -size : double
+
+    +onInit() : void
+    +onUpdate() : void
+    +onCollision() : void
+    #onDefeat() : void
+    #divide() : void
+    -checkOutOfBounds() : void
 }
 
-class EnemyShipBehaviour {
++class EnemyBomberBehaviour extends EnemyBehaviour{
+    -lastDist : double
+    - hasBomb : boolean
+
+    +onInit() : void
+    -dropBomb() : void
+    +onUpdate() : void
+    -checkOutOfBounds() : void
 }
 
-class AsteroidBehaviour {
++class PlanetBehaviour {
+    -playerAlive : boolean
+    -playerRecovery : double
+
+    +player() : void
+    +onUpdate() : void
+    onDefeat() : void
+    #gameOver() : void
+    +playerOnDefeat() : void
+    -recoverPlayer() : void
+}
+PlanetBehaviour o-- MovingObject : -player
+
+
++class BulletBehaviour {
+    +onUpdate() : void
+    +onCollision() : void
+}
+BulletBehaviour o-- CharacterBehaviour : -owner
+
+
++class BombBehaviour {
+    -explode : boolean
+
+    +explode() : void
+    +onCollision() : void
+}
+BombBehaviour o-- EnemyBomberBehaviour : -owner
+
++class EnemySpawnerBehaviour {
+    -enemyID : int
+    -timer : double
+    -rng : Random
+
+    +planet() : void
+    +player() : void
+    +onUpdate() : void
+}
+EnemySpawnerBehaviour o-- GameObject : -planet
+EnemySpawnerBehaviour o-- GameObject : -player
+
++class TitleBehaviour {
+    +onUpdate() : void
+    -startGame() : void
 }
 
-class EnemyBomberBehaviour {
++class EnemyBehaviour {
+    -time : double
+
+    +onUpdate() : void
 }
 
-class PlanetBehaviour {
-}
-
-class BulletBehaviour {
-}
-
-class BombBehaviour {
-}
-
-class EnemySpawnerBehaviour {
-}
-
-class MovingObject {
++class MovingObject {
     #topVelocity : double
     #friction : double
 
-    updateMovement() : void
-    addVelocity() : void
-    setVelocity() : void
+    +updateMovement() : void
+    +addVelocity() : void
+    +setVelocity() : void
+    -capVelocity() : void
 }
-MovingObject o-- Point : #velocity
+MovingObject *-- Point : #velocity
 
-class UIObject {
-}
-
-class EffectObject {
++class UIObject {
 }
 
-class BaseEnemy extends MovingObject {
++class EffectObject {
 }
 
 <> circ
@@ -241,12 +325,11 @@ beha -- BulletBehaviour
 beha -- CharacterBehaviour
 beha -- BombBehaviour
 beha -- EffectBehaviour
+beha -- TitleBehaviour
 
 CharacterBehaviour <|-- chara
-chara -- AsteroidBehaviour
-chara -- EnemyShipBehaviour
-chara -- EnemyBomberBehaviour
 chara -- PlayerShipBehaviour
 chara -- PlanetBehaviour
+chara -- EnemyBehaviour
 
 @enduml

@@ -117,6 +117,9 @@ public class AsteroidBehaviour extends EnemyBehaviour
         this.gameObject().engine().addEnabled(asteroid2);
     }
 
+    /**
+     * Verifica se a distância entre o asteroid e o target é maior que a distância definida por OUT_OF_BOUNDS_DIST.
+     */
     private void checkOutOfBounds()
     {
         if(this.parent.transform().position().distFrom(this.target.transform().position()) > OUT_OF_BOUNDS_DIST)

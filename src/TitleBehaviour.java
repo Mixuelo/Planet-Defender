@@ -12,11 +12,20 @@ public class TitleBehaviour extends Behaviour
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
 
+    /**
+     * Atualiza com base em tempo e input.
+     * @param dT {@code double}
+     * @param ie {@code InputEvent}
+     */
     @Override
-    public void onUpdate(double dT, InputEvent ie) {
-        //TODO: quando receber input chamar a funçao startGame()
+    public void onUpdate(double dT, InputEvent ie)
+    {
+        if (ie != null) startGame();
     }
 
+    /**
+     * Começa o jogo.
+     */
     private void startGame()
     {
         MovingObject player = new MovingObject(

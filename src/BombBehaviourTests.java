@@ -11,7 +11,7 @@ public class BombBehaviourTests
     {
         GameEngine engine = new GameEngine();
         Transform transform = new Transform(new Point(0, 0), 0, 1, 1);
-        BombBehaviour bombBehaviour = new BombBehaviour();
+        BombBehaviour bombBehaviour = new BombBehaviour(null);
         GameObject bomb = new GameObject("Bomb", transform, new ColliderCircle(transform, new Point(0, 0), 10), bombBehaviour);
 
         engine.addEnabled(bomb);
@@ -34,7 +34,7 @@ public class BombBehaviourTests
         GameEngine engine = new GameEngine();
 
         Transform bombTransform = new Transform(new Point(0, 0), 0, 1, 0);
-        BombBehaviour bombBehaviour = new BombBehaviour();
+        BombBehaviour bombBehaviour = new BombBehaviour(null);
         GameObject bomb = new GameObject("Bomb", bombTransform, new ColliderCircle(bombTransform, new Point(0, 0), 10), bombBehaviour);
 
         Transform playerTransform = new Transform(new Point(0, 0), 0, 1, 0);

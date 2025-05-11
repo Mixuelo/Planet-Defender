@@ -8,14 +8,17 @@ import java.util.List;
 public class BombBehaviour extends Behaviour
 {
     private boolean explode;
+    private EnemyBomberBehaviour owner;
     private static final double EXPLODE_SCALE = 5;
     private static final int BOMB_EFFECT_TIME = 12;
 
     /**
      * Construtor (inicializa a bomba como "não explodida").
+     * @param owner {@code EnemyBomberBehaviour}
      */
-    public BombBehaviour() 
+    public BombBehaviour(EnemyBomberBehaviour owner)
     {
+        this.owner = owner;
         this.explode = false;
     }
 
@@ -49,8 +52,7 @@ public class BombBehaviour extends Behaviour
 
         for(IGameObject go : gol)
         {
-            //TODO: fazer com que bombas nao colidam com o proprio pai nos primeiros instantes da sua criaçao
-            if(go.behaviour() instanceof CharacterBehaviour)
+            if(go.behaviour() instanceof CharacterBehaviour && !go.equals(this.owner))
             {
                 if(this.explode) 
                 {

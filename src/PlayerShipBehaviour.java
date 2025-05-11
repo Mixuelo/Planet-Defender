@@ -19,7 +19,6 @@ public class PlayerShipBehaviour extends CharacterBehaviour
 
     /**
      * Construtor.
-     * @param health {@code int}
      */
     public PlayerShipBehaviour()
     {
@@ -28,17 +27,30 @@ public class PlayerShipBehaviour extends CharacterBehaviour
         this.bulletID = 0;
     }
 
+    /**
+     * Define um planeta associado à nave (setter).
+     * @param p {@code GameObject}
+     */
     public void planet(GameObject p)
     {
         this.planet = p;
     }
 
+    /**
+     * Roda a nave.
+     * @param direction {@code int}
+     * @param dT {@code double}
+     */
     private void rotate(int direction, double dT)
     {
         double dAngle = ROTATION_SPEED * direction;
         this.parent.rotate(dAngle * dT);
     }
 
+    /**
+     * Acelera a nave.
+     * @param dT {@code double}
+     */
     private void accelerate(double dT)
     {
         double ang = Math.toRadians(this.parent.transform().angle());
@@ -51,12 +63,15 @@ public class PlayerShipBehaviour extends CharacterBehaviour
         );
     }
 
+    /**
+     * Faz com que a nave dispare.
+     */
     private void shoot()
     {
         double ang = Math.toRadians(this.parent.transform().angle());
 
         // TODO: definir raio universal para balas, inimigos podem ter balas com colisores menor que o jogador, para facilitar o jogo
-        MovingObject bullet = new MovingObject(this.parent.name() + "_bullet" + Integer.toString(this.bulletID++), this.parent.transform().clone(), new ColliderCircle(new Point(0,0), 5), new BulletBehaviour(), new Point(0,0), BULLET_SPEED, 1);
+        MovingObject bullet = new MovingObject(this.parent.name() + "_bullet" + Integer.toString(this.bulletID++), this.parent.transform().clone(), new ColliderCircle(new Point(0,0), 5), new BulletBehaviour(this), new Point(0,0), BULLET_SPEED, 1);
 
         bullet.setVelocity(
             new Point(
@@ -70,8 +85,14 @@ public class PlayerShipBehaviour extends CharacterBehaviour
         this.cooldown = FIRE_COOLDOWN;
     }
 
+    /**
+     * Atualiza com base em tempo e input.
+     * @param dT {@code double}
+     * @param ie {@code InputEvent}
+     */
     @Override
-    public void onUpdate(double dT, InputEvent ie) {
+    public void onUpdate(double dT, InputEvent ie)
+    {
         // TODO: verficar input
         int rotationDir = 0;
         boolean accel = false;
@@ -85,20 +106,31 @@ public class PlayerShipBehaviour extends CharacterBehaviour
         this.checkOutOfBounds();
     }
 
+    /**
+     * Método chamado quando a nave do jogador se encontra em "defeat".
+     */
     @Override
-    void onDefeat() {
+    void onDefeat()
+    {
         if(this.planet == null) { this.parent.engine().destroy(this.parent); return; }
 
         this.parent.engine().disable(this.parent);
         ((PlanetBehaviour) this.planet.behaviour()).onPlayerDefeat();
     }
 
+    /**
+     * Ativa este PlayerShipBehaviour.
+     */
     @Override
-    public void onEnabled() {
+    public void onEnabled()
+    {
         this.health = HEALTH;
         this.cooldown = 0;
     }
 
+    /**
+     * Verifica se a distância entre a nave e o planeta ultrapassa os limites definidos.
+     */
     private void checkOutOfBounds()
     {
         if(this.parent.transform().position().distFrom(this.planet.transform().position()) > OUT_OF_BOUNDS_DIST)
