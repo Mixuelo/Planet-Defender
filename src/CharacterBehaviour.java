@@ -29,7 +29,7 @@ public abstract class CharacterBehaviour extends Behaviour
      * Reduz a saúde deste CharacterBehaviour de acordo com um determinado dano.
      * @param damage {@code int}
      */
-    void takeDamage(int damage)
+    public void takeDamage(int damage)
     {
         this.health -= damage;
         if(this.health <= 0)
@@ -41,7 +41,7 @@ public abstract class CharacterBehaviour extends Behaviour
     /**
      * Destroi o GameObject associado a este CharacterBehaviour.
      */
-    void onDefeat()
+    public void onDefeat()
     {
         this.parent.engine().destroy(this.parent);
     }

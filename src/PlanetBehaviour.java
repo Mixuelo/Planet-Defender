@@ -51,7 +51,7 @@ public class PlanetBehaviour extends CharacterBehaviour
      * Declara Game Over e apaga este PlanetBehaviour.
      */
     @Override
-    void onDefeat()
+    public void onDefeat()
     {
         Transform effectTransform = this.parent.transform().clone();
         effectTransform.move(new Point(0,0), 2);

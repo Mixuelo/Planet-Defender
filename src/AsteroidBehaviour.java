@@ -89,7 +89,7 @@ public class AsteroidBehaviour extends EnemyBehaviour
      * Destroi o GameObject associado a este CharacterBehaviour.
      */
     @Override
-    protected void onDefeat()
+    public void onDefeat()
     {
         this.divide();
         this.parent.engine().destroy(this.parent);

@@ -1,4 +1,5 @@
 import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 
 /**
  * Subclasse de CharacterBehaviour responsável pelo comportamento da nave do jogador.
@@ -94,6 +95,7 @@ public class PlayerShipBehaviour extends CharacterBehaviour
     public void onUpdate(double dT, InputEvent ie)
     {
         // TODO: verficar input
+
         int rotationDir = 0;
         boolean accel = false;
         boolean fire = false;
@@ -110,7 +112,7 @@ public class PlayerShipBehaviour extends CharacterBehaviour
      * Método chamado quando a nave do jogador se encontra em "defeat".
      */
     @Override
-    void onDefeat()
+    public void onDefeat()
     {
         if(this.planet == null) { this.parent.engine().destroy(this.parent); return; }
 

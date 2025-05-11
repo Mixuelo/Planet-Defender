@@ -174,14 +174,14 @@ Line *-- Point : #p1, p2
     +health : int
 
     +health() : int
-    takeDamage() : void
-    onDefeat() : void
+    +takeDamage() : void
+    +onDefeat() : void
 }
 
 +abstract class EffectBehaviour {
     -time : int
 
-    onUpdate() : void
+    +onUpdate() : void
 }
 
 +class PlayerShipBehaviour {
