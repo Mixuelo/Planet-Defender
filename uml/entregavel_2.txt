@@ -151,10 +151,7 @@ package "Engine"
 
 +abstract class Behaviour implements IBehaviour{
 }
-}
 
-package "PlanetDefender"
-{
 GameEngine o-- GameObject : -ArrayList<> enabled, ArrayList<> disabled
 GameObject o-- Transform : -transform
 GameObject o-- Collider : -collider
@@ -167,76 +164,73 @@ ColliderPolygon *-- LineSegment : -ArrayList<> edges
 Collider <|-- ColliderPolygon
 ColliderCircle -- (Collider, ColliderPolygon)
 Line *-- Point : #p1, p2
+}
 
 ' JOGO
+package "PlanetDefender"
+{
 
 +abstract class CharacterBehaviour {
     +health : int
 
     +health() : int
     +takeDamage() : void
-    +onDefeat() : void
+    #onDefeat() : void
 }
 
-+abstract class EffectBehaviour {
++class EffectBehaviour {
     -time : int
-
-    +onUpdate() : void
 }
 
 +class PlayerShipBehaviour {
     -cooldown : double
-    - bulletID : int
+    -bulletID : int
 
     +planet() : void
     -rotate() : void
     -accelerate() : void
     -shoot() : void
-    +onUpdate() : void
-    onDefeat() : void
-    +onEnabled() : void
     -checkOutOfBounds() : void
 }
 PlayerShipBehaviour o-- GameObject : -planet
 
+enum actionState <<enum>> {
+    CHASE_PLAYER
+    CHASE_PLANET
+    ATTACK_PLAYER
+    ATTACK_PLANET
+}
+
 +class EnemyShipBehaviour extends EnemyBehaviour {
     -boredom : double
     -cooldown : double
-    -state : actionState
     -rng : Random
     -bulletID : int
 
     +player() : void
-    +onInit() : void
     -rotateTowards() : void
     -lookingTowards() : boolean
     -accelerate() : void
     -chase() : void
     -shoot() : void
     -attack() : void
-    +onUpdate() : void
 }
 EnemyShipBehaviour o-- GameObject : -player
+EnemyShipBehaviour *-- actionState : -state
 
 
 +class AsteroidBehaviour extends EnemyBehaviour {
     -size : double
 
-    +onInit() : void
-    +onUpdate() : void
-    +onCollision() : void
-    #onDefeat() : void
     #divide() : void
     -checkOutOfBounds() : void
 }
 
 +class EnemyBomberBehaviour extends EnemyBehaviour{
     -lastDist : double
-    - hasBomb : boolean
+    -hasBomb : boolean
 
-    +onInit() : void
     -dropBomb() : void
-    +onUpdate() : void
     -checkOutOfBounds() : void
 }
 
@@ -245,18 +239,13 @@ EnemyShipBehaviour o-- GameObject : -player
     -playerRecovery : double
 
     +player() : void
-    +onUpdate() : void
-    onDefeat() : void
     #gameOver() : void
     +playerOnDefeat() : void
     -recoverPlayer() : void
 }
 PlanetBehaviour o-- MovingObject : -player
 
-
 +class BulletBehaviour {
-    +onUpdate() : void
-    +onCollision() : void
 }
 BulletBehaviour o-- CharacterBehaviour : -owner
 
@@ -265,7 +254,6 @@ BulletBehaviour o-- CharacterBehaviour : -owner
     -explode : boolean
 
     +explode() : void
-    +onCollision() : void
 }
 BombBehaviour o-- EnemyBomberBehaviour : -owner
 
@@ -276,20 +264,16 @@ BombBehaviour o-- EnemyBomberBehaviour : -owner
 
     +planet() : void
     +player() : void
-    +onUpdate() : void
 }
 EnemySpawnerBehaviour o-- GameObject : -planet
 EnemySpawnerBehaviour o-- GameObject : -player
 
 +class TitleBehaviour {
-    +onUpdate() : void
     -startGame() : void
 }
 
 +class EnemyBehaviour {
     -time : double
-
-    +onUpdate() : void
 }
 
 +class MovingObject {
