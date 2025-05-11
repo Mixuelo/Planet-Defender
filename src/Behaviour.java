@@ -29,7 +29,7 @@ public abstract class Behaviour implements IBehaviour
     }
 
     /**
-     * Esta funçao é chamada quando o GameObject é adicionado à GameEngine
+     * Este método é chamado quando o GameObject é adicionado à GameEngine
      */
     public void onInit()
     {
@@ -37,7 +37,7 @@ public abstract class Behaviour implements IBehaviour
     }
 
     /**
-     * Esta funçao é chamada quando o GameObject é ativado pela GameEngine
+     * Este método é chamado quando o GameObject é ativado pela GameEngine
      */
     public void onEnabled()
     {
@@ -45,7 +45,7 @@ public abstract class Behaviour implements IBehaviour
     }
 
     /**
-     * Esta funçao é chamada quando o GameObject é desativado pela GameEngine
+     * Este método é chamado quando o GameObject é desativado pela GameEngine
      */
     public void onDisabled()
     {
@@ -53,7 +53,7 @@ public abstract class Behaviour implements IBehaviour
     }
 
     /**
-     * Esta funçao é chamada quando o GameObject é destruído pela GameEngine
+     * Este método é chamado quando o GameObject é destruído pela GameEngine
      */
     public void onDestroy()
     {
@@ -61,7 +61,7 @@ public abstract class Behaviour implements IBehaviour
     }
 
     /**
-     * Esta função é chamada a cada frame pela GameEngine
+     * Este método é chamado a cada frame pela GameEngine
      * @param dT {@code double}
      * @param ie {@code InputEvent}
      */

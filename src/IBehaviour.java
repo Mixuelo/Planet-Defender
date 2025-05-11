@@ -21,27 +21,27 @@ public interface IBehaviour
     public void gameObject(IGameObject go);
 
     /**
-     * Esta funçao é chamada quando o GameObject é adicionado à GameEngine
+     * Este método é chamado quando o GameObject é adicionado à GameEngine
      */
     void onInit();
 
     /**
-     * Esta funçao é chamada quando o GameObject é ativado pela GameEngine
+     * Este método é chamado quando o GameObject é ativado pela GameEngine
      */
     void onEnabled();
 
     /**
-     * Esta funçao é chamada quando o GameObject é desativado pela GameEngine
+     * Este método é chamado quando o GameObject é desativado pela GameEngine
      */
     void onDisabled();
 
     /**
-     * Esta funçao é chamada quando o GameObject é destruído pela GameEngine
+     * Este método é chamado quando o GameObject é destruído pela GameEngine
      */
     void onDestroy();
 
     /**
-     * Esta função é chamada a cada frame pela GameEngine
+     * Este método é chamado a cada frame pela GameEngine
      * @param dT {@code double}
      * @param ie {@code InputEvent}
      */

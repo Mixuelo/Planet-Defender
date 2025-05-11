@@ -109,7 +109,7 @@ public class PlayerShipBehaviour extends CharacterBehaviour
     }
 
     /**
-     * Método chamado quando a nave do jogador se encontra em "defeat".
+     * Método chamado quando a nave do jogador é derrotada.
      */
     @Override
     public void onDefeat()

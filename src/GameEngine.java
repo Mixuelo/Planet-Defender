@@ -208,7 +208,6 @@ public class GameEngine implements IGameEngine
      */
     public void checkCollisions()
     {
-        // TODO: ver se existe uma forma melhor de fazer isto em causar um desperdicio de memoria de O(n²)
         for(GameObject go : enabled)
         {
             ArrayList<IGameObject> list = new ArrayList<>();
