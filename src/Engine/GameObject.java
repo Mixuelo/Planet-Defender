@@ -13,6 +13,7 @@ public class GameObject implements IGameObject
     private Transform transform;
     private Collider collider;
     private Behaviour behaviour;
+    private Shape shape;
     private GameEngine engine;
 
     /**
@@ -103,10 +104,16 @@ public class GameObject implements IGameObject
         return collider;
     }
 
-    /** Retorna o objecto Behaviour do GameObject */
+    /** Retorna o objeto Behaviour do GameObject */
     public Behaviour behaviour()
     {
         return behaviour;
+    }
+
+    /** Retorna o objeto Shape do GameObject */
+    public Shape shape()
+    {
+        return shape;
     }
 
     /**

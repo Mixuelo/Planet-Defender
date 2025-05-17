@@ -27,5 +27,9 @@ public interface IGameObject
      */
     IBehaviour behaviour();
 
-    // ...
+    /**
+     * @return the Shape of the GameObject
+     */
+    IShape shape();
+
 }
