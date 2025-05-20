@@ -1,3 +1,6 @@
+import Engine.*;
+import PlanetDefender.*;
+
 public class Cliente
 {
     public static void main(String[] args)

@@ -12,26 +12,14 @@ import java.io.IOException;
 */
 public abstract class Shape implements IShape
 {
-    protected BufferedImage image;
     protected Point position;
+    protected double scale;
+    protected double angle;
+    protected Transform transform;
 
-    /**
-     * Construtor
-     * @param imageFile {@code String}
-     * @param pos {@code Point}
-     */
-    public Shape(String imageFile, Point pos)
+    public void transform(Transform t) 
     {
-        this.position = pos.clone();
-        try
-        {
-            this.image = ImageIO.read(new File(imageFile));
-        }
-        catch (IOException e)
-        {
-            System.err.println("Erro ao carregar imagem: " + imageFile);
-            this.image = null;
-        }
+        this.transform = t;
     }
 
     /**
@@ -39,4 +27,21 @@ public abstract class Shape implements IShape
      * @param g {@code Graphics2d}
      */
     public abstract void draw(Graphics2D g);
+
+    public void onUpdate()
+    {
+        Point dPos = this.transform.position().subNew(this.position); 
+        double dScale = this.transform.scale() - this.scale;
+        double dAngle = this.transform.angle() - this.angle;
+
+        this.move(dPos);
+        this.rotate(dAngle);
+        this.scale(dScale);
+    }
+
+    public abstract void scale(double dScale);
+
+    public abstract void move(Point dPos);
+
+    public abstract void rotate(double dAngle);
 }
