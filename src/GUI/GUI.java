@@ -1,13 +1,29 @@
 package GUI;
 
-import java.awt.event.InputEvent;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 import Engine.*;
+import java.awt.event.InputEvent;
+import javax.swing.*;
+import java.util.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class GUI
+public class GUI extends JFrame
 {
-    List<IGameObject> gol = new CopyOnWriteArrayList<>();
+    private final GamePanel gamePanel;
+    private final Queue<InputEvent> inputQueue;
+
+    public GUI()
+    {
+        super("Planet Defender");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(800, 600);
+
+        this.inputQueue = new ConcurrentLinkedQueue<>();
+        this.gamePanel = new GamePanel();
+
+        this.add(gamePanel);
+        this.addKeyListener(new KeyListenerImpl(inputQueue));
+        this.setVisible(true);
+    }
 
     /**
      * Retorna o 1º InputEvent de uma fila de espera que existe no GUI e
@@ -17,15 +33,15 @@ public class GUI
      */
     public InputEvent getUserInput()
     {
-        return null;
+        return inputQueue.poll();
     }
 
     /**
      * Aceita uma lista de GameObjects enabled para colocar no ecrã
-     * Estas listas, no GameEngine e no GUI tem de ser thread safe, pq o Java AWT/Swing corre numa thread diferente do resto do código Java.
+     * Estas listas, no GameEngine e no GUI tem de ser thread safe, pq o Java AWT/Swing corre numa thread diferente do resto do código Java como List<IGameObject> gol = new CopyOnWriteArrayList<>();
      */
-    public void putOnScreen(List<IGameObject> gol)
+    public void putOnScreen(GameEngine engine)
     {
-
+        gamePanel.engine(engine);
     }
 }

@@ -1,14 +1,10 @@
 package Engine;
 
+import GUI.*;
 import java.awt.event.InputEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-
-
 import javax.swing.*;
-
-import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
 
 /** Classe para o GameEngine, definido por uma lista de GameObjects.
  *  @author Miguel Alvito, Nicole Reis e Pedro Pinto
@@ -204,11 +200,15 @@ public class GameEngine implements IGameEngine
      */
     public void run()
     {
+        final int fps = 60;
+        final double frameTime = 1000 / fps;
+
         double lastTime = System.nanoTime() * Math.pow(10, -9);
+
         for(;;)
         {
-            double now = System.nanoTime() * Math.pow(10, -9);
-            double dt = (now - lastTime);
+            double now = System.nanoTime() * 1e-9;
+            double dt = now - lastTime;
             lastTime = now;
 
             InputEvent ie = getUserInput();
@@ -216,15 +216,16 @@ public class GameEngine implements IGameEngine
             for(IGameObject go : enabled)
             {
                 if(go instanceof MovingObject) { ((MovingObject) go).updateMovement(); }
-                go.collider().onUpdate();
+                if(go.collider() != null) go.collider().onUpdate();
                 //go.shape().onUpdate();
-                go.behaviour().onUpdate(dt, ie);
+                if(go.behaviour() != null) go.behaviour().onUpdate(dt, ie);
             }
 
             // envia lista de colisões para todos os
             // IGameObject em enabled
             this.checkCollisions();
-
+            if (panel != null) panel.repaint();
+            //GUI gui = new GUI();
             // envia a lista de IGameObjects em enabled para o GUI
         }
     }

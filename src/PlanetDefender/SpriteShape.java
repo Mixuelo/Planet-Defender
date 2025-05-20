@@ -21,7 +21,7 @@ public class SpriteShape extends Shape
 
     /**
      * Cosntrutor.
-     * @param imageFile {@code String}
+     * @param imagePath {@code String}
      */
     public SpriteShape(String imagePath, double imageScale, Transform t)
     {
