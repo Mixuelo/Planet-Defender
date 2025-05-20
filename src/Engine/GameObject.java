@@ -23,6 +23,7 @@ public class GameObject implements IGameObject
      * @param c {@code Collider}
      * @param b {@code Behaviour}
      */
+    @Deprecated
     public GameObject(String n, Transform t, Collider c, Behaviour b)
     {
         this.name = n;
@@ -31,6 +32,25 @@ public class GameObject implements IGameObject
         if (this.collider != null && this.collider.transform == null) this.collider.transform = t;
         this.behaviour = b;
         if (this.behaviour != null) this.behaviour.parent = this;
+    }
+
+    /**
+     * Contrutor de um GameObject.
+     * @param n {@code String}
+     * @param t {@code Transform}
+     * @param c {@code Collider}
+     * @param b {@code Behaviour}
+     * @param s {@code Shape}
+     */
+    public GameObject(String n, Transform t, Collider c, Behaviour b, Shape s)
+    {
+        this.name = n;
+        this.transform = t;
+        this.collider = c;
+        if (this.collider != null && this.collider.transform == null) this.collider.transform = t;
+        this.behaviour = b;
+        if (this.behaviour != null) this.behaviour.parent = this;
+        this.shape = s;
     }
 
     /** Retorna a GameEngine ao qual o GameObject pertence */
@@ -125,6 +145,7 @@ public class GameObject implements IGameObject
     {
         this.transform.move(dPos, dlayer);
         //this.collider.move(dPos);
+        this.shape.move(dPos);
     }
 
     /**
@@ -135,6 +156,7 @@ public class GameObject implements IGameObject
     {
         this.transform.rotate(dTheta);
         //this.collider.rotate(dTheta);
+        this.shape.rotate(dTheta);
     }
 
     /**
@@ -145,6 +167,7 @@ public class GameObject implements IGameObject
     {
         this.transform.scale(dScale);
         //this.collider.scale(dScale);
+        this.shape.scale(dScale);
     }
 
     /**

@@ -1,9 +1,9 @@
 package Engine;
 
-import java.awt.event.InputEvent;
 import java.util.ArrayList;
 import java.util.List;
 import PlanetDefender.MovingObject;
+import javax.swing.*;
 
 /** Classe para o GameEngine, definido por uma lista de GameObjects.
  *  @author Miguel Alvito, Nicole Reis e Pedro Pinto
@@ -13,8 +13,7 @@ public class GameEngine implements IGameEngine
 {
     private ArrayList<GameObject> enabled;
     private ArrayList<GameObject> disabled;
-
-    private final double dt = 0.0166666f;
+    private JFrame frame;
 
     /**
      * Construtor para o GameEngine.
@@ -23,6 +22,15 @@ public class GameEngine implements IGameEngine
     {
         enabled = new ArrayList<>();
         disabled = new ArrayList<>();
+    }
+
+    /**
+     * Define uma frame (setter)
+     * @param f {@code JFrame}
+     */
+    public void frame(JFrame f)
+    {
+        this.frame = f;
     }
 
     /**
@@ -185,9 +193,13 @@ public class GameEngine implements IGameEngine
      */
     public void run()
     {
+        double lastTime = System.nanoTime() * Math.pow(10, -9);
         for(;;)
         {
-            // ie = getUserInput();
+            double now = System.nanoTime() * Math.pow(10, -9);
+            double dt = (now - lastTime);
+            lastTime = now;
+            //ie = getUserInput();
             
             for(IGameObject go : enabled)
             {
@@ -226,3 +238,4 @@ public class GameEngine implements IGameEngine
         }
     }
 }
+

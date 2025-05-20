@@ -97,11 +97,26 @@ public class PlayerShipBehaviour extends CharacterBehaviour
     @Override
     public void onUpdate(double dT, InputEvent ie)
     {
-        // TODO: verficar input
-
         int rotationDir = 0;
         boolean accel = false;
         boolean fire = false;
+
+        if(((KeyEvent) ie).getKeyCode() == KeyEvent.VK_TAB)
+        {
+            fire = true;
+        }
+        else if(((KeyEvent) ie).getKeyCode() == KeyEvent.VK_UP)
+        {
+            accel = true;
+        }
+        else if(((KeyEvent) ie).getKeyCode() == KeyEvent.VK_LEFT)
+        {
+            rotationDir = 1;
+        }
+        else if(((KeyEvent) ie).getKeyCode() == KeyEvent.VK_RIGHT)
+        {
+            rotationDir = -1;
+        }
 
         if(rotationDir != 0) { this.rotate(rotationDir, dT); }
         if(accel) { this.accelerate(dT); }
