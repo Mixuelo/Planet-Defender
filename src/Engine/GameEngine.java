@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import PlanetDefender.MovingObject;
+
 import javax.swing.*;
 
 import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
@@ -32,7 +32,7 @@ public class GameEngine implements IGameEngine
 
     /**
      * Define uma frame (setter)
-     * @param f {@code JFrame}
+     * @param p {@code JFrame}
      */
     public void panel(JPanel p)
     {
@@ -188,7 +188,7 @@ public class GameEngine implements IGameEngine
 
     public InputEvent getUserInput()
     {
-
+        return null;
     }
 
     /**
