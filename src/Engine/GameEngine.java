@@ -1,9 +1,14 @@
 package Engine;
 
+import java.awt.event.InputEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
 import PlanetDefender.MovingObject;
 import javax.swing.*;
+
+import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
 
 /** Classe para o GameEngine, definido por uma lista de GameObjects.
  *  @author Miguel Alvito, Nicole Reis e Pedro Pinto
@@ -13,7 +18,8 @@ public class GameEngine implements IGameEngine
 {
     private ArrayList<GameObject> enabled;
     private ArrayList<GameObject> disabled;
-    private JFrame frame;
+    private JPanel panel;
+
 
     /**
      * Construtor para o GameEngine.
@@ -28,9 +34,9 @@ public class GameEngine implements IGameEngine
      * Define uma frame (setter)
      * @param f {@code JFrame}
      */
-    public void frame(JFrame f)
+    public void panel(JPanel p)
     {
-        this.frame = f;
+        this.panel = p;
     }
 
     /**
@@ -180,6 +186,11 @@ public class GameEngine implements IGameEngine
         disabled = new ArrayList<>();
     }
 
+    public InputEvent getUserInput()
+    {
+
+    }
+
     /**
      * Generates a new frame:
      * Get user input from UI
@@ -199,13 +210,14 @@ public class GameEngine implements IGameEngine
             double now = System.nanoTime() * Math.pow(10, -9);
             double dt = (now - lastTime);
             lastTime = now;
-            //ie = getUserInput();
+
+            InputEvent ie = getUserInput();
             
             for(IGameObject go : enabled)
             {
                 if(go instanceof MovingObject) { ((MovingObject) go).updateMovement(); }
                 go.collider().onUpdate();
-                //go.behaviour().onUpdate(dt, ie);
+                go.behaviour().onUpdate(dt, ie);
             }
 
             // envia lista de colisões para todos os
