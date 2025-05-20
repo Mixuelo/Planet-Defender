@@ -1,10 +1,13 @@
 package PlanetDefender;
 
+import Engine.Point;
+import Engine.Shape;
+import Engine.Transform;
+
 import java.awt.*;
 import java.io.File;
 
 import javax.imageio.ImageIO;
-import Engine.*;
 
 /**
  * Subclasse de Shape para o SpriteShape.
@@ -20,12 +23,28 @@ public class SpriteShape extends Shape
      * Cosntrutor.
      * @param imageFile {@code String}
      */
-    public SpriteShape(String imagePath, double imageScale, Transform t, Point p)
+    public SpriteShape(String imagePath, double imageScale, Transform t)
     {
-        this.position = p.clone();
         this.imageScale = imageScale;
         this.transform = t;
+        this.position = t.position().clone();
+        this.angle = t.angle();
+        this.scale = t.scale();
 
+        try 
+        {
+            File imageFile = new File(imagePath);
+            this.sprite = ImageIO.read(imageFile);
+        }
+        catch(Exception e)
+        {
+            System.out.println("ERRO: " + imagePath);
+            e.printStackTrace();
+        }
+    }
+
+    public void sprite(String imagePath)
+    {
         try 
         {
             File imageFile = new File(imagePath);
@@ -47,9 +66,10 @@ public class SpriteShape extends Shape
     {
         if (this.sprite != null)
         {
-            int w = (int) Math.round(sprite.getWidth(null) * this.imageScale);
-            int h = (int) Math.round(sprite.getHeight(null) * this.imageScale);
-            g.drawImage(sprite, (int) Math.round(position.x()), (int) Math.round(position.y()), w, h, null);
+            // TODO: fazer rotaçao
+            int w = (int) Math.round(sprite.getWidth(null) * this.imageScale * this.scale);
+            int h = (int) Math.round(sprite.getHeight(null) * this.imageScale * this.scale);
+            g.drawImage(sprite, (int) Math.round(position.x() - w/2), (int) Math.round(position.y() - h/2), w, h, null);
         }
     }
 
@@ -59,9 +79,7 @@ public class SpriteShape extends Shape
      */
     public void scale(double dScale)
     {
-        double finalScale = this.scale + dScale;
-        double mult = finalScale / this.scale;
-        this.scale *= mult;
+        this.scale += dScale;
     }
 
     /**
