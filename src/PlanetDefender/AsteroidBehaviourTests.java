@@ -41,13 +41,13 @@ public class AsteroidBehaviourTests
 
         asteroidBehaviour.target(target);
 
-        assertTrue(asteroid.velocity.x() == 0);
-        assertTrue(asteroid.velocity.y() == 0);
+        assertTrue(asteroid.velocity().x() == 0);
+        assertTrue(asteroid.velocity().y() == 0);
 
         asteroidBehaviour.onUpdate(0.1, null);
 
-        assertTrue(asteroid.velocity.x() > 0);
-        assertTrue(asteroid.velocity.y() > 0);
+        assertTrue(asteroid.velocity().x() > 0);
+        assertTrue(asteroid.velocity().y() > 0);
     }
 
     @Test

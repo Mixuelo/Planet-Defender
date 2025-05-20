@@ -29,6 +29,15 @@ public class MovingObject extends GameObject
     }
 
     /**
+     * Devolve a velocidade deste MovingObject (getter)
+     * @return velocity {@code Point}
+     */
+    public Point velocity()
+    {
+        return this.velocity;
+    }
+
+    /**
      * Atualiza o movimento deste MovingObject.
      */
     public void updateMovement()

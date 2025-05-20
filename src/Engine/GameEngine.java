@@ -217,6 +217,7 @@ public class GameEngine implements IGameEngine
             {
                 if(go instanceof MovingObject) { ((MovingObject) go).updateMovement(); }
                 go.collider().onUpdate();
+                //go.shape().onUpdate();
                 go.behaviour().onUpdate(dt, ie);
             }
 

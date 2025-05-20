@@ -23,7 +23,7 @@ public class GameObject implements IGameObject
      * @param c {@code Collider}
      * @param b {@code Behaviour}
      */
-    @Deprecated
+    //@Deprecated
     public GameObject(String n, Transform t, Collider c, Behaviour b)
     {
         this.name = n;

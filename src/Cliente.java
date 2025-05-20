@@ -18,7 +18,7 @@ public class Cliente
         game.addEnabled(title);
         game.addEnabled(background);
 
-        game.frame(frame);
+        game.panel(panel);
 
         game.run();
 
