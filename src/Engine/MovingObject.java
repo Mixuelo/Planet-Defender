@@ -1,6 +1,4 @@
-package PlanetDefender;
-
-import Engine.*;
+package Engine;
 
 /**
  * Subclasse de GameObject que representa objetos que se podem mover.

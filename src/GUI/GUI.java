@@ -1,8 +1,9 @@
-package Engine;
+package GUI;
 
 import java.awt.event.InputEvent;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import Engine.*;
 
 public class GUI
 {
@@ -16,7 +17,7 @@ public class GUI
      */
     public InputEvent getUserInput()
     {
-
+        return null;
     }
 
     /**
