@@ -14,4 +14,6 @@ public interface IShape
      * @param g {@code Graphics2D}
      */
     void draw(Graphics2D g);
+
+    void onUpdate();
 }

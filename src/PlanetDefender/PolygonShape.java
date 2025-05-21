@@ -120,7 +120,6 @@ public class PolygonShape extends Shape
      */
     public void move(Point dPos)
     {
-
         for(Point v : this.vertices)
         {
             v.addThis(dPos);

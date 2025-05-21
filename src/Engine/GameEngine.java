@@ -14,8 +14,7 @@ public class GameEngine implements IGameEngine
 {
     private ArrayList<GameObject> enabled;
     private ArrayList<GameObject> disabled;
-    private JPanel panel;
-
+    private GUI gui;
 
     /**
      * Construtor para o GameEngine.
@@ -27,12 +26,12 @@ public class GameEngine implements IGameEngine
     }
 
     /**
-     * Define uma frame (setter)
-     * @param p {@code JFrame}
+     * Define um GUI (setter)
+     * @param g {@code GUI}
      */
-    public void panel(JPanel p)
+    public void gui(GUI g)
     {
-        this.panel = p;
+        this.gui = g;
     }
 
     /**
@@ -182,11 +181,6 @@ public class GameEngine implements IGameEngine
         disabled = new ArrayList<>();
     }
 
-    public InputEvent getUserInput()
-    {
-        return null;
-    }
-
     /**
      * Generates a new frame:
      * Get user input from UI
@@ -201,9 +195,9 @@ public class GameEngine implements IGameEngine
     public void run()
     {
         final int fps = 60;
-        final double frameTime = 1000 / fps;
+        final double frameTime = 1000.0 / fps;
 
-        double lastTime = System.nanoTime() * Math.pow(10, -9);
+        double lastTime = System.nanoTime() * 1e-9;
 
         for(;;)
         {
@@ -211,22 +205,30 @@ public class GameEngine implements IGameEngine
             double dt = now - lastTime;
             lastTime = now;
 
-            InputEvent ie = getUserInput();
-            
+            InputEvent ie = gui.getUserInput();
+
             for(IGameObject go : enabled)
             {
-                if(go instanceof MovingObject) { ((MovingObject) go).updateMovement(); }
-                if(go.collider() != null) go.collider().onUpdate();
-                //go.shape().onUpdate();
-                if(go.behaviour() != null) go.behaviour().onUpdate(dt, ie);
+                if(go instanceof MovingObject) ((MovingObject) go).updateMovement();
+                if(go.collider() != null)      go.collider().onUpdate();
+                if(go.shape() != null)         go.shape().onUpdate();
+                if(go.behaviour() != null)     go.behaviour().onUpdate(dt, ie);
             }
 
-            // envia lista de colisões para todos os
-            // IGameObject em enabled
+            // envia lista de colisões para todos os IGameObject em enabled
             this.checkCollisions();
-            if (panel != null) panel.repaint();
-            //GUI gui = new GUI();
+            //if (panel != null) panel.repaint();
             // envia a lista de IGameObjects em enabled para o GUI
+            if (gui != null) gui.putOnScreen(this.getEnabled());
+
+            try
+            {
+                Thread.sleep((long) frameTime);
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
         }
     }
 

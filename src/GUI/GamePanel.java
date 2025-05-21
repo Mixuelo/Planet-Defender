@@ -3,14 +3,16 @@ import Engine.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class GamePanel extends JPanel
 {
-    private GameEngine engine;
+    private CopyOnWriteArrayList<IGameObject> gameObjects;
 
-    public void engine(GameEngine engine)
+    public void gameObjects(CopyOnWriteArrayList<IGameObject> list)
     {
-        this.engine = engine;
+        this.gameObjects = new CopyOnWriteArrayList<>(list);
         repaint();
     }
 
@@ -18,11 +20,11 @@ public class GamePanel extends JPanel
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-        if (engine.getEnabled().size() <= 0) return;
+        if (gameObjects.size() <= 0) return;
 
         Graphics2D g2d = (Graphics2D) g;
 
-        for (IGameObject obj : engine.getEnabled())
+        for (IGameObject obj : gameObjects)
         {
             if (obj.shape() != null) obj.shape().draw(g2d);
         }

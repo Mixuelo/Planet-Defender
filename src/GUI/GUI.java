@@ -5,6 +5,7 @@ import java.awt.event.InputEvent;
 import javax.swing.*;
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class GUI extends JFrame
 {
@@ -40,8 +41,10 @@ public class GUI extends JFrame
      * Aceita uma lista de GameObjects enabled para colocar no ecrã
      * Estas listas, no GameEngine e no GUI tem de ser thread safe, pq o Java AWT/Swing corre numa thread diferente do resto do código Java como List<IGameObject> gol = new CopyOnWriteArrayList<>();
      */
-    public void putOnScreen(GameEngine engine)
+    public void putOnScreen(List<IGameObject> objects)
     {
-        gamePanel.engine(engine);
+        CopyOnWriteArrayList<IGameObject> gol = new CopyOnWriteArrayList<>();
+        gol.addAll(objects);
+        gamePanel.gameObjects(gol);
     }
 }
