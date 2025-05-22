@@ -136,6 +136,11 @@ public class GameObject implements IGameObject
         return shape;
     }
 
+    public void shape(Shape s)
+    {
+        this.shape = s;
+    }
+
     /**
      * Este método move o GameObject, pelo vetor dPos.
      * @param dPos {@code Point}
@@ -145,7 +150,7 @@ public class GameObject implements IGameObject
     {
         this.transform.move(dPos, dlayer);
         //this.collider.move(dPos);
-        this.shape.move(dPos);
+        //this.shape.move(dPos);
     }
 
     /**
@@ -156,7 +161,7 @@ public class GameObject implements IGameObject
     {
         this.transform.rotate(dTheta);
         //this.collider.rotate(dTheta);
-        this.shape.rotate(dTheta);
+        //this.shape.rotate(dTheta);
     }
 
     /**
@@ -167,7 +172,7 @@ public class GameObject implements IGameObject
     {
         this.transform.scale(dScale);
         //this.collider.scale(dScale);
-        this.shape.scale(dScale);
+        //this.shape.scale(dScale);
     }
 
     /**

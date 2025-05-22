@@ -29,6 +29,6 @@ public class KeyListenerImpl implements KeyListener
     @Override
     public void keyTyped(KeyEvent e)
     {
-        inputQueue.add(e);
+
     }
 }

@@ -8,6 +8,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class GamePanel extends JPanel
 {
+    private static final long serialVersionUID = 1L;
     private CopyOnWriteArrayList<IGameObject> gameObjects;
 
     public void gameObjects(CopyOnWriteArrayList<IGameObject> list)

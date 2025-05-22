@@ -34,7 +34,7 @@ public class BombBehaviour extends Behaviour
 
         this.explode = true;
         if(this.parent instanceof MovingObject) ((MovingObject) this.parent).setVelocity(new Point(0,0));
-        //TODO: tornar a bomba invisivel (remover o shape)
+        this.parent.shape(null);
         Transform effectTransform = this.parent.transform().clone();
         effectTransform.move(new Point(0,0), 2);
         //TODO: definir tempo com base na duraçao da animaçao

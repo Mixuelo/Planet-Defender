@@ -103,19 +103,22 @@ public class PlayerShipBehaviour extends CharacterBehaviour
 
         if(((KeyEvent) ie).getKeyCode() == KeyEvent.VK_TAB)
         {
-            fire = true;
+            if(((KeyEvent) ie).getID() == KeyEvent.KEY_PRESSED) { fire = true; }
         }
         else if(((KeyEvent) ie).getKeyCode() == KeyEvent.VK_UP)
         {
-            accel = true;
+            if(((KeyEvent) ie).getID() == KeyEvent.KEY_PRESSED) { accel = true; }
+            if(((KeyEvent) ie).getID() == KeyEvent.KEY_RELEASED) { accel = false; }
         }
         else if(((KeyEvent) ie).getKeyCode() == KeyEvent.VK_LEFT)
         {
-            rotationDir = 1;
+            if(((KeyEvent) ie).getID() == KeyEvent.KEY_PRESSED) { rotationDir += 1; }
+            if(((KeyEvent) ie).getID() == KeyEvent.KEY_RELEASED) { rotationDir -= 1; }
         }
         else if(((KeyEvent) ie).getKeyCode() == KeyEvent.VK_RIGHT)
         {
-            rotationDir = -1;
+            if(((KeyEvent) ie).getID() == KeyEvent.KEY_PRESSED) { rotationDir -= 1; }
+            if(((KeyEvent) ie).getID() == KeyEvent.KEY_RELEASED) { rotationDir += 1; }
         }
 
         if(rotationDir != 0) { this.rotate(rotationDir, dT); }

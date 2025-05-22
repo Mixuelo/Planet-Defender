@@ -7,23 +7,25 @@ import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class GUI extends JFrame
+public class GUI
 {
+    private final JFrame frame;
     private final GamePanel gamePanel;
-    private final Queue<InputEvent> inputQueue;
+    private final transient Queue<InputEvent> inputQueue;
 
     public GUI()
     {
-        super("Planet Defender");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(800, 600);
+        this.frame = new JFrame("Planet Defender");
 
         this.inputQueue = new ConcurrentLinkedQueue<>();
         this.gamePanel = new GamePanel();
 
-        this.add(gamePanel);
-        this.addKeyListener(new KeyListenerImpl(inputQueue));
-        this.setVisible(true);
+        frame.add(gamePanel);
+        frame.addKeyListener(new KeyListenerImpl(inputQueue));
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(800, 600);
+        frame.setVisible(true);
     }
 
     /**
