@@ -1,8 +1,10 @@
 package PlanetDefender;
 
+import java.awt.*;
 import java.awt.event.InputEvent;
 import java.util.Random;
 import Engine.*;
+import Engine.Point;
 
 /**
  * Subclasse de EnenmyBehaviour responsável pelo comportamento das naves dos inimigos.
@@ -26,7 +28,7 @@ public class EnemyShipBehaviour extends EnemyBehaviour
     private Random rng;
     private int bulletID;
     private static final int HEALTH = 5;
-    private static final double ACCELERATION = 5;
+    private static final double ACCELERATION = 35;
     private static final double PATIENCE = 7;
     private static final double FIRE_COOLDOWN = 0.5;
     private static final double START_COOLDOWN = 5;
@@ -36,7 +38,7 @@ public class EnemyShipBehaviour extends EnemyBehaviour
     private static final double MAX_ROTATION_SPEED = 180;
     private static final double ROTATION_SPEED = 0.5;
     private static final double LOOK_ANGLE_THRESHOLD = 10;
-    private static final double BULLET_SPEED = 10;
+    private static final double BULLET_SPEED = 150;
 
     /**
      * Construtor.
@@ -180,7 +182,9 @@ public class EnemyShipBehaviour extends EnemyBehaviour
         double ang = Math.toRadians(this.parent.transform().angle());
 
         // TODO: definir raio universal para balas, inimigos podem ter balas com colisores menor que o jogador, para facilitar o jogo
-        MovingObject bullet = new MovingObject(this.parent.name() + "_bullet" + Integer.toString(this.bulletID++), this.parent.transform().clone(), new ColliderCircle(new Point(0,0), 3), new BulletBehaviour(this.parent), new Point(0,0), BULLET_SPEED, 1);
+        Transform bulletTrans = this.parent.transform().clone();
+        String uniqueBulletName = this.parent.name() + "_bullet_" + System.nanoTime();
+        MovingObject bullet = new MovingObject(uniqueBulletName, bulletTrans, new ColliderCircle(new Point(0,0), 3), new BulletBehaviour(this.parent), new CircleShape(5, Color.YELLOW, bulletTrans), new Point(0,0), BULLET_SPEED, 1);
 
         bullet.setVelocity(
             new Point(

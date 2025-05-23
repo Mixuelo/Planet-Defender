@@ -1,8 +1,10 @@
 package GUI;
 import Engine.*;
+import PlanetDefender.EnemyShipBehaviour;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.desktop.SystemSleepEvent;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 

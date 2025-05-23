@@ -13,9 +13,9 @@ public class PlanetBehaviour extends CharacterBehaviour
     private MovingObject player;
     private boolean playerAlive;
     private double playerRecovery;
-    private static final int HEALTH = 150;
+    private static final int HEALTH = 5;
     private static final double PLAYER_RECOVERY_TIME = 7;
-    private static final int DESTRUCTION_EFFECT_TIME = 5;
+    private static final int DESTRUCTION_EFFECT_TIME = 150;
 
     /**
      * Construtor.

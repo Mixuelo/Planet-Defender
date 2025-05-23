@@ -94,10 +94,10 @@ public class EnemySpawnerBehaviour extends Behaviour
         double maxv;
         double f;
 
-        int type = this.rng.nextInt(2); //TODO: MUDAR ISTO
+        int type = this.rng.nextInt(6); //TODO: MUDAR ISTO
 
         //TODO: ajustar valores
-        if(type < 3) // asteroide (1/2 de chance)
+        /*if(type < 3) // asteroide (1/2 de chance)
         {
             c = (Collider) new ColliderCircle(t, new Point(0,0), 0.5);
     
@@ -116,16 +116,21 @@ public class EnemySpawnerBehaviour extends Behaviour
 
             f = 1;
         }
-        else if(type < 6) // nave (1/3 de chance)
+        else*/ if(type < 5) // nave (1/3 de chance)
         {
             c = new ColliderPolygon(new ArrayList<>(Arrays.asList(new Point(0, 20), new Point(-10, 0), new Point(10, 0))));
 
             b = new EnemyShipBehaviour();
             ((EnemyShipBehaviour) b).player(this.player);
 
-            v = new Point(0,0);
+            s = new SpriteShape("imgs/nave_inimiga.png", 0.1, t);
+
+            //v = new Point(0,0);
+            v = this.planet.transform().position().subNew(t.position());
+            v.multThis(0.05);
+            v.rotateThis(new Point(0,0), this.rng.nextGaussian() * 30);
             
-            maxv = 40;
+            maxv = 100;
 
             f = 0.5;
         }
