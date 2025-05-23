@@ -51,6 +51,7 @@ public class GameObject implements IGameObject
         this.behaviour = b;
         if (this.behaviour != null) this.behaviour.parent = this;
         this.shape = s;
+        if (this.shape != null) this.shape.transform = t;
     }
 
     /** Retorna a GameEngine ao qual o GameObject pertence */
@@ -182,6 +183,7 @@ public class GameObject implements IGameObject
      */
     public boolean checkCollision(GameObject go)
     {
+        if(this.collider == null)                          return false;
         if(go.transform.layer() != this.transform.layer()) return false;
         if(this.equals(go))                                return false;
         return collider.checkCollision(go.collider);

@@ -17,13 +17,21 @@ public class KeyListenerImpl implements KeyListener
     @Override
     public void keyPressed(KeyEvent e)
     {
-        inputQueue.add(e);
+        if(e.getKeyCode() == KeyEvent.VK_SPACE ||
+           e.getKeyCode() == KeyEvent.VK_UP ||
+           e.getKeyCode() == KeyEvent.VK_LEFT ||
+           e.getKeyCode() == KeyEvent.VK_RIGHT)
+            inputQueue.add(e);
     }
 
     @Override
     public void keyReleased(KeyEvent e)
     {
-        inputQueue.add(e);
+        if(e.getKeyCode() == KeyEvent.VK_SPACE ||
+           e.getKeyCode() == KeyEvent.VK_UP ||
+           e.getKeyCode() == KeyEvent.VK_LEFT ||
+           e.getKeyCode() == KeyEvent.VK_RIGHT)
+            inputQueue.add(e);
     }
 
     @Override

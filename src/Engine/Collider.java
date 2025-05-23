@@ -81,6 +81,7 @@ public abstract class Collider implements ICollider
     */
     public boolean checkCollisionCircle(ColliderCircle that)
     {
+        if(that == null) { return false; }
         return this.checkCollision(that);
     }
 
@@ -89,6 +90,7 @@ public abstract class Collider implements ICollider
     */
     public boolean checkCollisionPolygon(ColliderPolygon that)
     {
+        if(that == null) { return false; }
         return this.checkCollision(that);
     }
 

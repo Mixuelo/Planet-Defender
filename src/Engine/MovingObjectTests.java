@@ -23,7 +23,7 @@ public class MovingObjectTests
     @Test
     public void testUpdateMovement()
     {
-        movingObject.updateMovement();
+        movingObject.updateMovement(1);
         assertEquals(new Point(1, 1), movingObject.transform().position());
     }
 

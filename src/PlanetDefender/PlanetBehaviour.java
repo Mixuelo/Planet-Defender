@@ -24,7 +24,7 @@ public class PlanetBehaviour extends CharacterBehaviour
     {
         super(HEALTH);
         this.playerAlive = true;
-        this.playerRecovery = 0;
+        this.playerRecovery = PLAYER_RECOVERY_TIME;
     }
 
     /**
@@ -71,7 +71,8 @@ public class PlanetBehaviour extends CharacterBehaviour
      */
     protected void gameOver()
     {
-        UIObject uiObject = new UIObject("GameOver", this.parent.transform().clone(), new TitleBehaviour());
+        // TODO: SHAPE GAME OVER
+        UIObject uiObject = new UIObject("GameOver", this.parent.transform().clone(), new TitleBehaviour(), null);
         this.parent.engine().addEnabled(uiObject);
     }
 
@@ -81,7 +82,6 @@ public class PlanetBehaviour extends CharacterBehaviour
     public void onPlayerDefeat()
     {
         this.playerAlive = false;
-        this.playerRecovery = PLAYER_RECOVERY_TIME;
     }
 
     /**
@@ -89,6 +89,7 @@ public class PlanetBehaviour extends CharacterBehaviour
      */
     private void recoverPlayer()
     {
+        this.playerRecovery = PLAYER_RECOVERY_TIME;
         this.player.move(this.parent.transform().position().subNew(this.player.transform().position()), 0);
         this.player.setVelocity(new Point(0,0));
         this.player.transform().rotate(-this.player.transform().angle());

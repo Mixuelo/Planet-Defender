@@ -207,9 +207,16 @@ public class GameEngine implements IGameEngine
 
             InputEvent ie = gui.getUserInput();
 
+            ArrayList<IGameObject> enabledClone = new ArrayList<>(this.enabled.size());
+
             for(IGameObject go : enabled)
             {
-                if(go instanceof MovingObject) ((MovingObject) go).updateMovement();
+                enabledClone.add(go);
+            }
+            
+            for(IGameObject go : enabledClone) 
+            {
+                if(go instanceof MovingObject) ((MovingObject) go).updateMovement(dt);
                 if(go.collider() != null)      go.collider().onUpdate();
                 if(go.shape() != null)         go.shape().onUpdate();
                 if(go.behaviour() != null)     go.behaviour().onUpdate(dt, ie);
@@ -221,6 +228,7 @@ public class GameEngine implements IGameEngine
             // envia a lista de IGameObjects em enabled para o GUI
             if (gui != null) gui.putOnScreen(this.getEnabled());
 
+            /*
             try
             {
                 Thread.sleep((long) frameTime);
@@ -229,6 +237,7 @@ public class GameEngine implements IGameEngine
             {
                 e.printStackTrace();
             }
+            */
         }
     }
 
@@ -239,11 +248,18 @@ public class GameEngine implements IGameEngine
      */
     public void checkCollisions()
     {
-        for(GameObject go : enabled)
+        ArrayList<GameObject> enabledClone = new ArrayList<>(this.enabled.size());
+
+        for(IGameObject go : enabled)
+        {
+            enabledClone.add((GameObject) go);
+        }
+
+        for(GameObject go : enabledClone)
         {
             ArrayList<IGameObject> list = new ArrayList<>();
 
-            for(GameObject other : enabled)
+            for(GameObject other : enabledClone)
             {
                 if(go != other && go.transform().layer() == other.transform().layer() && go.checkCollision(other))
                 {

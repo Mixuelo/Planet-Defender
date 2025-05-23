@@ -103,6 +103,7 @@ public class ColliderCircle extends Collider
     */
     public boolean checkCollision(Collider that)
     {
+        if(that == null) { return false; }
         return that.checkCollisionCircle(this);
     }
 

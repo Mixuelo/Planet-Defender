@@ -29,6 +29,24 @@ public class MovingObject extends GameObject
     }
 
     /**
+     * Construtor.
+     * @param n {@code String}
+     * @param t {@code Transform}
+     * @param c {@code Collider}
+     * @param s {@code Shape}
+     * @param velocity {@code Point}
+     * @param topVelocity {@code double}
+     * @param friction {@code double}
+     */
+    public MovingObject(String n, Transform t, Collider c, Behaviour b, Shape s, Point velocity, double topVelocity, double friction)
+    {
+        super(n, t, c, b, s);
+        this.velocity = velocity.clone();
+        this.topVelocity = topVelocity;
+        this.friction = friction;
+    }
+
+    /**
      * Devolve a velocidade deste MovingObject (getter)
      * @return velocity {@code Point}
      */
@@ -40,10 +58,10 @@ public class MovingObject extends GameObject
     /**
      * Atualiza o movimento deste MovingObject.
      */
-    public void updateMovement()
+    public void updateMovement(double dt)
     {
-        this.transform().position().addThis(velocity);
-        this.velocity.multThis(this.friction);
+        this.transform().position().addThis(velocity.multNew(dt));
+        this.velocity.multThis(1 - ((1 - this.friction) * dt)); // TODO: REFAZER FRICÇAO
     }
 
     /**

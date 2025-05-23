@@ -31,21 +31,25 @@ public class TitleBehaviour extends Behaviour
      */
     private void startGame()
     {
+        Transform plyTrans = new Transform(new Point(WIDTH/2, HEIGHT/4), 1, 0, 1);
         MovingObject player = new MovingObject(
             "player", 
-            new Transform(new Point(WIDTH/2, HEIGHT/4), 1, 0, 1), 
+            plyTrans,
             new ColliderPolygon(new ArrayList<>(Arrays.asList(new Point(0, 20), new Point(-10, 0), new Point(10, 0)))),
             new PlayerShipBehaviour(),
+            new SpriteShape("imgs/nave_jogador.png", 0.1, plyTrans), //IMAGEM GRANDE
             new Point(0, 0),
             45,
-            0.5
+            0.8
         );
 
+        Transform pntTrans = new Transform(new Point(WIDTH/2, HEIGHT/2), 1, 0, 1);
         GameObject planet = new GameObject(
             "planet", 
-            new Transform(new Point(WIDTH/2, HEIGHT/2), 1, 0, 1), 
+            pntTrans,
             new ColliderCircle(new Point(0, 0), 50),
-            new PlanetBehaviour()
+            new PlanetBehaviour(),
+            new SpriteShape("imgs/planeta.png", 0.0625, pntTrans) //PQ Q A IMAGEM ORIGINAL É 1600x1600 DE TAMANHO
         );
 
         GameObject enemy = new GameObject(

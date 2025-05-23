@@ -1,5 +1,6 @@
 package PlanetDefender;
 
+import java.awt.Color;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import Engine.*;
@@ -12,12 +13,14 @@ import Engine.*;
 public class PlayerShipBehaviour extends CharacterBehaviour
 {
     private double cooldown;
+    private int rotationDir = 0;
+    private boolean accel = false;
     private int bulletID;
     private GameObject planet;
     private static final int HEALTH = 25;
-    private static final double ACCELERATION = 5;
+    private static final double ACCELERATION = 30;
     private static final double FIRE_COOLDOWN = 0.5;
-    private static final double ROTATION_SPEED = 90;
+    private static final double ROTATION_SPEED = 180;
     private static final double BULLET_SPEED = 10;
     private static final double OUT_OF_BOUNDS_DIST = 600;
 
@@ -29,6 +32,8 @@ public class PlayerShipBehaviour extends CharacterBehaviour
         super(HEALTH);
         this.cooldown = 0;
         this.bulletID = 0;
+        this.rotationDir = 0;
+        this.accel = false;
     }
 
     /**
@@ -75,7 +80,8 @@ public class PlayerShipBehaviour extends CharacterBehaviour
         double ang = Math.toRadians(this.parent.transform().angle());
 
         // TODO: definir raio universal para balas, inimigos podem ter balas com colisores menor que o jogador, para facilitar o jogo
-        MovingObject bullet = new MovingObject(this.parent.name() + "_bullet" + Integer.toString(this.bulletID++), this.parent.transform().clone(), new ColliderCircle(new Point(0,0), 5), new BulletBehaviour(this.parent), new Point(0,0), BULLET_SPEED, 1);
+        Transform bulletTrans = this.parent.transform().clone();
+        MovingObject bullet = new MovingObject(this.parent.name() + "_bullet" + Integer.toString(this.bulletID++), bulletTrans , new ColliderCircle(new Point(0,0), 5), new BulletBehaviour(this.parent), new SpriteShape("imgs/bala.png",1, bulletTrans), new Point(0,0), BULLET_SPEED, 1);
 
         bullet.setVelocity(
             new Point(
@@ -97,29 +103,33 @@ public class PlayerShipBehaviour extends CharacterBehaviour
     @Override
     public void onUpdate(double dT, InputEvent ie)
     {
-        int rotationDir = 0;
-        boolean accel = false;
         boolean fire = false;
 
-        if(((KeyEvent) ie).getKeyCode() == KeyEvent.VK_TAB)
+        if(ie != null)
         {
-            if(((KeyEvent) ie).getID() == KeyEvent.KEY_PRESSED) { fire = true; }
+            if(((KeyEvent) ie).getKeyCode() == KeyEvent.VK_SPACE)
+            {
+                if(((KeyEvent) ie).getID() == KeyEvent.KEY_PRESSED) { fire = true; }
+            }
+            else if(((KeyEvent) ie).getKeyCode() == KeyEvent.VK_UP)
+            {
+                if(((KeyEvent) ie).getID() == KeyEvent.KEY_PRESSED) { accel = true; }
+                if(((KeyEvent) ie).getID() == KeyEvent.KEY_RELEASED) { accel = false; }
+            }
+            else if(((KeyEvent) ie).getKeyCode() == KeyEvent.VK_LEFT)
+            {
+                if(((KeyEvent) ie).getID() == KeyEvent.KEY_PRESSED) { rotationDir += 1; }
+                if(((KeyEvent) ie).getID() == KeyEvent.KEY_RELEASED) { rotationDir -= 1; }
+            }
+            else if(((KeyEvent) ie).getKeyCode() == KeyEvent.VK_RIGHT)
+            {
+                if(((KeyEvent) ie).getID() == KeyEvent.KEY_PRESSED) { rotationDir -= 1; }
+                if(((KeyEvent) ie).getID() == KeyEvent.KEY_RELEASED) { rotationDir += 1; }
+            }
         }
-        else if(((KeyEvent) ie).getKeyCode() == KeyEvent.VK_UP)
-        {
-            if(((KeyEvent) ie).getID() == KeyEvent.KEY_PRESSED) { accel = true; }
-            if(((KeyEvent) ie).getID() == KeyEvent.KEY_RELEASED) { accel = false; }
-        }
-        else if(((KeyEvent) ie).getKeyCode() == KeyEvent.VK_LEFT)
-        {
-            if(((KeyEvent) ie).getID() == KeyEvent.KEY_PRESSED) { rotationDir += 1; }
-            if(((KeyEvent) ie).getID() == KeyEvent.KEY_RELEASED) { rotationDir -= 1; }
-        }
-        else if(((KeyEvent) ie).getKeyCode() == KeyEvent.VK_RIGHT)
-        {
-            if(((KeyEvent) ie).getID() == KeyEvent.KEY_PRESSED) { rotationDir -= 1; }
-            if(((KeyEvent) ie).getID() == KeyEvent.KEY_RELEASED) { rotationDir += 1; }
-        }
+
+        if(rotationDir > 1) { rotationDir = 1; }
+        if(rotationDir < -1) { rotationDir = -1; }
 
         if(rotationDir != 0) { this.rotate(rotationDir, dT); }
         if(accel) { this.accelerate(dT); }

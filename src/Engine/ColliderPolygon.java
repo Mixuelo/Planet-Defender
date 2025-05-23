@@ -274,6 +274,7 @@ public class ColliderPolygon extends Collider
     */
     public boolean checkCollision(Collider that)
     {
+        if(that == null) { return false; }
         return that.checkCollisionPolygon(this);
     }
 
