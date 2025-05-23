@@ -204,7 +204,7 @@ public class GameEngine implements IGameEngine
             double now = System.nanoTime() * 1e-9;
             double dt = now - lastTime;
             lastTime = now;
-            System.out.println(dt);
+            //System.out.println(dt);
 
             InputEvent ie = gui.getUserInput();
 

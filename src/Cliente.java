@@ -12,11 +12,11 @@ public class Cliente
         game.gui(gui);
 
         UIObject title = new UIObject("title", new Transform(new Point(0, 0), 0, 0, 1), new TitleBehaviour(), null);
-        Transform backTrans = new Transform(new Point(0, 0), -1, 0, 1);
-        UIObject background = new UIObject("back",backTrans, null, new SpriteShape("imgs/fundo.png", 2.5, backTrans));
+        Transform backTrans = new Transform(new Point(400, 300), -1, 0, 1);
+        UIObject background = new UIObject("back",backTrans, null, new SpriteShape("imgs/fundo.png", 1, backTrans));
 
+        game.addEnabled(background);
         game.addEnabled(title);
-        //game.addEnabled(background);
 
         game.run();
 

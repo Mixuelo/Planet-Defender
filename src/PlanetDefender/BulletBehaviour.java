@@ -43,10 +43,13 @@ public class BulletBehaviour extends Behaviour
 
         Point pos = this.gameObject().transform().position();
 
+        /*
         if(pos.x() < LEFT_BORDER || pos.x() > RIGHT_BORDER || pos.y() < UP_BORDER || pos.y() > DOWN_BORDER)
         {
             this.gameObject().engine().destroy(this.gameObject());
         }
+        */
+
     }
 
     /**
@@ -56,7 +59,7 @@ public class BulletBehaviour extends Behaviour
     @Override
     public void onCollision(List<IGameObject> gol)
     {
-        super.onCollision(gol);
+        for(IGameObject go : gol) { if(go.equals(this.owner)) return; }
 
         for(IGameObject go : gol)
         {
@@ -65,12 +68,13 @@ public class BulletBehaviour extends Behaviour
             {
                 CharacterBehaviour cb = (CharacterBehaviour) b;
                 cb.takeDamage(1);
+                this.gameObject().engine().destroy(this.gameObject());
             }
             else if(b instanceof BombBehaviour)
             {
                 ((BombBehaviour) b).explode();
+                this.gameObject().engine().destroy(this.gameObject());
             }
         }
-        this.gameObject().engine().destroy(this.gameObject());
     }
 }

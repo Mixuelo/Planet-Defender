@@ -19,9 +19,9 @@ public class PlayerShipBehaviour extends CharacterBehaviour
     private GameObject planet;
     private static final int HEALTH = 25;
     private static final double ACCELERATION = 50;
-    private static final double FIRE_COOLDOWN = 0.5;
+    private static final double FIRE_COOLDOWN = 0.25;
     private static final double ROTATION_SPEED = 180;
-    private static final double BULLET_SPEED = 10;
+    private static final double BULLET_SPEED = 100;
     private static final double OUT_OF_BOUNDS_DIST = 600;
 
     /**
@@ -81,7 +81,7 @@ public class PlayerShipBehaviour extends CharacterBehaviour
 
         // TODO: definir raio universal para balas, inimigos podem ter balas com colisores menor que o jogador, para facilitar o jogo
         Transform bulletTrans = this.parent.transform().clone();
-        MovingObject bullet = new MovingObject(this.parent.name() + "_bullet" + Integer.toString(this.bulletID++), bulletTrans , new ColliderCircle(new Point(0,0), 5), new BulletBehaviour(this.parent), new SpriteShape("imgs/bala.png",1, bulletTrans), new Point(0,0), BULLET_SPEED, 1);
+        MovingObject bullet = new MovingObject(this.parent.name() + "_bullet" + Integer.toString(this.bulletID++), bulletTrans , new ColliderCircle(new Point(0,0), 5), new BulletBehaviour(this.parent), new CircleShape(5,Color.YELLOW, bulletTrans), new Point(0,0), BULLET_SPEED, 1);
 
         bullet.setVelocity(
             new Point(
