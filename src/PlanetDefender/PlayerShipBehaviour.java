@@ -18,7 +18,7 @@ public class PlayerShipBehaviour extends CharacterBehaviour
     private int bulletID;
     private GameObject planet;
     private static final int HEALTH = 25;
-    private static final double ACCELERATION = 30;
+    private static final double ACCELERATION = 50;
     private static final double FIRE_COOLDOWN = 0.5;
     private static final double ROTATION_SPEED = 180;
     private static final double BULLET_SPEED = 10;
@@ -131,7 +131,7 @@ public class PlayerShipBehaviour extends CharacterBehaviour
         if(rotationDir > 1) { rotationDir = 1; }
         if(rotationDir < -1) { rotationDir = -1; }
 
-        if(rotationDir != 0) { this.rotate(rotationDir, dT); }
+        if(rotationDir != 0) { this.rotate(-rotationDir, dT); }
         if(accel) { this.accelerate(dT); }
         if(fire && this.cooldown <= 0) { this.shoot(); }
 

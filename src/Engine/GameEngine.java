@@ -204,6 +204,7 @@ public class GameEngine implements IGameEngine
             double now = System.nanoTime() * 1e-9;
             double dt = now - lastTime;
             lastTime = now;
+            System.out.println(dt);
 
             InputEvent ie = gui.getUserInput();
 
@@ -228,7 +229,6 @@ public class GameEngine implements IGameEngine
             // envia a lista de IGameObjects em enabled para o GUI
             if (gui != null) gui.putOnScreen(this.getEnabled());
 
-            /*
             try
             {
                 Thread.sleep((long) frameTime);
@@ -237,7 +237,6 @@ public class GameEngine implements IGameEngine
             {
                 e.printStackTrace();
             }
-            */
         }
     }
 

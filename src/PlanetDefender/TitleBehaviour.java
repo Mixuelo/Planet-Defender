@@ -39,8 +39,8 @@ public class TitleBehaviour extends Behaviour
             new PlayerShipBehaviour(),
             new SpriteShape("imgs/nave_jogador.png", 0.1, plyTrans), //IMAGEM GRANDE
             new Point(0, 0),
-            45,
-            0.8
+            100,
+            0.7
         );
 
         Transform pntTrans = new Transform(new Point(WIDTH/2, HEIGHT/2), 1, 0, 1);

@@ -21,6 +21,7 @@ public class GamePanel extends JPanel
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
+        if (gameObjects == null)     return;
         if (gameObjects.size() <= 0) return;
 
         Graphics2D g2d = (Graphics2D) g;
