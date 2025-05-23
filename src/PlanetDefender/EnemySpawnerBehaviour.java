@@ -90,20 +90,23 @@ public class EnemySpawnerBehaviour extends Behaviour
         Collider c;
         Behaviour b;
         Point v;
+        SpriteShape s = null;
         double maxv;
         double f;
 
-        int type = this.rng.nextInt(6);
+        int type = this.rng.nextInt(2); //TODO: MUDAR ISTO
 
         //TODO: ajustar valores
         if(type < 3) // asteroide (1/2 de chance)
         {
-            c = null;
+            c = (Collider) new ColliderCircle(t, new Point(0,0), 0.5);
     
-            double size = this.rng.nextGaussian(8, 0.6);
+            double size = this.rng.nextGaussian(7, 0.6);
             size = Math.max(size, 5);
-            size = Math.min(size, 10);
+            size = Math.min(size, 9);
             b = new AsteroidBehaviour(size);
+
+            s = new SpriteShape("imgs/asteroide.png", 0.01, t);
 
             v = this.planet.transform().position().subNew(t.position());
             v.multThis(0.05);
@@ -149,7 +152,7 @@ public class EnemySpawnerBehaviour extends Behaviour
             f = 1;
         }
 
-        MovingObject enemy = new MovingObject(this.parent.name() + Integer.toString(this.enemyID++), t, c, b, v, maxv, f);
+        MovingObject enemy = new MovingObject(this.parent.name() + Integer.toString(this.enemyID++), t, c, b, s, v, maxv, f);
 
         ((EnemyBehaviour) enemy.behaviour()).target(this.planet);
 

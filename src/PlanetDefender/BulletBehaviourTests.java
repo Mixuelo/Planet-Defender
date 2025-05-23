@@ -18,35 +18,35 @@ public class BulletBehaviourTests
         Transform insideTransform = new Transform(new Point(100, 100), 0, 1, 0);
         GameObject insideBullet = new GameObject("InsideBullet", insideTransform, new ColliderCircle(insideTransform, new Point(0, 0), 2), bulletBehaviour);
         engine.addEnabled(insideBullet);
-        bulletBehaviour.onUpdate(0.1, null);
+        bulletBehaviour.onUpdate(1, null);
         assertTrue(engine.getEnabled().contains(insideBullet));
 
         // x < -50
         Transform leftTransform = new Transform(new Point(-51, 100), 0, 1, 0);
         GameObject leftBullet = new GameObject("LeftBullet", leftTransform, new ColliderCircle(leftTransform, new Point(0, 0), 2), bulletBehaviour);
         engine.addEnabled(leftBullet);
-        bulletBehaviour.onUpdate(0.1, null);
+        bulletBehaviour.onUpdate(1, null);
         assertFalse(engine.getEnabled().contains(leftBullet));
 
         // x > 850
         Transform rightTransform = new Transform(new Point(851, 100), 0, 1, 0);
         GameObject rightBullet = new GameObject("RightBullet", rightTransform, new ColliderCircle(rightTransform, new Point(0, 0), 2), bulletBehaviour);
         engine.addEnabled(rightBullet);
-        bulletBehaviour.onUpdate(0.1, null);
+        bulletBehaviour.onUpdate(1, null);
         assertFalse(engine.getEnabled().contains(rightBullet));
 
         // y < -50
         Transform topTransform = new Transform(new Point(100, -51), 0, 1, 0);
         GameObject topBullet = new GameObject("TopBullet", topTransform, new ColliderCircle(topTransform, new Point(0, 0), 2), bulletBehaviour);
         engine.addEnabled(topBullet);
-        bulletBehaviour.onUpdate(0.1, null);
+        bulletBehaviour.onUpdate(1, null);
         assertFalse(engine.getEnabled().contains(topBullet));
 
         // y > 650
         Transform bottomTransform = new Transform(new Point(100, 651), 0, 1, 0);
         GameObject bottomBullet = new GameObject("BottomBullet", bottomTransform, new ColliderCircle(bottomTransform, new Point(0, 0), 2), bulletBehaviour);
         engine.addEnabled(bottomBullet);
-        bulletBehaviour.onUpdate(0.1, null);
+        bulletBehaviour.onUpdate(1, null);
         assertFalse(engine.getEnabled().contains(bottomBullet));
     }
 

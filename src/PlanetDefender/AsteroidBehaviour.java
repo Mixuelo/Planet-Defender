@@ -13,13 +13,15 @@ public class AsteroidBehaviour extends EnemyBehaviour
 {
     private double size;
     private static final double SCALE_FACTOR = 10;
-    private static final double HEALTH_FACTOR = 5;
-    private static final double DAMAGE_FACTOR = 5;
-    private static final double DIVIDE_FACTOR = 0.4;
-    private static final double SIZE_CUTOFF = 3;
+    private static final double HEALTH_FACTOR = 0.5;
+    private static final double DAMAGE_FACTOR = 1;
+    private static final double DIVIDE_FACTOR = 0.6;
+    private static final double SIZE_CUTOFF = 2;
     private static final double DISTANCE_CUTOFF = 700;
     private static final double ACCELERATION = 5;
-    private static final double COLLIDER_RADIUS = 10;
+    private static final double COLLIDER_RADIUS = 0.5;
+    private static final double IMAGE_SCALE = 0.01;
+    private static final String IMAGE_PATH = "imgs/asteroide.png";
     private static final double OUT_OF_BOUNDS_DIST = 700;
 
     /**
@@ -79,6 +81,9 @@ public class AsteroidBehaviour extends EnemyBehaviour
         for(IGameObject go : gol)
         {
             IBehaviour b = go.behaviour();
+
+            if(b instanceof AsteroidBehaviour) { continue; }
+
             if(b instanceof CharacterBehaviour)
             {
                 CharacterBehaviour cb = (CharacterBehaviour) b;
@@ -109,12 +114,15 @@ public class AsteroidBehaviour extends EnemyBehaviour
         Transform parentTransform = this.gameObject().transform();
 
         Transform t1 = parentTransform.clone();
-        t1.move(new Point(Math.random()*20 - 10, Math.random()*20 - 10), 0);
-        GameObject asteroid1 = new GameObject(this.parent.name() + "_child1", t1, new ColliderCircle(t1, t1.position(), COLLIDER_RADIUS), new AsteroidBehaviour(childSize));
+        t1.move(new Point(Math.random()*50 - 25, Math.random()*50 - 25), 0);
+        GameObject asteroid1 = new MovingObject(this.parent.name() + "_child1", t1, new ColliderCircle(t1, t1.position(), COLLIDER_RADIUS), new AsteroidBehaviour(childSize), new SpriteShape(IMAGE_PATH, IMAGE_SCALE, t1), ((MovingObject) this.parent).velocity().clone(), ((MovingObject) this.parent).topVelocity(), ((MovingObject) this.parent).friction());
 
         Transform t2 = parentTransform.clone();
-        t2.move(new Point(Math.random()*20 - 10, Math.random()*20 - 10), 0);
-        GameObject asteroid2 = new GameObject(this.parent.name() + "_child2", t2, new ColliderCircle(t2, t2.position(), COLLIDER_RADIUS), new AsteroidBehaviour(childSize));
+        t2.move(new Point(Math.random()*50 - 25, Math.random()*50 - 25), 0);
+        GameObject asteroid2 = new MovingObject(this.parent.name() + "_child2", t2, new ColliderCircle(t2, t2.position(), COLLIDER_RADIUS), new AsteroidBehaviour(childSize), new SpriteShape(IMAGE_PATH, IMAGE_SCALE, t2), ((MovingObject) this.parent).velocity().clone(), ((MovingObject) this.parent).topVelocity(), ((MovingObject) this.parent).friction());
+
+        ((AsteroidBehaviour) asteroid1.behaviour()).target(this.target);
+        ((AsteroidBehaviour) asteroid2.behaviour()).target(this.target);
 
         this.gameObject().engine().addEnabled(asteroid1);
         this.gameObject().engine().addEnabled(asteroid2);

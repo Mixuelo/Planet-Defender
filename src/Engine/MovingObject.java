@@ -55,6 +55,16 @@ public class MovingObject extends GameObject
         return this.velocity;
     }
 
+    public double topVelocity()
+    {
+        return this.topVelocity;
+    }
+
+    public double friction()
+    {
+        return this.friction;
+    }
+
     /**
      * Atualiza o movimento deste MovingObject.
      */
