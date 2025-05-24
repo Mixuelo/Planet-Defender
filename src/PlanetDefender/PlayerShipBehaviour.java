@@ -13,8 +13,8 @@ import Engine.*;
 public class PlayerShipBehaviour extends CharacterBehaviour
 {
     private double cooldown;
-    private int rotationDir = 0;
-    private boolean accel = false;
+    private int rotationDir;
+    private boolean accel;
     private int bulletID;
     private GameObject planet;
     private static final int HEALTH = 10;
@@ -107,6 +107,7 @@ public class PlayerShipBehaviour extends CharacterBehaviour
     public void onUpdate(double dT, InputEvent ie)
     {
         boolean fire = false;
+        boolean lastAccel = this.accel;
 
         if(ie != null)
         {
@@ -129,6 +130,14 @@ public class PlayerShipBehaviour extends CharacterBehaviour
                 if(((KeyEvent) ie).getID() == KeyEvent.KEY_PRESSED) { rotationDir -= 1; }
                 if(((KeyEvent) ie).getID() == KeyEvent.KEY_RELEASED) { rotationDir += 1; }
             }
+        }
+
+        if(this.accel != lastAccel)
+        {
+            Shape s;
+            if(this.accel) { s = new SpriteShape("imgs/nave_jogador.png", 0.1, this.parent.transform(), 1); }
+            else { s = new SpriteShape("imgs/nave_jogador_parada.png", 0.1, this.parent.transform(), 1); }
+            this.parent.shape(s);
         }
 
         if(rotationDir > 1) { rotationDir = 1; }

@@ -193,7 +193,6 @@ public class EnemyShipBehaviour extends EnemyBehaviour
     {
         double ang = Math.toRadians(this.parent.transform().angle());
 
-        // TODO: definir raio universal para balas, inimigos podem ter balas com colisores menor que o jogador, para facilitar o jogo
         Transform bulletTrans = this.parent.transform().clone();
         Point lookVec = new Point(-Math.sin(ang), Math.cos(ang));
         lookVec.multThis(20);

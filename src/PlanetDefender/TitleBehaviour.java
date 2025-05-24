@@ -38,7 +38,7 @@ public class TitleBehaviour extends Behaviour
             plyTrans,
             new ColliderPolygon(new ArrayList<>(Arrays.asList(new Point(0, 20), new Point(-10, 0), new Point(10, 0)))),
             new PlayerShipBehaviour(),
-            new SpriteShape("imgs/nave_jogador.png", 0.1, plyTrans, 1), //IMAGEM GRANDE
+            new SpriteShape("imgs/nave_jogador_parada.png", 0.1, plyTrans, 1),
             new Point(0, 0),
             125,
             0.7
@@ -50,7 +50,7 @@ public class TitleBehaviour extends Behaviour
             pntTrans,
             new ColliderCircle(new Point(0, 0), 50),
             new PlanetBehaviour(),
-            new SpriteShape("imgs/planeta.png", 0.0625, pntTrans) //PQ Q A IMAGEM ORIGINAL É 1600x1600 DE TAMANHO
+            new SpriteShape("imgs/planeta.png", 0.0625, pntTrans)
         );
 
         GameObject enemy = new GameObject(
