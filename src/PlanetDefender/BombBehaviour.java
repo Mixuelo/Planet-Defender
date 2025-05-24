@@ -67,6 +67,7 @@ public class BombBehaviour extends Behaviour
                 else 
                 {
                     this.explode();
+                    return;
                 }
             }
         }

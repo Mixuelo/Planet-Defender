@@ -14,7 +14,7 @@ public class AsteroidBehaviour extends EnemyBehaviour
     private double size;
     private static final double SCALE_FACTOR = 10;
     private static final double HEALTH_FACTOR = 0.5;
-    private static final double DAMAGE_FACTOR = 1;
+    private static final double DAMAGE_FACTOR = 0.7;
     private static final double DIVIDE_FACTOR = 0.6;
     private static final double DIVIDE_MAX_ANGLE = 45;
     private static final double SIZE_CUTOFF = 2;
