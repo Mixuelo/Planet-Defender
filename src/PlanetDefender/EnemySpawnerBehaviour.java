@@ -97,7 +97,7 @@ public class EnemySpawnerBehaviour extends Behaviour
         int type = this.rng.nextInt(6); //TODO: MUDAR ISTO
 
         //TODO: ajustar valores
-        if(type < 10) // asteroide (1/2 de chance)
+        if(type < 0) // asteroide (1/2 de chance)
         {
             c = (Collider) new ColliderCircle(t, new Point(0,0), 0.5);
     
@@ -116,7 +116,7 @@ public class EnemySpawnerBehaviour extends Behaviour
 
             f = 1;
         }
-        else if(type < 0) // nave (1/3 de chance)
+        else if(type < 6) // nave (1/3 de chance)
         {
             c = new ColliderPolygon(new ArrayList<>(Arrays.asList(new Point(0, 20), new Point(-10, 0), new Point(10, 0))));
 

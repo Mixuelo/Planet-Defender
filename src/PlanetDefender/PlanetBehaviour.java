@@ -1,7 +1,10 @@
 package PlanetDefender;
 
+import java.awt.*;
+import java.awt.desktop.SystemSleepEvent;
 import java.awt.event.InputEvent;
 import Engine.*;
+import Engine.Point;
 
 /**
  * Subclasse de CharacterBehaviour responsável pelo comportamento do planeta.
@@ -72,8 +75,18 @@ public class PlanetBehaviour extends CharacterBehaviour
      */
     protected void gameOver()
     {
-        // TODO: SHAPE GAME OVER
-        UIObject uiObject = new UIObject("GameOver", this.parent.transform().clone(), new TitleBehaviour(), null);
+        for(IGameObject go : this.parent.engine().getEnabled())
+        {
+            if(go.behaviour() instanceof EnemyBehaviour) this.parent.engine().disable(go);
+        }
+
+        UIObject uiObject = new UIObject("GameOver", this.parent.transform().clone(), new TitleBehaviour(), new SpriteShape("imgs/gameover.png", 1, new Transform(new Point(400, 300), 0, 0, 1)));
+
+        //Transform t2 = new Transform(new Point(400, 400), 0, 0, 1);
+        //UIObject info = new UIObject("Info", t2, new TitleBehaviour(), new TextShape("Aperte ESPAÇO para jogar", new Font("Arial", Font.PLAIN, 24), Color.WHITE, t2));
+
+        //this.parent.engine().addEnabled(info);
+
         this.parent.engine().addEnabled(uiObject);
     }
 

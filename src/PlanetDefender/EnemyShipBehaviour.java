@@ -208,7 +208,7 @@ public class EnemyShipBehaviour extends EnemyBehaviour
     {
         if(!lookingTowards(go)) { rotateTowards(go, dT); }
 
-        if(this.cooldown <= 0 && (lookingTowards(go) || go == this.player) ) { shoot(); }
+        if(this.cooldown <= 0 && (lookingTowards(go)) ) { shoot(); }
 
         if(go == this.player && this.parent.transform().position().distFrom(go.transform().position()) > PLAYER_DIST_CHASE)
         {
