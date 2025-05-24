@@ -75,12 +75,14 @@ public class PlanetBehaviour extends CharacterBehaviour
      */
     protected void gameOver()
     {
+        /*
         for(IGameObject go : this.parent.engine().getEnabled())
         {
             if(go.behaviour() instanceof EnemyBehaviour) this.parent.engine().disable(go);
         }
+        */
 
-        UIObject uiObject = new UIObject("GameOver", this.parent.transform().clone(), new TitleBehaviour(), new SpriteShape("imgs/gameover.png", 1, new Transform(new Point(400, 300), 0, 0, 1)));
+        UIObject uiObject = new UIObject("GameOver", new Transform(new Point(400, 300), 7, 0, 1), null, new SpriteShape("imgs/gameover.png", 1, new Transform(new Point(400, 300), 0, 0, 1)));
 
         //Transform t2 = new Transform(new Point(400, 400), 0, 0, 1);
         //UIObject info = new UIObject("Info", t2, new TitleBehaviour(), new TextShape("Aperte ESPAÇO para jogar", new Font("Arial", Font.PLAIN, 24), Color.WHITE, t2));
