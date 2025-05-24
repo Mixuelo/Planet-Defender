@@ -67,6 +67,13 @@ public class TitleBehaviour extends Behaviour
             new ArcGaugeBehaviour(Color.GREEN, 25, 8)
         );
 
+        GameObject playerStatus = new GameObject(
+            "player_status",
+            new Transform(new Point(0, 0), 5, 0, 1),
+            null,
+            new ArcGaugeBehaviour(Color.CYAN, 20, 5)
+        );
+
         ((PlayerShipBehaviour) player.behaviour()).planet(planet);
         ((PlanetBehaviour) planet.behaviour()).player(player);
 
@@ -76,11 +83,14 @@ public class TitleBehaviour extends Behaviour
         //TODO: criar objectos de UI
         ((PlanetBehaviour) planet.behaviour()).statusGauge(planetStatus);
         ((ArcGaugeBehaviour) planetStatus.behaviour()).target(planet);
+        ((PlayerShipBehaviour) player.behaviour()).statusGauge(playerStatus);
+        ((ArcGaugeBehaviour) playerStatus.behaviour()).target(player);
 
         this.parent.engine().addEnabled(planet);
         this.parent.engine().addEnabled(player);
         this.parent.engine().addEnabled(enemy);
         this.parent.engine().addEnabled(planetStatus);
+        this.parent.engine().addEnabled(playerStatus);
 
         this.parent.engine().destroy(this.parent);
     }
