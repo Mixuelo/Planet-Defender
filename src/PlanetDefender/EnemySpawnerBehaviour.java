@@ -114,7 +114,7 @@ public class EnemySpawnerBehaviour extends Behaviour
 
             maxv = 40; 
 
-            f = 1;
+            f = 0;
         }
         else if(type < 5) // nave (1/3 de chance)
         {
@@ -132,7 +132,7 @@ public class EnemySpawnerBehaviour extends Behaviour
             
             maxv = 40;
 
-            f = 0.5;
+            f = 15;
         }
         else // bombardeiro (1/6 de chance)
         {
@@ -159,7 +159,7 @@ public class EnemySpawnerBehaviour extends Behaviour
             
             maxv = 100; 
 
-            f = 1;
+            f = 0;
         }
 
         MovingObject enemy = new MovingObject(this.parent.name() + Integer.toString(this.enemyID++), t, c, b, s, v, maxv, f);

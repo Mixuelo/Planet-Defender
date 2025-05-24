@@ -71,7 +71,11 @@ public class MovingObject extends GameObject
     public void updateMovement(double dt)
     {
         this.transform().position().addThis(velocity.multNew(dt));
-        this.velocity.multThis(1 - ((1 - this.friction) * dt)); // TODO: REFAZER FRICÇAO
+
+        double mag = this.velocity.distFrom(new Point(0,0));
+        if(mag < 1e-6) { return; }
+        double target = Math.max(mag - this.friction * dt, 0);
+        this.velocity.multThis(target / mag);
     }
 
     /**

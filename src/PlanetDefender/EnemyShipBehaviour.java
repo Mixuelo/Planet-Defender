@@ -198,7 +198,7 @@ public class EnemyShipBehaviour extends EnemyBehaviour
         lookVec.multThis(20);
         bulletTrans.move(lookVec, 0);
 
-        MovingObject bullet = new MovingObject(this.parent.name() + "_bullet" + Integer.toString(this.bulletID++), bulletTrans, new ColliderCircle(new Point(0,0), 3), new BulletBehaviour(this.parent), new CircleShape(5, Color.YELLOW, bulletTrans, -1), new Point(0,0), BULLET_SPEED, 1);
+        MovingObject bullet = new MovingObject(this.parent.name() + "_bullet" + Integer.toString(this.bulletID++), bulletTrans, new ColliderCircle(new Point(0,0), 3), new BulletBehaviour(this.parent), new CircleShape(5, Color.YELLOW, bulletTrans, -1), new Point(0,0), BULLET_SPEED, 0);
 
         bullet.setVelocity(
                 new Point(

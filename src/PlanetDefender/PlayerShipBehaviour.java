@@ -15,11 +15,12 @@ public class PlayerShipBehaviour extends CharacterBehaviour
     private double cooldown;
     private int rotationDir;
     private boolean accel;
+    private boolean fire;
     private int bulletID;
     private GameObject planet;
     private static final int HEALTH = 10;
     private static final double ACCELERATION = 80;
-    private static final double FIRE_COOLDOWN = 0.25;
+    private static final double FIRE_COOLDOWN = 0.33;
     private static final double ROTATION_SPEED = 180;
     private static final double BULLET_SPEED = 150;
     private static final double OUT_OF_BOUNDS_DIST = 600;
@@ -34,6 +35,7 @@ public class PlayerShipBehaviour extends CharacterBehaviour
         this.bulletID = 0;
         this.rotationDir = 0;
         this.accel = false;
+        this.fire = false;
     }
 
     /**
@@ -84,7 +86,7 @@ public class PlayerShipBehaviour extends CharacterBehaviour
         lookVec.multThis(20);
         bulletTrans.move(lookVec, 0);
 
-        MovingObject bullet = new MovingObject(this.parent.name() + "_bullet" + Integer.toString(this.bulletID++), bulletTrans , new ColliderCircle(new Point(0,0), 5), new BulletBehaviour(this.parent), new CircleShape(5,Color.YELLOW, bulletTrans, -1), new Point(0,0), BULLET_SPEED, 1);
+        MovingObject bullet = new MovingObject(this.parent.name() + "_bullet" + Integer.toString(this.bulletID++), bulletTrans , new ColliderCircle(new Point(0,0), 5), new BulletBehaviour(this.parent), new CircleShape(5,Color.YELLOW, bulletTrans, -1), new Point(0,0), BULLET_SPEED, 0);
 
         bullet.setVelocity(
             new Point(
@@ -106,7 +108,6 @@ public class PlayerShipBehaviour extends CharacterBehaviour
     @Override
     public void onUpdate(double dT, InputEvent ie)
     {
-        boolean fire = false;
         boolean lastAccel = this.accel;
 
         if(ie != null)
@@ -114,6 +115,7 @@ public class PlayerShipBehaviour extends CharacterBehaviour
             if(((KeyEvent) ie).getKeyCode() == KeyEvent.VK_SPACE)
             {
                 if(((KeyEvent) ie).getID() == KeyEvent.KEY_PRESSED) { fire = true; }
+                if(((KeyEvent) ie).getID() == KeyEvent.KEY_RELEASED) { fire = false; }
             }
             else if(((KeyEvent) ie).getKeyCode() == KeyEvent.VK_UP)
             {

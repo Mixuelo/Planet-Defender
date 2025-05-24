@@ -72,7 +72,7 @@ public class TitleBehaviour extends Behaviour
             new SpriteShape("imgs/nave_jogador_parada.png", 0.1, plyTrans, 1),
             new Point(0, 0),
             125,
-            0.7
+            25
         );
 
         Transform pntTrans = new Transform(new Point(WIDTH/2, HEIGHT/2), 1, 0, 1);
