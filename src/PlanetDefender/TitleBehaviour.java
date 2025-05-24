@@ -1,5 +1,6 @@
 package PlanetDefender;
 
+import java.awt.Color;
 import java.awt.event.InputEvent;
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -59,17 +60,27 @@ public class TitleBehaviour extends Behaviour
             new EnemySpawnerBehaviour()
         );
 
+        GameObject planetStatus = new GameObject(
+            "planet_status",
+            new Transform(new Point(0, 0), 5, 0, 1),
+            null,
+            new ArcGaugeBehaviour(Color.GREEN, 25, 8)
+        );
+
         ((PlayerShipBehaviour) player.behaviour()).planet(planet);
         ((PlanetBehaviour) planet.behaviour()).player(player);
 
         ((EnemySpawnerBehaviour) enemy.behaviour()).planet(planet);
         ((EnemySpawnerBehaviour) enemy.behaviour()).player(player);
 
+        //TODO: criar objectos de UI
+        ((PlanetBehaviour) planet.behaviour()).statusGauge(planetStatus);
+        ((ArcGaugeBehaviour) planetStatus.behaviour()).target(planet);
+
         this.parent.engine().addEnabled(planet);
         this.parent.engine().addEnabled(player);
         this.parent.engine().addEnabled(enemy);
-
-        //TODO: criar objectos de UI
+        this.parent.engine().addEnabled(planetStatus);
 
         this.parent.engine().destroy(this.parent);
     }

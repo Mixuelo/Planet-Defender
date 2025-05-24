@@ -10,6 +10,7 @@ import Engine.*;
 public abstract class CharacterBehaviour extends Behaviour
 {
     public int health;
+    public GameObject statusGauge;
 
     /**
      * Construtor.
@@ -18,6 +19,7 @@ public abstract class CharacterBehaviour extends Behaviour
     public CharacterBehaviour(int health)
     {
         this.health = health;
+        this.statusGauge = null;
     }
 
     /**
@@ -36,6 +38,7 @@ public abstract class CharacterBehaviour extends Behaviour
     public void takeDamage(int damage)
     {
         this.health -= damage;
+        if(this.statusGauge != null) { ((ArcGaugeBehaviour) statusGauge.behaviour()).refresh(); }
         if(this.health <= 0)
         {
             onDefeat();
@@ -48,5 +51,10 @@ public abstract class CharacterBehaviour extends Behaviour
     protected void onDefeat()
     {
         this.parent.engine().destroy(this.parent);
+    }
+
+    protected void statusGauge(GameObject sg)
+    {
+        this.statusGauge = sg;
     }
 }
