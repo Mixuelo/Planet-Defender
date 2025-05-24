@@ -31,6 +31,11 @@ public abstract class CharacterBehaviour extends Behaviour
         return this.health;
     }
 
+    public void health(int hp)
+    {
+        this.health = hp;
+    }
+
     /**
      * Reduz a saúde deste CharacterBehaviour de acordo com um determinado dano.
      * @param damage {@code int}
@@ -53,8 +58,13 @@ public abstract class CharacterBehaviour extends Behaviour
         this.parent.engine().destroy(this.parent);
     }
 
-    protected void statusGauge(GameObject sg)
+    public void statusGauge(GameObject sg)
     {
         this.statusGauge = sg;
+    }
+
+    public GameObject statusGauge()
+    {
+        return this.statusGauge;
     }
 }

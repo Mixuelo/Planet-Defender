@@ -5,6 +5,7 @@ import java.awt.desktop.SystemSleepEvent;
 import java.awt.event.InputEvent;
 import Engine.*;
 import Engine.Point;
+import PlanetDefender.ArcGaugeBehaviour;
 
 /**
  * Subclasse de CharacterBehaviour responsável pelo comportamento do planeta.
@@ -16,6 +17,7 @@ public class PlanetBehaviour extends CharacterBehaviour
     private MovingObject player;
     private boolean playerAlive;
     private double playerRecovery;
+    private int playerMaxHealth;
     private static final int HEALTH = 50;
     private static final double PLAYER_RECOVERY_TIME = 7;
     private static final int DESTRUCTION_EFFECT_TIME = 150;
@@ -27,7 +29,13 @@ public class PlanetBehaviour extends CharacterBehaviour
     {
         super(HEALTH);
         this.playerAlive = true;
-        this.playerRecovery = PLAYER_RECOVERY_TIME;
+        this.playerRecovery = 0;
+    }
+
+    @Override
+    public void onInit() 
+    {
+        this.playerMaxHealth = ((CharacterBehaviour) this.player.behaviour()).health();
     }
 
     /**
@@ -47,8 +55,13 @@ public class PlanetBehaviour extends CharacterBehaviour
     @Override
     public void onUpdate(double dT, InputEvent ie)
     {
-        if(!this.playerAlive) { this.playerRecovery -= dT; }
-        if(this.playerRecovery <= 0) { this.recoverPlayer(); }
+        if(!this.playerAlive) 
+        { 
+            this.playerRecovery += dT; 
+            ((CharacterBehaviour) this.player.behaviour()).health((int) (this.playerRecovery / PLAYER_RECOVERY_TIME * playerMaxHealth));
+            ((ArcGaugeBehaviour) ((CharacterBehaviour) this.player.behaviour()).statusGauge.behaviour()).refresh();
+        }
+        if(this.playerRecovery >= PLAYER_RECOVERY_TIME) { this.recoverPlayer(); }
 
         // TODO: atualizar UIObject que apresenta a vida do planeta
     }
@@ -108,7 +121,7 @@ public class PlanetBehaviour extends CharacterBehaviour
      */
     private void recoverPlayer()
     {
-        this.playerRecovery = PLAYER_RECOVERY_TIME;
+        this.playerRecovery = 0;
         this.playerAlive = true;
         this.parent.engine().enable(this.player);
     }
