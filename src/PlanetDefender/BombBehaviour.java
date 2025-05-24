@@ -14,6 +14,7 @@ public class BombBehaviour extends Behaviour
     private GameObject owner;
     private static final double EXPLODE_SCALE = 5;
     private static final int BOMB_EFFECT_TIME = 12;
+    private static final int DAMAGE = 10;
 
     /**
      * Construtor (inicializa a bomba como "não explodida").
@@ -33,6 +34,7 @@ public class BombBehaviour extends Behaviour
         if(this.explode) { return; }
 
         this.explode = true;
+        this.owner = null;
         if(this.parent instanceof MovingObject) ((MovingObject) this.parent).setVelocity(new Point(0,0));
         this.parent.shape(null);
         Transform effectTransform = this.parent.transform().clone();
@@ -59,7 +61,7 @@ public class BombBehaviour extends Behaviour
             {
                 if(this.explode) 
                 {
-                    ((CharacterBehaviour) go.behaviour()).takeDamage(7);
+                    ((CharacterBehaviour) go.behaviour()).takeDamage(DAMAGE);
                 }
                 else 
                 {
