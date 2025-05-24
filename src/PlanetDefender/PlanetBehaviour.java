@@ -98,6 +98,9 @@ public class PlanetBehaviour extends CharacterBehaviour
     public void onPlayerDefeat()
     {
         this.playerAlive = false;
+        this.player.move(this.parent.transform().position().subNew(this.player.transform().position()), 0);
+        this.player.setVelocity(new Point(0,0));
+        this.player.transform().rotate(-this.player.transform().angle());
     }
 
     /**
@@ -106,9 +109,6 @@ public class PlanetBehaviour extends CharacterBehaviour
     private void recoverPlayer()
     {
         this.playerRecovery = PLAYER_RECOVERY_TIME;
-        this.player.move(this.parent.transform().position().subNew(this.player.transform().position()), 0);
-        this.player.setVelocity(new Point(0,0));
-        this.player.transform().rotate(-this.player.transform().angle());
         this.playerAlive = true;
         this.parent.engine().enable(this.player);
     }

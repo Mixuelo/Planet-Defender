@@ -60,7 +60,14 @@ public class TitleBehaviour extends Behaviour
         MovingObject player = new MovingObject(
             "player", 
             plyTrans,
-            new ColliderPolygon(new ArrayList<>(Arrays.asList(new Point(0, 20), new Point(-10, 0), new Point(10, 0)))),
+            new ColliderPolygon(new ArrayList<>(Arrays.asList(
+                new Point(13, -35), 
+                new Point(37, -35), 
+                new Point(50, -28),
+                new Point(40, -9),
+                new Point(6, -9),
+                new Point(0, -28)
+            ))),
             new PlayerShipBehaviour(),
             new SpriteShape("imgs/nave_jogador_parada.png", 0.1, plyTrans, 1),
             new Point(0, 0),
