@@ -123,7 +123,7 @@ public class EnemySpawnerBehaviour extends Behaviour
             b = new EnemyShipBehaviour();
             ((EnemyShipBehaviour) b).player(this.player);
 
-            s = new SpriteShape("imgs/nave_inimiga.png", 0.1, t);
+            s = new SpriteShape("imgs/nave_inimiga.png", 0.1, t, 1);
 
             //v = new Point(0,0);
             v = this.planet.transform().position().subNew(t.position());
@@ -153,7 +153,7 @@ public class EnemySpawnerBehaviour extends Behaviour
 
             b = new EnemyBomberBehaviour();
 
-            s = new SpriteShape("imgs/bombardeiro.png", 0.05, t);
+            s = new SpriteShape("imgs/bombardeiro.png", 0.05, t, 1);
 
             v = new Point(0,0);
             

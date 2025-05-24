@@ -27,6 +27,16 @@ public class CircleShape extends Shape
         this.scale = t.scale();
         this.radius = r;
         this.color = c;
+        this.drawOrder = 0;
+    }
+
+    /**
+     * Construtor.
+     */
+    public CircleShape(double r, Color c, Transform t, int z)
+    {
+        this(r, c, t);
+        this.drawOrder = z;
     }
 
     /**

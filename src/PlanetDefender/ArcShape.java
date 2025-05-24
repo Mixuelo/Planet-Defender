@@ -33,6 +33,7 @@ public class ArcShape extends Shape
         this.startAngle = sa;
         this.arcAngle = aa;
         this.strokeWidth = sw;
+        this.drawOrder = 0;
     }
 
     /**

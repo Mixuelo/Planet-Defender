@@ -50,6 +50,7 @@ public class PolygonShape extends Shape
         this.scale = sDiff;
         this.transform = trans;
         this.color = c;
+        this.drawOrder = 0;
     }
 
     /**

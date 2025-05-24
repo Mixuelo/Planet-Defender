@@ -28,6 +28,13 @@ public class GamePanel extends JPanel
 
         Graphics2D g2d = (Graphics2D) g;
 
+        gameObjects.sort((a,b) -> { 
+            int d = a.transform().layer() - b.transform().layer();
+            if(d != 0) return d;
+            if(a.shape() == null || b.shape() == null) return 0; 
+            return ((Engine.Shape) a.shape()).drawOrder() - ((Engine.Shape) b.shape()).drawOrder(); 
+        });
+
         for (IGameObject obj : gameObjects)
         {
             if (obj.shape() != null) obj.shape().draw(g2d);

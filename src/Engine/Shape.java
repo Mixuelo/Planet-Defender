@@ -16,10 +16,21 @@ public abstract class Shape implements IShape
     protected double scale;
     protected double angle;
     protected Transform transform;
+    protected int drawOrder;
 
     public void transform(Transform t) 
     {
         this.transform = t;
+    }
+
+    public void drawOrder(int i) 
+    {
+        this.drawOrder = i;
+    }
+
+    public int drawOrder() 
+    {
+        return this.drawOrder;
     }
 
     /**

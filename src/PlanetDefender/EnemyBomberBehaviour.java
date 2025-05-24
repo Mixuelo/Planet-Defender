@@ -56,7 +56,7 @@ public class EnemyBomberBehaviour extends EnemyBehaviour
         ang %= 360;
         
         Transform t = this.parent.transform().clone();
-        MovingObject bomb = new MovingObject(this.parent.name() + "_bomb", t, new ColliderCircle(new Point(0,0), BOMB_RADIUS), new BombBehaviour(this.parent), new CircleShape(BOMB_RADIUS, Color.BLACK, t), new Point(0,0), BOMB_SPEED, 1);
+        MovingObject bomb = new MovingObject(this.parent.name() + "_bomb", t, new ColliderCircle(new Point(0,0), BOMB_RADIUS), new BombBehaviour(this.parent), new CircleShape(BOMB_RADIUS, Color.BLACK, t, -1), new Point(0,0), BOMB_SPEED, 1);
 
         bomb.setVelocity(
             new Point(

@@ -31,6 +31,7 @@ public class SpriteShape extends Shape
         this.position = t.position().clone();
         this.angle = t.angle();
         this.scale = t.scale();
+        this.drawOrder = 0;
 
         try 
         {
@@ -42,6 +43,12 @@ public class SpriteShape extends Shape
             System.out.println("ERRO: " + imagePath);
             e.printStackTrace();
         }
+    }
+
+    public SpriteShape(String imagePath, double imageScale, Transform t, int z)
+    {
+        this(imagePath, imageScale, t);
+        this.drawOrder = z;
     }
 
     public void sprite(String imagePath)

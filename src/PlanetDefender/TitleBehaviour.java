@@ -38,7 +38,7 @@ public class TitleBehaviour extends Behaviour
             plyTrans,
             new ColliderPolygon(new ArrayList<>(Arrays.asList(new Point(0, 20), new Point(-10, 0), new Point(10, 0)))),
             new PlayerShipBehaviour(),
-            new SpriteShape("imgs/nave_jogador.png", 0.1, plyTrans), //IMAGEM GRANDE
+            new SpriteShape("imgs/nave_jogador.png", 0.1, plyTrans, 1), //IMAGEM GRANDE
             new Point(0, 0),
             125,
             0.7
@@ -80,7 +80,6 @@ public class TitleBehaviour extends Behaviour
         ((EnemySpawnerBehaviour) enemy.behaviour()).planet(planet);
         ((EnemySpawnerBehaviour) enemy.behaviour()).player(player);
 
-        //TODO: criar objectos de UI
         ((PlanetBehaviour) planet.behaviour()).statusGauge(planetStatus);
         ((ArcGaugeBehaviour) planetStatus.behaviour()).target(planet);
         ((PlayerShipBehaviour) player.behaviour()).statusGauge(playerStatus);
