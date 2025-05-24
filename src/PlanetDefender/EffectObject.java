@@ -15,8 +15,8 @@ public class EffectObject extends GameObject
      * @param t {@code Transform}
      * @param time {@code int}
      */
-    public EffectObject(String n, Transform t, int time)
+    public EffectObject(String n, Transform t, String imagePath, String imageExt, double imageScale, int frames, double fps)
     {
-        super(n, t, (Collider) null, (Behaviour) new EffectBehaviour(time));
+        super(n, t, (Collider) null, (Behaviour) new EffectBehaviour(imagePath, imageExt, imageScale, frames, fps));
     }
 }

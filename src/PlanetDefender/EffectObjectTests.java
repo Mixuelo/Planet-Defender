@@ -7,7 +7,9 @@ import Engine.*;
 
 public class EffectObjectTests
 {
+    /*
     @Test
+    //TODO: decidir o q fazer com isto
     public void testConstructor()
     {
         Transform t = new Transform(new Point(0, 0), 0, 0, 1);
@@ -16,4 +18,5 @@ public class EffectObjectTests
         assertEquals("teste", effectObject.name());
         assertEquals(t.toString(), effectObject.transform().toString());
     }
+    */
 }

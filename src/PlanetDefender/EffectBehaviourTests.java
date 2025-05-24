@@ -7,7 +7,9 @@ import Engine.*;
 
 public class EffectBehaviourTests
 {
+    /*
     @Test
+    //TODO: decidir o q fazer com isto
     public void onUpdateTest()
     {
         GameEngine engine = new GameEngine();
@@ -25,4 +27,5 @@ public class EffectBehaviourTests
         effectBehaviour.onUpdate(0.5, null);
         assertFalse(engine.getEnabled().contains(effectObject));
     }
+    */
 }

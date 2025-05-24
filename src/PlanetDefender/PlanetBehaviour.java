@@ -59,8 +59,9 @@ public class PlanetBehaviour extends CharacterBehaviour
         Transform effectTransform = this.parent.transform().clone();
         effectTransform.move(new Point(0,0), 2);
         // TODO: definir tempo com base na duraçao da animaçao
-        EffectObject effect = new EffectObject(this.parent.name() + "_effect", effectTransform, DESTRUCTION_EFFECT_TIME);
-        this.parent.engine().addEnabled(effect);
+        // TODO: ANIMAÇAO destruiçao
+        //EffectObject effect = new EffectObject(this.parent.name() + "_effect", effectTransform, DESTRUCTION_EFFECT_TIME);
+        //this.parent.engine().addEnabled(effect);
 
         this.gameOver();
         this.parent.engine().destroy(this.parent);
