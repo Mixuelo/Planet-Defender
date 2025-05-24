@@ -13,12 +13,12 @@ import Engine.Point;
  */
 public class EnemyShipBehaviour extends EnemyBehaviour
 {
-    enum actionState 
+    enum actionState
     {
         CHASE_PLAYER,
         CHASE_PLANET,
         ATTACK_PLAYER,
-        ATTACK_PLANET,
+        ATTACK_PLANET
     }
 
     private GameObject player;
@@ -34,7 +34,7 @@ public class EnemyShipBehaviour extends EnemyBehaviour
     private static final double START_COOLDOWN = 5;
     private static final double PLAYER_DIST_TRIGGER = 150;
     private static final double PLAYER_DIST_CHASE = 350;
-    private static final double PLANET_DIST_TRIGGER = 250;
+    private static final double PLANET_DIST_TRIGGER = 350;
     private static final double MAX_ROTATION_SPEED = 180;
     private static final double ROTATION_SPEED = 0.5;
     private static final double LOOK_ANGLE_THRESHOLD = 10;
@@ -70,11 +70,11 @@ public class EnemyShipBehaviour extends EnemyBehaviour
         super.onInit();
 
         int firstState = rng.nextInt(3);
-        if(firstState == 0) 
+        if(firstState == 0)
         {
             this.state = actionState.CHASE_PLANET;
         }
-        else 
+        else
         {
             this.state = actionState.CHASE_PLAYER;
         }
@@ -92,10 +92,10 @@ public class EnemyShipBehaviour extends EnemyBehaviour
         desiredAngle %= 360;
 
         double dAngle = desiredAngle - this.parent.transform().angle();
-        
-        if(dAngle > 180) 
+
+        if(dAngle > 180)
         {
-            dAngle -= 360; 
+            dAngle -= 360;
         }
         else if(dAngle < -180)
         {
@@ -125,6 +125,8 @@ public class EnemyShipBehaviour extends EnemyBehaviour
         return false;
     }
 
+
+
     /**
      * Acelera a nave inimiga.
      * @param dT {@code double}
@@ -134,10 +136,10 @@ public class EnemyShipBehaviour extends EnemyBehaviour
         double ang = Math.toRadians(this.parent.transform().angle());
 
         ((MovingObject) this.parent).addVelocity(
-            new Point(
-                -Math.sin(ang) * ACCELERATION * dT,
-                Math.cos(ang) * ACCELERATION * dT
-            )
+                new Point(
+                        -Math.sin(ang) * ACCELERATION * dT,
+                        Math.cos(ang) * ACCELERATION * dT
+                )
         );
     }
 
@@ -183,14 +185,13 @@ public class EnemyShipBehaviour extends EnemyBehaviour
 
         // TODO: definir raio universal para balas, inimigos podem ter balas com colisores menor que o jogador, para facilitar o jogo
         Transform bulletTrans = this.parent.transform().clone();
-        String uniqueBulletName = this.parent.name() + "_bullet_" + System.nanoTime();
-        MovingObject bullet = new MovingObject(uniqueBulletName, bulletTrans, new ColliderCircle(new Point(0,0), 3), new BulletBehaviour(this.parent), new CircleShape(5, Color.YELLOW, bulletTrans), new Point(0,0), BULLET_SPEED, 1);
+        MovingObject bullet = new MovingObject(this.parent.name() + "_bullet" + Integer.toString(this.bulletID++), bulletTrans, new ColliderCircle(new Point(0,0), 3), new BulletBehaviour(this.parent), new CircleShape(5, Color.YELLOW, bulletTrans), new Point(0,0), BULLET_SPEED, 1);
 
         bullet.setVelocity(
-            new Point(
-                -Math.sin(ang) * BULLET_SPEED,
-                Math.cos(ang) * BULLET_SPEED
-            )
+                new Point(
+                        -Math.sin(ang) * BULLET_SPEED,
+                        Math.cos(ang) * BULLET_SPEED
+                )
         );
 
         this.parent.engine().addEnabled(bullet);
@@ -221,7 +222,7 @@ public class EnemyShipBehaviour extends EnemyBehaviour
      * @param ie {@code InputEvent}
      */
     @Override
-    public void onUpdate(double dT, InputEvent ie) 
+    public void onUpdate(double dT, InputEvent ie)
     {
         switch (this.state) {
             case CHASE_PLAYER:

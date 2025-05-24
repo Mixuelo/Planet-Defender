@@ -116,7 +116,7 @@ public class EnemySpawnerBehaviour extends Behaviour
 
             f = 1;
         }
-        else*/ if(type < 5) // nave (1/3 de chance)
+        else */if(type < 6) // nave (1/3 de chance)
         {
             c = new ColliderPolygon(new ArrayList<>(Arrays.asList(new Point(0, 20), new Point(-10, 0), new Point(10, 0))));
 
@@ -130,7 +130,7 @@ public class EnemySpawnerBehaviour extends Behaviour
             v.multThis(0.05);
             v.rotateThis(new Point(0,0), this.rng.nextGaussian() * 30);
             
-            maxv = 100;
+            maxv = 40;
 
             f = 0.5;
         }
