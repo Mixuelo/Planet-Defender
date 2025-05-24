@@ -1,10 +1,12 @@
 package PlanetDefender;
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.util.Arrays;
 import java.util.ArrayList;
 import Engine.*;
+import Engine.Point;
 
 /**
  * Subclasse de Behaviour responsável pelo comportamento do ecrã inicial do jogo.
@@ -15,6 +17,7 @@ public class TitleBehaviour extends Behaviour
 {
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
+    private static boolean firstGame = true;
 
     /**
      * Atualiza com base em tempo e input.
@@ -24,7 +27,28 @@ public class TitleBehaviour extends Behaviour
     @Override
     public void onUpdate(double dT, InputEvent ie)
     {
-        if (ie != null) startGame();
+        if(firstGame)
+        {
+            Transform t1 = new Transform(new Point(400, 250), 0, 0, 1);
+            UIObject title = new UIObject("PlanetDefender", t1, new TitleBehaviour(), new SpriteShape("imgs/titulo.png", 1, t1));
+
+            Transform t2 = new Transform(new Point(400, 400), 0, 0, 1);
+            UIObject info = new UIObject("Info", t2, new TitleBehaviour(), new TextShape("Aperte ESPAÇO para jogar", new Font("Arial", Font.PLAIN, 24), Color.WHITE, t2));
+
+            this.parent.engine().addEnabled(title);
+            this.parent.engine().addEnabled(info);
+
+            if (ie != null && ((KeyEvent) ie).getKeyCode() == KeyEvent.VK_SPACE)
+            {
+                this.parent.engine().destroy(title);
+                this.parent.engine().destroy(info);
+                startGame();
+            }
+        }
+        else if (ie != null && ((KeyEvent) ie).getKeyCode() == KeyEvent.VK_SPACE)
+        {
+            startGame();
+        }
     }
 
     /**
@@ -92,5 +116,6 @@ public class TitleBehaviour extends Behaviour
         this.parent.engine().addEnabled(playerStatus);
 
         this.parent.engine().destroy(this.parent);
+        if (firstGame) firstGame = false;
     }
 }
