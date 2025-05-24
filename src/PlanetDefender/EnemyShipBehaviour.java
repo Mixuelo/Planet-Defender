@@ -27,18 +27,19 @@ public class EnemyShipBehaviour extends EnemyBehaviour
     private actionState state;
     private Random rng;
     private int bulletID;
-    private static final int HEALTH = 5;
-    private static final double ACCELERATION = 35;
-    private static final double PATIENCE = 7;
-    private static final double FIRE_COOLDOWN = 0.5;
+    private static final int HEALTH = 3;
+    private static final double ACCELERATION = 30;
+    private static final double PATIENCE = 20;
+    private static final double FIRE_COOLDOWN = 0.75;
     private static final double START_COOLDOWN = 5;
-    private static final double PLAYER_DIST_TRIGGER = 150;
-    private static final double PLAYER_DIST_CHASE = 350;
-    private static final double PLANET_DIST_TRIGGER = 350;
+    private static final double PLAYER_DIST_TRIGGER = 200;
+    private static final double PLAYER_DIST_CHASE = 250;
+    private static final double PLANET_DIST_TRIGGER = 200;
     private static final double MAX_ROTATION_SPEED = 180;
-    private static final double ROTATION_SPEED = 0.5;
-    private static final double LOOK_ANGLE_THRESHOLD = 10;
-    private static final double BULLET_SPEED = 150;
+    private static final double MIN_ROTATION_SPEED = 45;
+    private static final double ROTATION_SPEED = 1.5;
+    private static final double LOOK_ANGLE_THRESHOLD = 5;
+    private static final double BULLET_SPEED = 100;
 
     /**
      * Construtor.
@@ -69,7 +70,7 @@ public class EnemyShipBehaviour extends EnemyBehaviour
     {
         super.onInit();
 
-        int firstState = rng.nextInt(3);
+        int firstState = rng.nextInt(4);
         if(firstState == 0)
         {
             this.state = actionState.CHASE_PLANET;
@@ -90,6 +91,7 @@ public class EnemyShipBehaviour extends EnemyBehaviour
         Point dist = go.transform().position().subNew(this.parent.transform().position());
         double desiredAngle = Math.toDegrees(Math.atan2(dist.y(), dist.x())) - 90;
         desiredAngle %= 360;
+        if(desiredAngle < 0) { desiredAngle += 360; }
 
         double dAngle = desiredAngle - this.parent.transform().angle();
 
@@ -107,6 +109,11 @@ public class EnemyShipBehaviour extends EnemyBehaviour
         if(dAngle > MAX_ROTATION_SPEED) { dAngle = MAX_ROTATION_SPEED; }
         else if(dAngle < -MAX_ROTATION_SPEED) { dAngle = -MAX_ROTATION_SPEED; }
 
+        if(!lookingTowards(go)) {
+            if(dAngle > 0 && dAngle < MIN_ROTATION_SPEED) { dAngle = MIN_ROTATION_SPEED; }
+            else if(dAngle < 0 && dAngle > -MIN_ROTATION_SPEED) { dAngle = -MIN_ROTATION_SPEED; }
+        }
+
         this.parent.rotate(dAngle * dT);
     }
 
@@ -117,11 +124,14 @@ public class EnemyShipBehaviour extends EnemyBehaviour
      */
     private boolean lookingTowards(GameObject go)
     {
-        double goAngle = go.transform().angle();
         double thisAngle = this.parent.transform().angle();
+        Point dist = go.transform().position().subNew(this.parent.transform().position());
+        double desiredAngle = Math.toDegrees(Math.atan2(dist.y(), dist.x())) - 90;
+        desiredAngle %= 360;
+        if(desiredAngle < 0) { desiredAngle += 360; }
 
-        if(Math.abs(thisAngle - goAngle) <= LOOK_ANGLE_THRESHOLD) { return true; }
-        if(Math.abs(thisAngle - (goAngle - 360)) <= LOOK_ANGLE_THRESHOLD) { return true; }
+        if(Math.abs(thisAngle - desiredAngle) <= LOOK_ANGLE_THRESHOLD) { return true; }
+        if(Math.abs(thisAngle - (desiredAngle - 360)) <= LOOK_ANGLE_THRESHOLD) { return true; }
         return false;
     }
 
@@ -150,7 +160,7 @@ public class EnemyShipBehaviour extends EnemyBehaviour
      */
     private void chase(GameObject go, double dT)
     {
-        boolean chasePlayer = (go == this.player);
+        boolean chasePlayer = (go.equals(this.player));
         if(chasePlayer) { this.boredom += dT; }
 
         // rodar

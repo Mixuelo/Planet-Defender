@@ -17,7 +17,7 @@ public class PlayerShipBehaviour extends CharacterBehaviour
     private boolean accel = false;
     private int bulletID;
     private GameObject planet;
-    private static final int HEALTH = 25;
+    private static final int HEALTH = 10;
     private static final double ACCELERATION = 80;
     private static final double FIRE_COOLDOWN = 0.25;
     private static final double ROTATION_SPEED = 180;
