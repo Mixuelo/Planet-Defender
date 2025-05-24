@@ -194,6 +194,8 @@ public class GameEngine implements IGameEngine
      */
     public void run()
     {
+        BackgroundMusic music = new BackgroundMusic();
+        music.playMusic("music/backMusic.wav");
         final int fps = 60;
         final double frameTime = 1000.0 / fps;
 
@@ -236,6 +238,17 @@ public class GameEngine implements IGameEngine
             catch (InterruptedException e)
             {
                 e.printStackTrace();
+            }
+        }
+    }
+
+    public void resetEngine()
+    {
+        for(IGameObject go : this.getEnabled())
+        {
+            if(!go.name().equals("back"))
+            {
+                this.destroy(go);
             }
         }
     }

@@ -47,6 +47,7 @@ public class TitleBehaviour extends Behaviour
         }
         else if (ie != null && ((KeyEvent) ie).getKeyCode() == KeyEvent.VK_SPACE)
         {
+            ((GameEngine) this.parent.engine()).resetEngine();
             startGame();
         }
     }
