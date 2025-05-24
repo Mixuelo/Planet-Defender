@@ -149,7 +149,7 @@ public class EnemySpawnerBehaviour extends Behaviour
 
             t.rotate(ang);
 
-            c = new ColliderPolygon(new ArrayList<>(Arrays.asList(new Point(10, 15), new Point(10, -15), new Point(-10, -15), new Point(-10, 15))));
+            c = new ColliderPolygon(new ArrayList<>(Arrays.asList(new Point(8, 25), new Point(8, -25), new Point(-8, -25), new Point(-8, 25))));
 
             b = new EnemyBomberBehaviour();
 
