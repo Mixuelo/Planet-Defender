@@ -56,6 +56,7 @@ public class Transform implements ITransform, Cloneable
     {
         this.angle += dTheta;
         this.angle %= 360;
+        if(this.angle < 0) { this.angle += 360; }
     }
 
     /**
