@@ -2,6 +2,7 @@ package PlanetDefender;
 
 import java.util.List;
 import Engine.*;
+import PlanetDefender.EffectBehaviourTests;
 
 /**
  * Subclasse de Behaviour responsável pelo comportamento das bombas.
@@ -13,7 +14,8 @@ public class BombBehaviour extends Behaviour
     private boolean explode;
     private GameObject owner;
     private static final double EXPLODE_SCALE = 5;
-    private static final int BOMB_EFFECT_TIME = 12;
+    private static final double BOMB_EFFECT_FPS = 25;
+    private static final int DAMAGE = 10;
 
     /**
      * Construtor (inicializa a bomba como "não explodida").
@@ -33,12 +35,13 @@ public class BombBehaviour extends Behaviour
         if(this.explode) { return; }
 
         this.explode = true;
+        this.owner = null;
         if(this.parent instanceof MovingObject) ((MovingObject) this.parent).setVelocity(new Point(0,0));
         this.parent.shape(null);
         Transform effectTransform = this.parent.transform().clone();
         effectTransform.move(new Point(0,0), 2);
         //TODO: definir tempo com base na duraçao da animaçao
-        EffectObject effect = new EffectObject(this.parent.name() + "_effect", effectTransform, BOMB_EFFECT_TIME); 
+        EffectObject effect = new EffectObject(this.parent.name() + "_effect", effectTransform, "imgs/boom", ".png", 0.5, 17, BOMB_EFFECT_FPS); 
         this.parent.engine().addEnabled(effect);
 
         this.parent.scale(EXPLODE_SCALE - this.parent.transform().scale());
@@ -59,7 +62,7 @@ public class BombBehaviour extends Behaviour
             {
                 if(this.explode) 
                 {
-                    ((CharacterBehaviour) go.behaviour()).takeDamage(7);
+                    ((CharacterBehaviour) go.behaviour()).takeDamage(DAMAGE);
                 }
                 else 
                 {

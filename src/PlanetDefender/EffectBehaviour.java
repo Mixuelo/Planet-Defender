@@ -10,15 +10,34 @@ import Engine.*;
  */
 public class EffectBehaviour extends Behaviour
 {
-    private double time;
+    private double timer;
+    private String imagePath;
+    private String imageExt;
+    private double imageScale;
+    private int frames;
+    private double fps;
+    private double animDT;
+    private int lastFrame;
 
     /**
      * Construtor.
      * @param t {@code double}
      */
-    public EffectBehaviour(double t)
+    public EffectBehaviour(String ip, String ie, double is, int f, double fps)
     {
-        this.time = t;
+        this.imagePath = ip;
+        this.imageExt = ie;
+        this.imageScale = is;
+        this.frames = f;
+        this.fps = fps;
+        this.animDT = 1/fps;
+        this.lastFrame = 0;
+    }
+
+    public void onInit() {
+        super.onInit();
+
+        this.parent.rotate(-this.parent.transform().angle());
     }
 
     /**
@@ -29,12 +48,22 @@ public class EffectBehaviour extends Behaviour
     @Override
     public void onUpdate(double dT, InputEvent ie)
     {
-        super.onUpdate(dT, ie);
+        this.timer += dT;
 
-        this.time -= dT;
-        if(this.time <= 0) 
+        if(this.timer >= this.frames * animDT) 
         {
+            this.parent.shape(null);
             this.parent.engine().destroy(this.parent);
+            return;
         }
+
+        int currFrame = (int) (this.timer / this.animDT) + 1;
+
+        if(this.lastFrame != currFrame) 
+        {
+            this.parent.shape(new SpriteShape(this.imagePath + currFrame + this.imageExt, this.imageScale, this.parent.transform()));
+        }
+
+        this.lastFrame = currFrame;
     } 
 }

@@ -23,7 +23,7 @@ public class EnemySpawnerBehaviour extends Behaviour
     private static final int RIGHT_BORDER = 850;
     private static final int UP_BORDER = -50;
     private static final int DOWN_BORDER = 650;
-    private static final double INITIAL_TIMER = 5;
+    private static final double INITIAL_TIMER = 10;
     private static final double MIN_TIMER = 2.5;
     private static final double TIME_DECREASE = 0.05;
 
@@ -97,7 +97,7 @@ public class EnemySpawnerBehaviour extends Behaviour
         int type = this.rng.nextInt(6); //TODO: MUDAR ISTO
 
         //TODO: ajustar valores
-        /*if(type < 3) // asteroide (1/2 de chance)
+        if(type < 10) // asteroide (1/2 de chance)
         {
             c = (Collider) new ColliderCircle(t, new Point(0,0), 0.5);
     
@@ -109,14 +109,14 @@ public class EnemySpawnerBehaviour extends Behaviour
             s = new SpriteShape("imgs/asteroide.png", 0.01, t);
 
             v = this.planet.transform().position().subNew(t.position());
-            v.multThis(0.05);
-            v.rotateThis(new Point(0,0), this.rng.nextGaussian() * 30);
+            v.multThis(0.03);
+            v.rotateThis(new Point(0,0), this.rng.nextDouble(-55, 55));
 
             maxv = 40; 
 
             f = 1;
         }
-        else */if(type < 6) // nave (1/3 de chance)
+        else if(type < 0) // nave (1/3 de chance)
         {
             c = new ColliderPolygon(new ArrayList<>(Arrays.asList(new Point(0, 20), new Point(-10, 0), new Point(10, 0))));
 
@@ -140,15 +140,20 @@ public class EnemySpawnerBehaviour extends Behaviour
             double ang = Math.toDegrees(Math.atan2(dist.y(), dist.x())) - 90;
             ang %= 360;
 
-            double rang = this.rng.nextDouble(-15, 15);
-            if(rang >= 0)   { ang += 15 + rang; }
-            else            { ang += -15 + rang; }
+            double angDiffMax = 5;
+            double angDiffMin = 15;
+
+            double rang = this.rng.nextDouble(-angDiffMax, angDiffMax);
+            if(rang >= 0)   { ang += angDiffMin + rang; }
+            else            { ang += -angDiffMin + rang; }
 
             t.rotate(ang);
 
             c = new ColliderPolygon(new ArrayList<>(Arrays.asList(new Point(10, 15), new Point(10, -15), new Point(-10, -15), new Point(-10, 15))));
 
             b = new EnemyBomberBehaviour();
+
+            s = new SpriteShape("imgs/bombardeiro.png", 0.05, t);
 
             v = new Point(0,0);
             

@@ -1,5 +1,6 @@
 package PlanetDefender;
 
+import java.awt.Color;
 import java.awt.event.InputEvent;
 import Engine.*;
 
@@ -14,9 +15,9 @@ public class EnemyBomberBehaviour extends EnemyBehaviour
     private double lastDist;
     private boolean hasBomb;
     private static final int HEALTH = 5;
-    private static final double SPEED = 15;
-    private static final double BOMB_SPEED = 10;
-    private static final double BOMB_RADIUS = 10;
+    private static final double SPEED = 25;
+    private static final double BOMB_SPEED = 20;
+    private static final double BOMB_RADIUS = 12;
     private static final double OUT_OF_BOUNDS_DIST = 700;
 
     /**
@@ -54,12 +55,13 @@ public class EnemyBomberBehaviour extends EnemyBehaviour
         double ang = Math.toDegrees(Math.atan2(dist.y(), dist.x())) - 90;
         ang %= 360;
         
-        MovingObject bomb = new MovingObject(this.parent.name() + "_bomb", this.parent.transform().clone(), new ColliderCircle(new Point(0,0), BOMB_RADIUS), new BombBehaviour(this.parent), new Point(0,0), BOMB_SPEED, 1);
+        Transform t = this.parent.transform().clone();
+        MovingObject bomb = new MovingObject(this.parent.name() + "_bomb", t, new ColliderCircle(new Point(0,0), BOMB_RADIUS), new BombBehaviour(this.parent), new CircleShape(BOMB_RADIUS, Color.BLACK, t), new Point(0,0), BOMB_SPEED, 1);
 
         bomb.setVelocity(
             new Point(
-                -Math.sin(ang) * BOMB_SPEED,
-                Math.cos(ang) * BOMB_SPEED
+                -Math.sin(Math.toRadians(ang)) * BOMB_SPEED,
+                Math.cos(Math.toRadians(ang)) * BOMB_SPEED
             )
         );
 
