@@ -24,6 +24,7 @@ public class GUI
     public GUI()
     {
         this.frame = new JFrame("Planet Defender");
+        frame.setResizable(false);
 
         this.inputQueue = new ConcurrentLinkedQueue<>();
         this.gamePanel = new GamePanel();
