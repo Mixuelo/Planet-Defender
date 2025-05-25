@@ -90,6 +90,7 @@ public class AsteroidBehaviour extends EnemyBehaviour
                 CharacterBehaviour cb = (CharacterBehaviour) b;
                 cb.takeDamage((int) (size * DAMAGE_FACTOR));
                 this.gameObject().engine().destroy(this.gameObject());
+                this.defeatEffect();
             }
         }
     }
@@ -102,7 +103,11 @@ public class AsteroidBehaviour extends EnemyBehaviour
     {
         this.divide();
         this.parent.engine().destroy(this.parent);
+        this.defeatEffect();
+    }
 
+    private void defeatEffect() 
+    {
         Transform effectTransform = this.parent.transform().clone();
         effectTransform.move(new Point(0,0), 2);
         effectTransform.rotate(-effectTransform.angle());

@@ -14,7 +14,7 @@ public class PlayerShipBehaviourTests
         behaviour.health = 0;
 
         behaviour.onEnabled();
-        assertEquals(25, behaviour.health);
+        assertEquals(10, behaviour.health);
     }
 
     @Test
@@ -23,9 +23,10 @@ public class PlayerShipBehaviourTests
         GameEngine engine = new GameEngine();
         PlayerShipBehaviour behaviour = new PlayerShipBehaviour();
         GameObject planet = new GameObject("planet", new Transform(new Point(0, 0), 0, 0, 0), null, new PlanetBehaviour());
-        GameObject player = new GameObject("player", new Transform(new Point(0, 0), 0, 0, 0), null, behaviour);
+        MovingObject player = new MovingObject("player", new Transform(new Point(0, 0), 0, 0, 0), null, behaviour, new Point(0,0), 0, 0);
         player.engine(engine);
         planet.engine(engine);
+        ((PlanetBehaviour) planet.behaviour()).player(player);
         behaviour.planet(planet);
 
         behaviour.onDefeat();

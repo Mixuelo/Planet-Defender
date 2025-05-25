@@ -43,12 +43,10 @@ public class BulletBehaviour extends Behaviour
 
         Point pos = this.gameObject().transform().position();
 
-        /*
         if(pos.x() < LEFT_BORDER || pos.x() > RIGHT_BORDER || pos.y() < UP_BORDER || pos.y() > DOWN_BORDER)
         {
             this.gameObject().engine().destroy(this.gameObject());
         }
-        */
 
     }
 

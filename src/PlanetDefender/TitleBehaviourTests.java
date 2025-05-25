@@ -28,7 +28,7 @@ public class TitleBehaviourTests
 
         titleBehaviour.onUpdate(0.1, input);
 
-        assertEquals(3, engine.getEnabled().size());
+        assertEquals(5, engine.getEnabled().size());
         assertFalse(engine.getEnabled().contains(titleObject));
     }
 }

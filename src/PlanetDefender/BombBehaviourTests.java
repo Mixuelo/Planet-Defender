@@ -57,7 +57,7 @@ public class BombBehaviourTests
         assertEquals(playerHealth, playerBehaviour.health());
 
         bombBehaviour.onCollision(collisionList);
-        assertEquals(playerHealth - 7, playerBehaviour.health());
+        assertEquals(playerHealth - 10, playerBehaviour.health());
         
         assertFalse(engine.getEnabled().contains(bomb));
     }

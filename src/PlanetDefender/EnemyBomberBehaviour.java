@@ -15,7 +15,7 @@ public class EnemyBomberBehaviour extends EnemyBehaviour
     private double lastDist;
     private boolean hasBomb;
     private static final int HEALTH = 5;
-    private static final double SPEED = 25;
+    private static final double SPEED = 30;
     private static final double BOMB_SPEED = 20;
     private static final double BOMB_RADIUS = 12;
     private static final double OUT_OF_BOUNDS_DIST = 700;

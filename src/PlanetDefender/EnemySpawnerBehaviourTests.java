@@ -23,7 +23,7 @@ public class EnemySpawnerBehaviourTests
         assertEquals(1, engine.getEnabled().size());
 
         spawner.onUpdate(1.0, null);
-        spawner.onUpdate(5 + 0.1, null);
+        spawner.onUpdate(10 + 0.1, null);
 
         assertEquals(2, engine.getEnabled().size());
         GameObject enemy = (GameObject) engine.getEnabled().get(1);
