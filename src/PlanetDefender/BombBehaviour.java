@@ -14,7 +14,7 @@ public class BombBehaviour extends Behaviour
     private boolean explode;
     private GameObject owner;
     private static final double EXPLODE_SCALE = 5;
-    private static final double BOMB_EFFECT_FPS = 25;
+    private static final double BOMB_EFFECT_FPS = 15;
     private static final int DAMAGE = 10;
 
     /**
@@ -40,7 +40,7 @@ public class BombBehaviour extends Behaviour
         this.parent.shape(null);
         Transform effectTransform = this.parent.transform().clone();
         effectTransform.move(new Point(0,0), 2);
-        //TODO: definir tempo com base na duraçao da animaçao
+        effectTransform.rotate(-effectTransform.angle());
         EffectObject effect = new EffectObject(this.parent.name() + "_effect", effectTransform, "imgs/boom", ".png", 0.5, 17, BOMB_EFFECT_FPS); 
         this.parent.engine().addEnabled(effect);
 

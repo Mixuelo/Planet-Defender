@@ -37,6 +37,7 @@ public class ColliderPolygon extends Collider
 
         this.angle = 0;
         this.scale = 1;
+        this.transform = null;
     }
 
     /**

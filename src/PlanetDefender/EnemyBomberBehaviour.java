@@ -56,7 +56,7 @@ public class EnemyBomberBehaviour extends EnemyBehaviour
         ang %= 360;
         
         Transform t = this.parent.transform().clone();
-        MovingObject bomb = new MovingObject(this.parent.name() + "_bomb", t, new ColliderCircle(new Point(0,0), BOMB_RADIUS), new BombBehaviour(this.parent), new CircleShape(BOMB_RADIUS, Color.BLACK, t, -1), new Point(0,0), BOMB_SPEED, 0);
+        MovingObject bomb = new MovingObject(this.parent.name() + "_bomb", t, new ColliderCircle(t, new Point(0,0), BOMB_RADIUS), new BombBehaviour(this.parent), new CircleShape(BOMB_RADIUS, Color.BLACK, t, -1), new Point(0,0), BOMB_SPEED, 0);
 
         bomb.setVelocity(
             new Point(
@@ -98,5 +98,20 @@ public class EnemyBomberBehaviour extends EnemyBehaviour
         {
             this.takeDamage(999);
         }
+    }
+
+    @Override
+    protected void onDefeat() {
+        super.onDefeat();
+
+        Transform effectTransform = this.parent.transform().clone();
+        effectTransform.move(new Point(0,0), 2);
+        effectTransform.rotate(-effectTransform.angle());
+        EffectObject effectExplosion = new EffectObject(this.parent.name() + "_defeat_explosion", effectTransform, "imgs/boom", ".png", 0.4, 17, 17); 
+        Transform effectTransformShip = this.parent.transform().clone();
+        effectTransformShip.move(new Point(0,0), 2);
+        EffectObject effectShip = new EffectObject(this.parent.name() + "_defeat_ship", effectTransformShip, "imgs/bombardeiro_derrota", ".png", 0.05, 1, 2); 
+        this.parent.engine().addEnabled(effectExplosion);
+        this.parent.engine().addEnabled(effectShip);
     }
 }

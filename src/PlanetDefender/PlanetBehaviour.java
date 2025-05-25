@@ -5,7 +5,6 @@ import java.awt.desktop.SystemSleepEvent;
 import java.awt.event.InputEvent;
 import Engine.*;
 import Engine.Point;
-import PlanetDefender.ArcGaugeBehaviour;
 
 /**
  * Subclasse de CharacterBehaviour responsável pelo comportamento do planeta.
@@ -62,8 +61,6 @@ public class PlanetBehaviour extends CharacterBehaviour
             ((ArcGaugeBehaviour) ((CharacterBehaviour) this.player.behaviour()).statusGauge.behaviour()).refresh();
         }
         if(this.playerRecovery >= PLAYER_RECOVERY_TIME) { this.recoverPlayer(); }
-
-        // TODO: atualizar UIObject que apresenta a vida do planeta
     }
 
     /**
@@ -74,10 +71,9 @@ public class PlanetBehaviour extends CharacterBehaviour
     {
         Transform effectTransform = this.parent.transform().clone();
         effectTransform.move(new Point(0,0), 2);
-        // TODO: definir tempo com base na duraçao da animaçao
-        // TODO: ANIMAÇAO destruiçao
-        //EffectObject effect = new EffectObject(this.parent.name() + "_effect", effectTransform, DESTRUCTION_EFFECT_TIME);
-        //this.parent.engine().addEnabled(effect);
+        effectTransform.rotate(-effectTransform.angle());
+        EffectObject effect = new EffectObject(this.parent.name() + "_effect", effectTransform, "imgs/over", ".png", 6, 4, 8); 
+        this.parent.engine().addEnabled(effect);
 
         this.gameOver();
         this.parent.engine().destroy(this.parent);

@@ -27,6 +27,7 @@ public abstract class Collider implements ICollider
     public void transform(Transform t) 
     {
         this.transform = t;
+        this.onUpdate();
     }
 
     /**

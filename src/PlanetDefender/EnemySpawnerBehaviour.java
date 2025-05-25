@@ -18,11 +18,13 @@ public class EnemySpawnerBehaviour extends Behaviour
     private Random rng;
     private GameObject planet;
     private GameObject player;
-    //TODO: ajustar valores com base nas dimensoes do ecra
-    private static final int LEFT_BORDER = -50;
-    private static final int RIGHT_BORDER = 850;
-    private static final int UP_BORDER = -50;
-    private static final int DOWN_BORDER = 650;
+    private static final int SCREEN_WIDTH = 800;
+    private static final int SCREEN_HEIGHT = 600;
+    private static final int MARGIN = 50;
+    private static final int LEFT_BORDER = -MARGIN;
+    private static final int RIGHT_BORDER = SCREEN_WIDTH + MARGIN;
+    private static final int UP_BORDER = -MARGIN;
+    private static final int DOWN_BORDER = SCREEN_HEIGHT + MARGIN;
     private static final double INITIAL_TIMER = 10;
     private static final double MIN_TIMER = 2.5;
     private static final double TIME_DECREASE = 0.05;
@@ -96,7 +98,6 @@ public class EnemySpawnerBehaviour extends Behaviour
 
         int type = this.rng.nextInt(6);
 
-        //TODO: ajustar valores
         if(type < 3) // asteroide (1/2 de chance)
         {
             c = (Collider) new ColliderCircle(t, new Point(0,0), 0.5);
@@ -118,7 +119,7 @@ public class EnemySpawnerBehaviour extends Behaviour
         }
         else if(type < 5) // nave (1/3 de chance)
         {
-            c = new ColliderPolygon(new ArrayList<>(Arrays.asList(new Point(0, 40), new Point(-25, 0), new Point(25, 0))));
+            c = new ColliderPolygon(t, new ArrayList<>(Arrays.asList(new Point(0, 40), new Point(-25, 0), new Point(25, 0))));
 
             b = new EnemyShipBehaviour();
             ((EnemyShipBehaviour) b).player(this.player);
@@ -149,7 +150,7 @@ public class EnemySpawnerBehaviour extends Behaviour
 
             t.rotate(ang);
 
-            c = new ColliderPolygon(new ArrayList<>(Arrays.asList(new Point(8, 25), new Point(8, -25), new Point(-8, -25), new Point(-8, 25))));
+            c = new ColliderPolygon(t, new ArrayList<>(Arrays.asList(new Point(8, 25), new Point(8, -25), new Point(-8, -25), new Point(-8, 25))));
 
             b = new EnemyBomberBehaviour();
 

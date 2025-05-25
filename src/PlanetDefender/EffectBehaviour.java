@@ -34,12 +34,6 @@ public class EffectBehaviour extends Behaviour
         this.lastFrame = 0;
     }
 
-    public void onInit() {
-        super.onInit();
-
-        this.parent.rotate(-this.parent.transform().angle());
-    }
-
     /**
      * Atualiza este EffectBehaviour com base no tempo e no input.
      * @param dT {@code double}

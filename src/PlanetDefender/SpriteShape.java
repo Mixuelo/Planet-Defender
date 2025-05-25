@@ -74,19 +74,14 @@ public class SpriteShape extends Shape
     {
         if (this.sprite != null)
         {
-            //int w = (int) Math.round(sprite.getWidth(null) * this.imageScale * this.scale);
-            //int h = (int) Math.round(sprite.getHeight(null) * this.imageScale * this.scale);
             int w = sprite.getWidth(null);
             int h = sprite.getHeight(null);
-            // TODO: fazer rotaçao
 
             AffineTransform trans = new AffineTransform();
             trans.translate(this.position.x(), this.position.y());
             trans.scale(this.imageScale * this.scale, this.imageScale * this.scale);
             trans.translate(-w/2, -h/2);
             trans.rotate(Math.toRadians(this.angle), w/2, h/2);
-            //trans.rotate(-Math.toRadians(this.angle), this.position.x()-w/2, this.position.y()-h/2);
-            //g.drawImage(sprite, (int) Math.round(position.x() - w/2), (int) Math.round(position.y() - h/2), w, h, null);
             g.drawImage(this.sprite, trans, null);
         }
     }

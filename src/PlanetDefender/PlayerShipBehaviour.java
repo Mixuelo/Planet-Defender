@@ -86,7 +86,7 @@ public class PlayerShipBehaviour extends CharacterBehaviour
         lookVec.multThis(20);
         bulletTrans.move(lookVec, 0);
 
-        MovingObject bullet = new MovingObject(this.parent.name() + "_bullet" + Integer.toString(this.bulletID++), bulletTrans , new ColliderCircle(new Point(0,0), 5), new BulletBehaviour(this.parent), new CircleShape(5,Color.YELLOW, bulletTrans, -1), new Point(0,0), BULLET_SPEED, 0);
+        MovingObject bullet = new MovingObject(this.parent.name() + "_bullet" + Integer.toString(this.bulletID++), bulletTrans , new ColliderCircle(bulletTrans, new Point(0,0), 5), new BulletBehaviour(this.parent), new CircleShape(5,Color.YELLOW, bulletTrans, -1), new Point(0,0), BULLET_SPEED, 0);
 
         bullet.setVelocity(
             new Point(
@@ -159,8 +159,17 @@ public class PlayerShipBehaviour extends CharacterBehaviour
     @Override
     public void onDefeat()
     {
-        if(this.planet == null) { this.parent.engine().destroy(this.parent); return; }
+        Transform effectTransform = this.parent.transform().clone();
+        effectTransform.move(new Point(0,0), 2);
+        effectTransform.rotate(-effectTransform.angle());
+        EffectObject effectExplosion = new EffectObject(this.parent.name() + "_defeat_explosion", effectTransform, "imgs/boom", ".png", 0.4, 17, 17); 
+        Transform effectTransformShip = this.parent.transform().clone();
+        effectTransformShip.move(new Point(0,0), 2);
+        EffectObject effectShip = new EffectObject(this.parent.name() + "_defeat_ship", effectTransformShip, "imgs/nave_jogador_derrota", ".png", 0.1, 1, 2); 
+        this.parent.engine().addEnabled(effectExplosion);
+        this.parent.engine().addEnabled(effectShip);
 
+        if(this.planet == null) { this.parent.engine().destroy(this.parent); return; }
         this.parent.engine().disable(this.parent);
         ((PlanetBehaviour) this.planet.behaviour()).onPlayerDefeat();
     }

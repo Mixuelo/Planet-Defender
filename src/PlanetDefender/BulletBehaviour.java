@@ -59,6 +59,7 @@ public class BulletBehaviour extends Behaviour
     @Override
     public void onCollision(List<IGameObject> gol)
     {
+        boolean hit = false;
         for(IGameObject go : gol) { if(go.equals(this.owner)) return; }
 
         for(IGameObject go : gol)
@@ -68,13 +69,25 @@ public class BulletBehaviour extends Behaviour
             {
                 CharacterBehaviour cb = (CharacterBehaviour) b;
                 cb.takeDamage(1);
-                this.gameObject().engine().destroy(this.gameObject());
+                hit = true;
             }
             else if(b instanceof BombBehaviour)
             {
                 ((BombBehaviour) b).explode();
                 this.gameObject().engine().destroy(this.gameObject());
+                hit = true;
             }
+        }
+
+        if(hit) 
+        {
+            this.gameObject().engine().destroy(this.gameObject());
+
+            Transform effectTransform = this.parent.transform().clone();
+            effectTransform.move(new Point(0,0), 2);
+            effectTransform.rotate(-effectTransform.angle());
+            EffectObject effect = new EffectObject(this.parent.name() + "_effect", effectTransform, "imgs/bala", ".png", 1, 4, 16); 
+            this.parent.engine().addEnabled(effect);
         }
     }
 }

@@ -29,7 +29,7 @@ public class GameObject implements IGameObject
         this.name = n;
         this.transform = t;
         this.collider = c;
-        if (this.collider != null && this.collider.transform == null) this.collider.transform = t;
+        if (this.collider != null && this.collider.transform == null) { this.collider.transform(t); }
         this.behaviour = b;
         if (this.behaviour != null) this.behaviour.parent = this;
     }

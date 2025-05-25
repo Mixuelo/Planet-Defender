@@ -9,7 +9,7 @@ public class ColliderCircle extends Collider
 {
     private double radius;
     
-    /** Construtor do Collider em círculo. TODO: DEPRECATED
+    /** Construtor do Collider em círculo.
         @param center   o centro do circulo, em Point
         @param radius   o raio do circulo, em double
     */
@@ -20,6 +20,7 @@ public class ColliderCircle extends Collider
         this.radius = radius;
         this.scale = 1;
         this.angle = 0;
+        this.transform = null;
     }
 
     /**

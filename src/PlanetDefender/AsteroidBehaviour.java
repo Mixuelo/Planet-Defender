@@ -102,6 +102,13 @@ public class AsteroidBehaviour extends EnemyBehaviour
     {
         this.divide();
         this.parent.engine().destroy(this.parent);
+
+        Transform effectTransform = this.parent.transform().clone();
+        effectTransform.move(new Point(0,0), 2);
+        effectTransform.rotate(-effectTransform.angle());
+        effectTransform.scale(-effectTransform.scale() + 1);
+        EffectObject effect = new EffectObject(this.parent.name() + "_effect", effectTransform, "imgs/over", ".png", this.size * SCALE_FACTOR / 32 * 1.5, 4, 16); 
+        this.parent.engine().addEnabled(effect);
     }
 
     /**
