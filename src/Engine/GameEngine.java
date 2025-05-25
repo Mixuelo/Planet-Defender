@@ -224,7 +224,6 @@ public class GameEngine implements IGameEngine
         double now = System.nanoTime() * 1e-9;
         double dt = now - lastTime;
         lastTime = now;
-        //System.out.println(dt);
 
         InputEvent ie = gui.getUserInput();
 
@@ -248,8 +247,6 @@ public class GameEngine implements IGameEngine
         //if (panel != null) panel.repaint();
         // envia a lista de IGameObjects em enabled para o GUI
         if (gui != null) gui.putOnScreen(this.getEnabled());
-
-        //System.out.println(dt);
     }
 
     /**

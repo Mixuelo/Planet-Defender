@@ -46,7 +46,7 @@ public class EnemyBomberBehaviourTests
         bomberTransform.move(new Point(-20, 0), 0);
         bomberBehaviour.onUpdate(0.1, null);
 
-        assertEquals(3, engine.getEnabled().size()); // boom
+        assertEquals(3, engine.getEnabled().size());
 
         MovingObject bomb = (MovingObject) engine.getEnabled().get(2);
         assertEquals("Bomber_bomb", bomb.name());

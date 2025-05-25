@@ -39,7 +39,7 @@ public class BackgroundMusic
     }
 
     /**
-     * Pára a música.
+     * Para a música.
      */
     public void stopMusic()
     {

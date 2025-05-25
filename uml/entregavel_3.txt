@@ -1,10 +1,11 @@
 @startuml
 
+!pragma layout elk
 skinparam style strictuml
 
 package "Engine" 
 {
-  +interface IGameObject <<interface>> {
++interface IGameObject <<interface>> {
     name() : String
     transform() : ITransform
     shape() : IShape
@@ -35,9 +36,7 @@ package "Engine"
     -exists() : boolean
     -tick() : void
 }
-GameEngine *-- GameObject : -ArrayList<> enabled
-GameEngine *-- GameObject : -ArrayList<> disabled
-GameEngine o-- GUI : -gui
+GameEngine *-- GameObject : -ArrayList<> enabled, disabled
 
 +class GameObject implements IGameObject{
     -name : String
@@ -90,6 +89,7 @@ MovingObject *-- Point : #velocity
 
     +toString() : String
 }
+Collider o-- Transform : #transform
 
 +class Point {
     -x : double
@@ -113,6 +113,7 @@ MovingObject *-- Point : #velocity
     +clone() : Point
 }
 
+together {
 +class ColliderCircle {
     -radius : double
 
@@ -130,6 +131,7 @@ MovingObject *-- Point : #velocity
 
     +vertices() : ArrayList<Point>
     +edges() : ArrayList<LineSegment>
+}
 }
 
 +class Line{
@@ -202,10 +204,9 @@ Shape o-- Transform : #transform
 
 }
 
+Engine.GameEngine o-- GUI.GUI : -gui
 
 
-package "PlanetDefender" 
-{
 GameEngine o-- GameObject : -ArrayList<> enabled, ArrayList<> disabled
 GameObject o-- Transform : -transform
 GameObject o-- Collider : -collider
@@ -216,22 +217,27 @@ Transform *-- Point : -position
 Collider *-- Point : #centroid
 ColliderPolygon *-- Point : -ArrayList<> vertices
 ColliderPolygon *-- LineSegment : -ArrayList<> edges
-Collider <|-- ColliderPolygon
-ColliderCircle -- (Collider, ColliderPolygon)
+<> col
+Collider <|-- col
+col -- ColliderPolygon
+col -- ColliderCircle
 Line *-- Point : #p1, p2
 
 ' JOGO
+package "PlanetDefender" 
+{
 
 +abstract class CharacterBehaviour {
-    +health : int
+    #health : int
 
     +health() : int
+    +health() : void
     +takeDamage() : void
     +onDefeat() : void
     +statusGauge() : void
     +statusGauge() : GameObject
 }
-CharacterBehaviour o-- GameObject : +statusGauge
+CharacterBehaviour o-- GameObject : #statusGauge
 
 +abstract class EffectBehaviour {
     -timer : double
@@ -242,8 +248,6 @@ CharacterBehaviour o-- GameObject : +statusGauge
     -fps : double
     -animDT : double
     -lastFrame : int
-    
-    +onUpdate() : void
 }
 
 +class PlayerShipBehaviour {
@@ -257,41 +261,39 @@ CharacterBehaviour o-- GameObject : +statusGauge
     -rotate() : void
     -accelerate() : void
     -shoot() : void
-    +onUpdate() : void
-    +onDefeat() : void
-    +onEnabled() : void
     -checkOutOfBounds() : void
 }
 PlayerShipBehaviour o-- GameObject : -planet
 
+enum actionState <<enum>> {
+    CHASE_PLAYER
+    CHASE_PLANET
+    ATTACK_PLAYER
+    ATTACK_PLANET
+}
+
 +class EnemyShipBehaviour extends EnemyBehaviour {
     -boredom : double
     -cooldown : double
-    -state : actionState
     -rng : Random
     -bulletID : int
+    -accel : boolean
     
     +player() : void
-    +onInit() : void
     -rotateTowards() : void
     -lookingTowards() : boolean
     -accelerate() : void
     -chase() : void
     -shoot() : void
     -attack() : void
-    +onUpdate() : void
-    #onDefeat() : void
 }
 EnemyShipBehaviour o-- GameObject : -player
+EnemyShipBehaviour *-- actionState : -state
 
 
 +class AsteroidBehaviour extends EnemyBehaviour {
     -size : double
     
-    +onInit() : void
-    +onUpdate() : void
-    +onCollision() : void
-    #onDefeat() : void
     -defeatEffect() : void
     #divide() : void
     -checkOutOfBounds() : void
@@ -301,9 +303,7 @@ EnemyShipBehaviour o-- GameObject : -player
     -lastDist : double
     -hasBomb : boolean
     
-    +onInit() : void
     -dropBomb() : void
-    +onUpdate() : void
     -checkOutOfBounds() : void
 }
 
@@ -313,8 +313,6 @@ EnemyShipBehaviour o-- GameObject : -player
     -playerMaxHealth : int
     
     +player() : void
-    +onUpdate() : void
-    +onDefeat() : void
     #gameOver() : void
     +onPlayerDefeat() : void
     -recoverPlayer() : void
@@ -323,8 +321,6 @@ PlanetBehaviour o-- MovingObject : -player
 
 
 +class BulletBehaviour {
-    +onUpdate() : void
-    +onCollision() : void
 }
 BulletBehaviour o-- CharacterBehaviour : -owner
 
@@ -333,7 +329,6 @@ BulletBehaviour o-- CharacterBehaviour : -owner
     -explode : boolean
     
     +explode() : void
-    +onCollision() : void
 }
 BombBehaviour o-- EnemyBomberBehaviour : -owner
 
@@ -344,18 +339,15 @@ BombBehaviour o-- EnemyBomberBehaviour : -owner
     
     +planet() : void
     +player() : void
-    +onUpdate() : void
 }
 EnemySpawnerBehaviour o-- GameObject : -planet
 EnemySpawnerBehaviour o-- GameObject : -player
 
 +class TitleBehaviour {
-    +onUpdate() : void
     -startGame() : void
 }
 
 +class EnemyBehaviour {
-    
     +target() : void
 }
 EnemyBehaviour o-- GameObject : #target
@@ -365,7 +357,7 @@ EnemyBehaviour o-- GameObject : #target
     -timer : double
     -value : double
     -maxValue : double
-    -color : -color
+    -color : Color
     -radius : double
     -strokeWidth : double
     
@@ -437,7 +429,7 @@ package "GUI"
       +stopMusic() : void
     }
 
-    +class GamePanel extends JPanel
+    +class GamePanel
     {
        +gameObjects() : void
     }
@@ -453,7 +445,7 @@ package "GUI"
     }
     GUI *-- GamePanel : -gamePanel
     
-    +class KeyListenerImpl implements KeyListener
+    +class KeyListenerImpl
     {
       -inputQueue : Queue<InputEvent>
     }

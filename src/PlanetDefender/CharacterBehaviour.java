@@ -9,8 +9,8 @@ import Engine.*;
  */
 public abstract class CharacterBehaviour extends Behaviour
 {
-    public int health;
-    public GameObject statusGauge;
+    protected int health;
+    protected GameObject statusGauge;
 
     /**
      * Construtor.
