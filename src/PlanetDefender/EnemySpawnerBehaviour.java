@@ -27,7 +27,7 @@ public class EnemySpawnerBehaviour extends Behaviour
     private static final int DOWN_BORDER = SCREEN_HEIGHT + MARGIN;
     private static final double INITIAL_TIMER = 10;
     private static final double MIN_TIMER = 2.5;
-    private static final double TIME_DECREASE = 0.05;
+    private static final double TIME_DECREASE = 0.1;
 
     /**
      * Construtor.
