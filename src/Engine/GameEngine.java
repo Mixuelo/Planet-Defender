@@ -1,10 +1,14 @@
 package Engine;
 
 import GUI.*;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
+import javax.swing.Timer;
 
 /** Classe para o GameEngine, definido por uma lista de GameObjects.
  *  @author Miguel Alvito, Nicole Reis e Pedro Pinto
@@ -15,6 +19,7 @@ public class GameEngine implements IGameEngine
     private ArrayList<GameObject> enabled;
     private ArrayList<GameObject> disabled;
     private GUI gui;
+    private double lastTime;
 
     /**
      * Construtor para o GameEngine.
@@ -199,49 +204,50 @@ public class GameEngine implements IGameEngine
         final int fps = 60;
         final double frameTime = 1000.0 / fps;
 
-        double lastTime = System.nanoTime() * 1e-9;
+        lastTime = System.nanoTime() * 1e-9;
+
+        Timer timer = new Timer((int) frameTime, new ActionListener() {
+            public void actionPerformed(ActionEvent evt) { tick(); }
+        });
+        timer.start();
 
         for(;;)
         {
-            double now = System.nanoTime() * 1e-9;
-            double dt = now - lastTime;
-            lastTime = now;
-            //System.out.println(dt);
-
-            InputEvent ie = gui.getUserInput();
-
-            ArrayList<IGameObject> enabledClone = new ArrayList<>(this.enabled.size());
-
-            for(IGameObject go : enabled)
-            {
-                enabledClone.add(go);
-            }
-            
-            for(IGameObject go : enabledClone) 
-            {
-                if(go instanceof MovingObject) ((MovingObject) go).updateMovement(dt);
-                if(go.collider() != null)      go.collider().onUpdate();
-                if(go.shape() != null)         go.shape().onUpdate();
-                if(go.behaviour() != null)     go.behaviour().onUpdate(dt, ie);
-            }
-
-            // envia lista de colisões para todos os IGameObject em enabled
-            this.checkCollisions();
-            //if (panel != null) panel.repaint();
-            // envia a lista de IGameObjects em enabled para o GUI
-            if (gui != null) gui.putOnScreen(this.getEnabled());
-
-            //TODO: TIMER FRAMERATE
-            try
-            {
-                Thread.sleep((long) frameTime);
-            }
-            catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
-            //System.out.println(dt);
+            //this.tick();
         }
+    }
+
+    private void tick()
+    {
+        double now = System.nanoTime() * 1e-9;
+        double dt = now - lastTime;
+        lastTime = now;
+        //System.out.println(dt);
+
+        InputEvent ie = gui.getUserInput();
+
+        ArrayList<IGameObject> enabledClone = new ArrayList<>(this.enabled.size());
+
+        for(IGameObject go : enabled)
+        {
+            enabledClone.add(go);
+        }
+        
+        for(IGameObject go : enabledClone) 
+        {
+            if(go instanceof MovingObject) ((MovingObject) go).updateMovement(dt);
+            if(go.collider() != null)      go.collider().onUpdate();
+            if(go.shape() != null)         go.shape().onUpdate();
+            if(go.behaviour() != null)     go.behaviour().onUpdate(dt, ie);
+        }
+
+        // envia lista de colisões para todos os IGameObject em enabled
+        this.checkCollisions();
+        //if (panel != null) panel.repaint();
+        // envia a lista de IGameObjects em enabled para o GUI
+        if (gui != null) gui.putOnScreen(this.getEnabled());
+
+        //System.out.println(dt);
     }
 
     public void resetEngine()
