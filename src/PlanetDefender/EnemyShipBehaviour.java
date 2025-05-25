@@ -25,11 +25,12 @@ public class EnemyShipBehaviour extends EnemyBehaviour
     private double boredom;
     private double cooldown;
     private actionState state;
+    private boolean accel;
     private Random rng;
     private int bulletID;
     private static final int HEALTH = 3;
     private static final double ACCELERATION = 30;
-    private static final double PATIENCE = 20;
+    private static final double PATIENCE = 15;
     private static final double FIRE_COOLDOWN = 0.75;
     private static final double START_COOLDOWN = 5;
     private static final double PLAYER_DIST_TRIGGER = 200;
@@ -51,6 +52,7 @@ public class EnemyShipBehaviour extends EnemyBehaviour
         this.cooldown = START_COOLDOWN;
         this.rng = new Random();
         this.boredom = 0;
+        this.accel = false;
     }
 
     /**
@@ -141,6 +143,7 @@ public class EnemyShipBehaviour extends EnemyBehaviour
      */
     private void accelerate(double dT)
     {
+        this.accel = true;
         double ang = Math.toRadians(this.parent.transform().angle());
 
         ((MovingObject) this.parent).addVelocity(
@@ -181,6 +184,7 @@ public class EnemyShipBehaviour extends EnemyBehaviour
         if(boredom >= PATIENCE)
         {
             this.state = actionState.CHASE_PLANET;
+            this.boredom = 0;
         }
     }
 
@@ -221,7 +225,7 @@ public class EnemyShipBehaviour extends EnemyBehaviour
 
         if(this.cooldown <= 0 && (lookingTowards(go)) ) { shoot(); }
 
-        if(go == this.player && this.parent.transform().position().distFrom(go.transform().position()) > PLAYER_DIST_CHASE)
+        if(go.equals(this.player) && this.parent.transform().position().distFrom(go.transform().position()) > PLAYER_DIST_CHASE)
         {
             this.state = actionState.CHASE_PLAYER;
         }
@@ -235,6 +239,9 @@ public class EnemyShipBehaviour extends EnemyBehaviour
     @Override
     public void onUpdate(double dT, InputEvent ie)
     {
+        boolean lastAccel = this.accel;
+        this.accel = false;
+
         switch (this.state) {
             case CHASE_PLAYER:
                 chase(this.player, dT);
@@ -254,6 +261,14 @@ public class EnemyShipBehaviour extends EnemyBehaviour
 
             default:
                 break;
+        }
+
+        if(this.accel != lastAccel)
+        {
+            Engine.Shape s;
+            if(this.accel) { s = new SpriteShape("imgs/nave_inimiga.png", 0.1, this.parent.transform(), 1); }
+            else { s = new SpriteShape("imgs/nave_inimiga_parada.png", 0.1, this.parent.transform(), 1); }
+            this.parent.shape(s);
         }
 
         if(cooldown > 0) { this.cooldown -= dT; }

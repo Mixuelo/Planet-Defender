@@ -68,7 +68,7 @@ public class AsteroidBehaviourTests
 
         asteroidBehaviour.onCollision(new ArrayList<>(Arrays.asList(character)));
 
-        int expectedDamage = (int)(50.0 * 5);
+        int expectedDamage = (int)(50.0 * 0.7);
         assertEquals(initialHealth - expectedDamage, playerBehaviour.health());
         assertFalse(engine.getEnabled().contains(asteroid));
     }
@@ -79,13 +79,13 @@ public class AsteroidBehaviourTests
         GameEngine engine = new GameEngine();
         AsteroidBehaviour asteroidBehaviour = new AsteroidBehaviour(50.0);
         Transform transform = new Transform(new Point(0, 0), 1, 1, 0);
-        GameObject asteroid = new GameObject("Asteroid", transform, new ColliderCircle(new Point(0, 0), 5), asteroidBehaviour);
+        MovingObject asteroid = new MovingObject("Asteroid", transform, new ColliderCircle(new Point(0, 0), 5), asteroidBehaviour, new Point(0,0), 100, 0);
         engine.addEnabled(asteroid);
 
         asteroidBehaviour.onDefeat();
 
         assertFalse(engine.getEnabled().contains(asteroid));
-        assertEquals(2, engine.getEnabled().size());
+        assertEquals(3, engine.getEnabled().size());
     }
 
     @Test
@@ -94,7 +94,7 @@ public class AsteroidBehaviourTests
         GameEngine engine = new GameEngine();
         AsteroidBehaviour asteroidBehaviour = new AsteroidBehaviour(50.0);
         Transform transform = new Transform(new Point(0, 0), 1, 1, 0);
-        GameObject asteroid = new GameObject("Asteroid", transform, new ColliderCircle(new Point(0, 0), 5), asteroidBehaviour);
+        MovingObject asteroid = new MovingObject("Asteroid", transform, new ColliderCircle(new Point(0, 0), 5), asteroidBehaviour, new Point(0,0), 100, 0);
         engine.addEnabled(asteroid);
 
         asteroidBehaviour.divide();

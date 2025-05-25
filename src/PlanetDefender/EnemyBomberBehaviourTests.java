@@ -17,8 +17,8 @@ public class EnemyBomberBehaviourTests
 
         engine.addEnabled(bomber);
             
-        assertEquals(-Math.sin(Math.toRadians(45)) * 15, bomber.velocity().x());
-        assertEquals(Math.cos(Math.toRadians(45)) * 15, bomber.velocity().y());
+        assertEquals(-Math.sin(Math.toRadians(45)) * 30, bomber.velocity().x());
+        assertEquals(Math.cos(Math.toRadians(45)) * 30, bomber.velocity().y());
     }
 
     @Test

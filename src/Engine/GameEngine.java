@@ -230,6 +230,7 @@ public class GameEngine implements IGameEngine
             // envia a lista de IGameObjects em enabled para o GUI
             if (gui != null) gui.putOnScreen(this.getEnabled());
 
+            //TODO: TIMER FRAMERATE
             try
             {
                 Thread.sleep((long) frameTime);
@@ -238,6 +239,7 @@ public class GameEngine implements IGameEngine
             {
                 e.printStackTrace();
             }
+            //System.out.println(dt);
         }
     }
 

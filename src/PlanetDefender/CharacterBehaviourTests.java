@@ -10,8 +10,13 @@ public class CharacterBehaviourTests
     @Test
     public void testTakeDamage()
     {
+        GameEngine eng = new GameEngine();
         PlayerShipBehaviour ship1 = new PlayerShipBehaviour();
+        GameObject shipObject1 = new GameObject("ship1", new Transform(new Point(0,0), 1, 0, 1), null, ship1);
         PlayerShipBehaviour ship2 = new PlayerShipBehaviour();
+        GameObject shipObject2 = new GameObject("ship2", new Transform(new Point(0,0), 1, 0, 1), null, ship2);
+        eng.addEnabled(shipObject1);
+        eng.addEnabled(shipObject2);
 
         int initialHealth = ship1.health();
 
@@ -26,8 +31,8 @@ public class CharacterBehaviourTests
     public void testOnDefeat()
     {
         GameEngine eng = new GameEngine();
-        GameObject ship1 = new GameObject("s1", null, null, new PlayerShipBehaviour());
-        GameObject ship2 = new GameObject("s2", null, null, new PlayerShipBehaviour());
+        GameObject ship1 = new GameObject("s1", new Transform(new Point(0,0), 1, 0, 1), null, new PlayerShipBehaviour());
+        GameObject ship2 = new GameObject("s2", new Transform(new Point(0,0), 1, 0, 1), null, new PlayerShipBehaviour());
         eng.addEnabled(ship1);
         eng.addEnabled(ship2);
 
