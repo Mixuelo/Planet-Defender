@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.*;
 import javax.swing.Timer;
 
 /** Classe para o GameEngine, definido por uma lista de GameObjects.
@@ -216,7 +215,10 @@ public class GameEngine implements IGameEngine
             //this.tick();
         }
     }
-    
+
+    /**
+     * Executa um ciclo de atualização do engine.
+     */
     private void tick()
     {
         double now = System.nanoTime() * 1e-9;
@@ -250,6 +252,9 @@ public class GameEngine implements IGameEngine
         //System.out.println(dt);
     }
 
+    /**
+     * Apaga todos os objetos menos o fundo.
+     */
     public void resetEngine()
     {
         for(IGameObject go : this.getEnabled())

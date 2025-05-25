@@ -31,6 +31,10 @@ public abstract class CharacterBehaviour extends Behaviour
         return this.health;
     }
 
+    /**
+     * Setter para a saúde deste CharacterBehaviour.
+     * @param hp {@code int}
+     */
     public void health(int hp)
     {
         this.health = hp;
@@ -58,11 +62,19 @@ public abstract class CharacterBehaviour extends Behaviour
         this.parent.engine().destroy(this.parent);
     }
 
+    /**
+     * Setter para o statusGauge.
+     * @param sg {@code GameObject}
+     */
     public void statusGauge(GameObject sg)
     {
         this.statusGauge = sg;
     }
 
+    /**
+     * Getter para o statusGauge.
+     * @return sg {@code GameObject}
+     */
     public GameObject statusGauge()
     {
         return this.statusGauge;
