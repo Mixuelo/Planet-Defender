@@ -15,5 +15,8 @@ public interface IShape
      */
     void draw(Graphics2D g);
 
+    /**
+     * Atualiza este shape.
+     */
     void onUpdate();
 }

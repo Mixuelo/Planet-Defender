@@ -2,7 +2,6 @@ package PlanetDefender;
 
 import java.util.List;
 import Engine.*;
-import PlanetDefender.EffectBehaviourTests;
 
 /**
  * Subclasse de Behaviour responsável pelo comportamento das bombas.

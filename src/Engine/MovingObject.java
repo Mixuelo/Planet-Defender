@@ -55,18 +55,27 @@ public class MovingObject extends GameObject
         return this.velocity;
     }
 
+    /**
+     * Devolve a velocidade máxima deste MovingObject (getter)
+     * @return topVelocity {@code double}
+     */
     public double topVelocity()
     {
         return this.topVelocity;
     }
 
+    /**
+     * Devolve a fricção deste MovingObject (getter)
+     * @return friction {@code double}
+     */
     public double friction()
     {
         return this.friction;
     }
 
     /**
-     * Atualiza o movimento deste MovingObject.
+     * Atualiza o movimento deste MovingObject com base no tempo.
+     * @param dt {@code double}
      */
     public void updateMovement(double dt)
     {

@@ -1,10 +1,6 @@
 package Engine;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
 
 /** Classe abstrata para o Shape.
     @author     Miguel Alvito, Nicole Reis e Pedro Pinto
@@ -18,16 +14,28 @@ public abstract class Shape implements IShape
     protected Transform transform;
     protected int drawOrder;
 
+    /**
+     * Define uma transform para este Shape (setter).
+     * @param t {@code Transform}
+     */
     public void transform(Transform t) 
     {
         this.transform = t;
     }
 
+    /***
+     * Define a ordem de desenho (setter).
+     * @param i {@code int}
+     */
     public void drawOrder(int i) 
     {
         this.drawOrder = i;
     }
 
+    /**
+     * Devolve a ordem de desenho (getter).
+     * @return drawOrder {@code int}
+     */
     public int drawOrder() 
     {
         return this.drawOrder;
@@ -39,6 +47,9 @@ public abstract class Shape implements IShape
      */
     public abstract void draw(Graphics2D g);
 
+    /**
+     * Atualiza este Shape.
+     */
     public void onUpdate()
     {
         Point dPos = this.transform.position().subNew(this.position); 
@@ -50,9 +61,21 @@ public abstract class Shape implements IShape
         this.scale(dScale);
     }
 
+    /**
+     * Altera a escala.
+     * @param dScale {@code double}
+     */
     public abstract void scale(double dScale);
 
+    /**
+     * Move este Shape.
+     * @param dPos {@code Point}
+     */
     public abstract void move(Point dPos);
 
+    /**
+     * Roda este Shape.
+     * @param dAngle {@code double}
+     */
     public abstract void rotate(double dAngle);
 }

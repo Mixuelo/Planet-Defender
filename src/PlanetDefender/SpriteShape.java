@@ -21,8 +21,10 @@ public class SpriteShape extends Shape
     double imageScale;
 
     /**
-     * Cosntrutor.
+     * Construtor.
      * @param imagePath {@code String}
+     * @param imageScale {@code double}
+     * @param t {@code Transform}
      */
     public SpriteShape(String imagePath, double imageScale, Transform t)
     {
@@ -45,12 +47,23 @@ public class SpriteShape extends Shape
         }
     }
 
+    /**
+     * Construtor.
+     * @param imagePath {@code String}
+     * @param imageScale {@code double}
+     * @param t {@code Transform}
+     * @param z {@code int}
+     */
     public SpriteShape(String imagePath, double imageScale, Transform t, int z)
     {
         this(imagePath, imageScale, t);
         this.drawOrder = z;
     }
 
+    /**
+     * Carrega uma imagem a partir de um path e define-a como sprite do objeto.
+     * @param imagePath {@code String}
+     */
     public void sprite(String imagePath)
     {
         try 
@@ -87,7 +100,7 @@ public class SpriteShape extends Shape
     }
 
     /**
-     * Atualizar a escala do circulo, adicionando sScale ao valor da escala.
+     * Atualizar a escala do shape, adicionando dScale ao valor da escala.
      * @param dScale {@code double}
      */
     public void scale(double dScale)
@@ -96,7 +109,7 @@ public class SpriteShape extends Shape
     }
 
     /**
-     * Este método move o Collider.
+     * Este método move este shape.
      * @param dPos {@code Point}
      */
     public void move(Point dPos)
@@ -105,7 +118,7 @@ public class SpriteShape extends Shape
     }
 
     /**
-     * Este método faz a rotação do Collider em determinados graus.
+     * Este método faz a rotação deste shape em determinados graus.
      * @param dAngle {@code double}
      */
     public void rotate(double dAngle)

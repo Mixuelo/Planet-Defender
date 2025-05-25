@@ -4,10 +4,19 @@ import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Classe responsável pela música de fundo do jogo.
+ * @author Miguel Alvito, Nicole Reis, Pedro Pinto
+ * @version 1.0 (25/05/2025)
+ */
 public class BackgroundMusic
 {
     private Clip clip;
 
+    /**
+     * Inicia a música (em loop)
+     * @param filePath {@code String}
+     */
     public void playMusic(String filePath)
     {
         try
@@ -29,6 +38,9 @@ public class BackgroundMusic
         }
     }
 
+    /**
+     * Pára a música.
+     */
     public void stopMusic()
     {
         if (clip != null && clip.isRunning()) clip.stop();

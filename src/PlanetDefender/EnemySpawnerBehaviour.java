@@ -48,6 +48,10 @@ public class EnemySpawnerBehaviour extends Behaviour
         this.planet = p;
     }
 
+    /**
+     * Define um GameObject como jogador (setter).
+     * @param p {@code GameObject}
+     */
     public void player(GameObject p)
     {
         this.player = p;

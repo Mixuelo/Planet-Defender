@@ -1,7 +1,5 @@
 package PlanetDefender;
 
-import java.awt.*;
-import java.awt.desktop.SystemSleepEvent;
 import java.awt.event.InputEvent;
 import Engine.*;
 import Engine.Point;
@@ -31,6 +29,9 @@ public class PlanetBehaviour extends CharacterBehaviour
         this.playerRecovery = 0;
     }
 
+    /**
+     * Inicializa este PlanetBehaviour.
+     */
     @Override
     public void onInit() 
     {

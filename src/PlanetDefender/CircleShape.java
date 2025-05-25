@@ -7,7 +7,7 @@ import Engine.Shape;
 import java.awt.*;
 
 /**
- * Subclasse de Shape para o CircleShape.
+ * Subclasse de Shape para círculos.
  * @author Miguel Alvito, Nicole Reis e Pedro Pinto
  * @version 1.0 (17/05/2025)
  */
@@ -51,7 +51,7 @@ public class CircleShape extends Shape
     }
 
     /**
-     * Atualizar a escala do circulo, adicionando sScale ao valor da escala.
+     * Atualizar a escala do circulo, adicionando dScale ao valor da escala.
      * @param dScale {@code double}
      */
     public void scale(double dScale)

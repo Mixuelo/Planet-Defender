@@ -4,7 +4,6 @@ import GUI.*;
 import java.awt.event.InputEvent;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.*;
 
 /** Classe para o GameEngine, definido por uma lista de GameObjects.
  *  @author Miguel Alvito, Nicole Reis e Pedro Pinto
@@ -242,6 +241,9 @@ public class GameEngine implements IGameEngine
         }
     }
 
+    /**
+     * Apaga destrói todos os objetos da engine, menos o fundo.
+     */
     public void resetEngine()
     {
         for(IGameObject go : this.getEnabled())

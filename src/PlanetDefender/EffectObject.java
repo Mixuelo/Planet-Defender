@@ -13,7 +13,11 @@ public class EffectObject extends GameObject
      * Construtor.
      * @param n {@code String}
      * @param t {@code Transform}
-     * @param time {@code int}
+     * @param imagePath {@code String}
+     * @param imageExt {@code String}
+     * @param imageScale {@code double}
+     * @param frames {@code int}
+     * @param fps {@code double}
      */
     public EffectObject(String n, Transform t, String imagePath, String imageExt, double imageScale, int frames, double fps)
     {

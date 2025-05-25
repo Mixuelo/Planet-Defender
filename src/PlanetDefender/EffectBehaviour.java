@@ -21,7 +21,11 @@ public class EffectBehaviour extends Behaviour
 
     /**
      * Construtor.
-     * @param t {@code double}
+     * @param ip {@code String}
+     * @param ie {@code String}
+     * @param is {@code double}
+     * @param f {@code int}
+     * @param fps {@code double}
      */
     public EffectBehaviour(String ip, String ie, double is, int f, double fps)
     {

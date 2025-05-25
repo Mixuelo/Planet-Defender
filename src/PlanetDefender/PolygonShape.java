@@ -74,7 +74,7 @@ public class PolygonShape extends Shape
     }
 
     /**
-     * Este método calcula o position do polígono.
+     * Este método calcula a posição do polígono.
      * @return position {@code Point}
      */
     private Point calculateCentroid()

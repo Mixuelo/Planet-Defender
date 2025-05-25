@@ -137,6 +137,10 @@ public class GameObject implements IGameObject
         return shape;
     }
 
+    /**
+     * Define o shape para este GameObject (setter).
+     * @param s {@code Shape}
+     */
     public void shape(Shape s)
     {
         this.shape = s;

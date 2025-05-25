@@ -7,7 +7,7 @@ import Engine.Shape;
 import java.awt.*;
 
 /**
- * Subclasse de Shape para o CircleShape.
+ * Subclasse de Shape para o ArcShape.
  * @author Miguel Alvito, Nicole Reis e Pedro Pinto
  * @version 1.0 (17/05/2025)
  */
@@ -21,6 +21,12 @@ public class ArcShape extends Shape
 
     /**
      * Construtor.
+     * @param r {@code double}
+     * @param c {@code Color}
+     * @param sw {@code double}
+     * @param sa {@code double}
+     * @param aa {@code double}
+     * @param t {@code Transform}
      */
     public ArcShape(double r, Color c, double sw, double sa, double aa, Transform t)
     {
@@ -52,7 +58,7 @@ public class ArcShape extends Shape
     }
 
     /**
-     * Atualizar a escala do circulo, adicionando sScale ao valor da escala.
+     * Atualizar a escala do arco, adicionando dScale ao valor da escala.
      * @param dScale {@code double}
      */
     public void scale(double dScale)
@@ -64,7 +70,7 @@ public class ArcShape extends Shape
     }
 
     /**
-     * Este método move o Collider.
+     * Este método move o arco.
      * @param dPos {@code Point}
      */
     public void move(Point dPos)
@@ -73,7 +79,7 @@ public class ArcShape extends Shape
     }
 
     /**
-     * Este método faz a rotação do Collider em determinados graus.
+     * Este método faz a rotação do arco em determinados graus.
      * @param dAngle {@code double}
      */
     public void rotate(double dAngle)

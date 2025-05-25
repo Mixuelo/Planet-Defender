@@ -135,8 +135,6 @@ public class EnemyShipBehaviour extends EnemyBehaviour
         return false;
     }
 
-
-
     /**
      * Acelera a nave inimiga.
      * @param dT {@code double}
@@ -261,8 +259,12 @@ public class EnemyShipBehaviour extends EnemyBehaviour
         if(cooldown > 0) { this.cooldown -= dT; }
     }
 
+    /**
+     * Destroi o GameObject associado a este EnemyShipBehaviour.
+     */
     @Override
-    protected void onDefeat() {
+    protected void onDefeat()
+    {
         super.onDefeat();
 
         Transform effectTransform = this.parent.transform().clone();

@@ -4,8 +4,12 @@ import java.awt.Color;
 import java.awt.event.InputEvent;
 
 import Engine.*;
-import PlanetDefender.CharacterBehaviour;
 
+/**
+ * Subclasse de Behaviour responsável pela barra circular (arco) que representa visualmente o estado de vida.
+ * @author Miguel Alvito, Nicole Reis, Pedro Pinto
+ * @version 1.0 (25/05/2025)
+ */
 public class ArcGaugeBehaviour extends Behaviour
 {
     private GameObject target;
@@ -18,6 +22,12 @@ public class ArcGaugeBehaviour extends Behaviour
     private static final double SUSTAIN_TIME = 1;
     private static final double RELEASE_TIME = 1;
 
+    /**
+     * Construtor.
+     * @param c {@code Color}
+     * @param r {@code double}
+     * @param sw {@code double}
+     */
     public ArcGaugeBehaviour(Color c, double r, double sw)
     {
         this.target = null;
@@ -29,11 +39,19 @@ public class ArcGaugeBehaviour extends Behaviour
         this.strokeWidth = sw;
     }
 
+    /**
+     * Define um GameObject como alvo (setter):
+     * @param t {@code GameObject}
+     */
     public void target(GameObject t)
     {
         this.target = t;
     }
 
+    /**
+     * Inicializa este ArcGaugeBehaviour.
+     */
+    @Override
     public void onInit() 
     {
         if(this.target == null) { return; }    
@@ -41,7 +59,14 @@ public class ArcGaugeBehaviour extends Behaviour
         this.maxValue = ((CharacterBehaviour) this.target.behaviour()).health();
     }
 
-    public void onUpdate(double dT, InputEvent ie) {
+    /**
+     * Atualiza este ArcGaugeBehaviour com base em tempo e input.
+     * @param dT {@code double}
+     * @param ie {@code InputEvent}
+     */
+    @Override
+    public void onUpdate(double dT, InputEvent ie)
+    {
         Point dPos = this.target.transform().position().subNew(this.parent.transform().position());
         this.parent.move(dPos, 0);
 
@@ -62,6 +87,9 @@ public class ArcGaugeBehaviour extends Behaviour
         this.parent.shape(s);
     }
 
+    /**
+     * Atualiza o valor com a nova vida do alvo e reinicia o temporizador.
+     */
     public void refresh()
     {
         this.value = ((CharacterBehaviour) this.target.behaviour()).health();

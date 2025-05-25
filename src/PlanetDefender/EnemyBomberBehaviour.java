@@ -100,8 +100,12 @@ public class EnemyBomberBehaviour extends EnemyBehaviour
         }
     }
 
+    /**
+     * Destroi o GameObject associado a este EnemyBomberBehaviour.
+     */
     @Override
-    protected void onDefeat() {
+    protected void onDefeat()
+    {
         super.onDefeat();
 
         Transform effectTransform = this.parent.transform().clone();
