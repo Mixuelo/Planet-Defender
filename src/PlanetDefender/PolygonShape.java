@@ -104,6 +104,7 @@ public class PolygonShape extends Shape
      * Este método altera a escala, adicionando dScale ao valor da escala.
      * @param dScale {@code double}
      */
+    @Override
     public void scale(double dScale)
     {
         double finalScale = this.scale + dScale;
@@ -119,6 +120,7 @@ public class PolygonShape extends Shape
      * Este método move o Collider.
      * @param dPos {@code Point}
      */
+    @Override
     public void move(Point dPos)
     {
         for(Point v : this.vertices)
@@ -132,6 +134,7 @@ public class PolygonShape extends Shape
      * Este método faz a rotação do Collider em determinados graus.
      * @param dAngle {@code double}
      */
+    @Override
     public void rotate(double dAngle)
     {
         for(Point v : this.vertices)

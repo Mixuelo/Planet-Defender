@@ -17,8 +17,8 @@ import javax.imageio.ImageIO;
  */
 public class SpriteShape extends Shape
 {
-    Image sprite;
-    double imageScale;
+    private Image sprite;
+    private double imageScale;
 
     /**
      * Construtor.
@@ -103,6 +103,7 @@ public class SpriteShape extends Shape
      * Atualizar a escala do shape, adicionando dScale ao valor da escala.
      * @param dScale {@code double}
      */
+    @Override
     public void scale(double dScale)
     {
         this.scale += dScale;
@@ -112,6 +113,7 @@ public class SpriteShape extends Shape
      * Este método move este shape.
      * @param dPos {@code Point}
      */
+    @Override
     public void move(Point dPos)
     {
         this.position.addThis(dPos);
@@ -121,6 +123,7 @@ public class SpriteShape extends Shape
      * Este método faz a rotação deste shape em determinados graus.
      * @param dAngle {@code double}
      */
+    @Override
     public void rotate(double dAngle)
     {
         this.angle = (this.angle + dAngle) % 360;
