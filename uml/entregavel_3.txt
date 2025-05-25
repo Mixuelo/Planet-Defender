@@ -1,0 +1,489 @@
+@startuml
+
+skinparam style strictuml
+
+package "Engine" 
+{
+  +interface IGameObject <<interface>> {
+    name() : String
+    transform() : ITransform
+    shape() : IShape
+    collider() : ICollider
+    behaviour() : IBehaviour
+}
+
++interface ITransform <<interface>> {
+    +move() : void
+    +rotate() : void
+    +scale() : void
+
+    +position() : Point
+    +layer() : int
+    +angle() : double
+    +scale() : double
+}
+
++interface ICollider <<interface>> {
+    centroid() : Point
+    onUpdate() : void
+}
+
++class GameEngine implements IGameEngine {
+    -lastTime : double
+    
+    +gui() : void
+    -exists() : boolean
+    -tick() : void
+}
+GameEngine *-- GameObject : -ArrayList<> enabled
+GameEngine *-- GameObject : -ArrayList<> disabled
+GameEngine o-- GUI : -gui
+
++class GameObject implements IGameObject{
+    -name : String
+
+    +engine() : IGameEngine
+    +engine() : void
+    +shape() : void
+    +move() : void
+    +rotate() : void
+    +scale() : void
+    +checkCollision() : boolean
+
+    +toString() : String
+    +equals() : boolean
+    +hashCode() : boolean
+}
+
++class MovingObject {
+    #topVelocity : double
+    #friction : double
+
+    +velocity() : Point
+    +topVelocity() : double
+    +friction() : double
+    +updateMovement() : void
+    +addVelocity() : void
+    +setVelocity() : void
+    -capVelocity() : void
+}
+MovingObject *-- Point : #velocity
+
++class Transform implements ITransform {
+    -layer : int
+    -angle : double
+    -scale : double
+
+    +toString() : String
+}
+
++abstract class Collider implements ICollider {
+    #scale : double
+    #angle : double
+
+    +{abstract} move() : void
+    +{abstract} rotate() : void
+    +{abstract} scale() : void
+    +{abstract} checkCollision() : boolean
+    +checkCollisionCircle() : boolean
+    +checkCollisionPolygon() : boolean
+
+    +toString() : String
+}
+
++class Point {
+    -x : double
+    -y : double
+
+    +addNew() : Point
+    +subNew() : Point
+    +multNew() : Point
+    +addThis() : void
+    +subThis() : void
+    +multThis() : void
+    +rotateThis() : void
+    +scaleThis() : void
+    +distFrom() : double
+
+    +x() : double
+    +y() : double
+
+    +toString() : String
+    +equals() : boolean
+    +clone() : Point
+}
+
++class ColliderCircle {
+    -radius : double
+
+    -{static} checkRadius() : void
+    +segmentIntersect() : boolean
+
+    +radius() : double
+}
+
++class ColliderPolygon {
+    -{static} checkVertices() : void
+    -calculateArea() : double
+    -calculateCentroid() : Point
+    -checkPointInside() : boolean
+
+    +vertices() : ArrayList<Point>
+    +edges() : ArrayList<LineSegment>
+}
+
++class Line{
+    -{static} checkEquals() : void
+    #pointOrientation() : orientation
+    +pointCollinear : boolean
+    +closestPointFromPoint : Point
+}
+
++class LineSegment extends Line{
+    +pointOnSegment() : boolean
+    +segmentIntersect() : boolean
+
+    +p1() : Point
+    +p2() : Point
+
+    +toString() : String
+}
+
++interface IGameEngine <<interface>> {
+    +addEnabled() : void
+    +addDisabled() : void
+    +enable() : void
+    +disable() : void
+    +isEnabled() : boolean
+    +isDisabled() : boolean
+    +getEnabled() : List<IGameObject>
+    +getDisabled() : List<IGameObject>
+    +destroy() : void
+    +destroyAll() : void
+    +run() : void
+    +checkCollisions() : void
+}
+
++interface IBehaviour <<interface>> {
+    gameObject() : IGameObject
+    gameObject() : void
+    onInit() : void
+    onEnabled() : void
+    onDisabled() : void
+    onDestroy() : void
+    onUpdate() : void
+    onCollision() : void
+}
+
++abstract class Behaviour implements IBehaviour{
+}
+
++interface IShape <<interface>>
+{
+    draw() : void
+    onUpdate() : void
+}
+
++abstract class Shape implements IShape
+{
+    #scale : double
+    #angle : double
+    #drawOrder : int
+    
+    +transform() : void
+    +drawOrder() : void
+    +drawOrder() : int
+    *scale() : void
+    +move() : void
+    +rotate() : void
+}
+Shape o-- Point : #position
+Shape o-- Transform : #transform
+
+}
+
+
+
+package "PlanetDefender" 
+{
+GameEngine o-- GameObject : -ArrayList<> enabled, ArrayList<> disabled
+GameObject o-- Transform : -transform
+GameObject o-- Collider : -collider
+GameObject o-- Behaviour : -behaviour
+GameObject o-- Shape : -shape
+GameObject --o Behaviour : #parent
+Transform *-- Point : -position
+Collider *-- Point : #centroid
+ColliderPolygon *-- Point : -ArrayList<> vertices
+ColliderPolygon *-- LineSegment : -ArrayList<> edges
+Collider <|-- ColliderPolygon
+ColliderCircle -- (Collider, ColliderPolygon)
+Line *-- Point : #p1, p2
+
+' JOGO
+
++abstract class CharacterBehaviour {
+    +health : int
+
+    +health() : int
+    +takeDamage() : void
+    +onDefeat() : void
+    +statusGauge() : void
+    +statusGauge() : GameObject
+}
+CharacterBehaviour o-- GameObject : +statusGauge
+
++abstract class EffectBehaviour {
+    -timer : double
+    -imagePath : String
+    -imageExt : String
+    -imageScale : double
+    -frames : int
+    -fps : double
+    -animDT : double
+    -lastFrame : int
+    
+    +onUpdate() : void
+}
+
++class PlayerShipBehaviour {
+    -cooldown : double
+    -rotationDir : int
+    -accel : boolean
+    -fire : boolean
+    -bulletID : int
+    
+    +planet() : void
+    -rotate() : void
+    -accelerate() : void
+    -shoot() : void
+    +onUpdate() : void
+    +onDefeat() : void
+    +onEnabled() : void
+    -checkOutOfBounds() : void
+}
+PlayerShipBehaviour o-- GameObject : -planet
+
++class EnemyShipBehaviour extends EnemyBehaviour {
+    -boredom : double
+    -cooldown : double
+    -state : actionState
+    -rng : Random
+    -bulletID : int
+    
+    +player() : void
+    +onInit() : void
+    -rotateTowards() : void
+    -lookingTowards() : boolean
+    -accelerate() : void
+    -chase() : void
+    -shoot() : void
+    -attack() : void
+    +onUpdate() : void
+    #onDefeat() : void
+}
+EnemyShipBehaviour o-- GameObject : -player
+
+
++class AsteroidBehaviour extends EnemyBehaviour {
+    -size : double
+    
+    +onInit() : void
+    +onUpdate() : void
+    +onCollision() : void
+    #onDefeat() : void
+    -defeatEffect() : void
+    #divide() : void
+    -checkOutOfBounds() : void
+}
+
++class EnemyBomberBehaviour extends EnemyBehaviour{
+    -lastDist : double
+    -hasBomb : boolean
+    
+    +onInit() : void
+    -dropBomb() : void
+    +onUpdate() : void
+    -checkOutOfBounds() : void
+}
+
++class PlanetBehaviour {
+    -playerAlive : boolean
+    -playerRecovery : double
+    -playerMaxHealth : int
+    
+    +player() : void
+    +onUpdate() : void
+    +onDefeat() : void
+    #gameOver() : void
+    +onPlayerDefeat() : void
+    -recoverPlayer() : void
+}
+PlanetBehaviour o-- MovingObject : -player
+
+
++class BulletBehaviour {
+    +onUpdate() : void
+    +onCollision() : void
+}
+BulletBehaviour o-- CharacterBehaviour : -owner
+
+
++class BombBehaviour {
+    -explode : boolean
+    
+    +explode() : void
+    +onCollision() : void
+}
+BombBehaviour o-- EnemyBomberBehaviour : -owner
+
++class EnemySpawnerBehaviour {
+    -enemyID : int
+    -timer : double
+    -rng : Random
+    
+    +planet() : void
+    +player() : void
+    +onUpdate() : void
+}
+EnemySpawnerBehaviour o-- GameObject : -planet
+EnemySpawnerBehaviour o-- GameObject : -player
+
++class TitleBehaviour {
+    +onUpdate() : void
+    -startGame() : void
+}
+
++class EnemyBehaviour {
+    
+    +target() : void
+}
+EnemyBehaviour o-- GameObject : #target
+
++class ArcGaugeBehaviour
+{
+    -timer : double
+    -value : double
+    -maxValue : double
+    -color : -color
+    -radius : double
+    -strokeWidth : double
+    
+    +target() : void
+    +refresh() : void
+}
+ArcGaugeBehaviour o-- GameObject : -target
+
++class UIObject {
+}
+
++class EffectObject {
+}
+
++class ArcShape
+{
+    -radius : double
+    -color : Color 
+    -startAngle : double
+    -arcAngle : double
+    -strokeWidth : double
+}
+
++class CircleShape
+{
+    -radius : double
+    -color : Color 
+}
+
++class PolygonShape
+{
+    -color : Color 
+    
+    -calculateArea() : double
+    -calculateCentroid() : Point
+}
+PolygonShape *-- Point : -ArrayList<> vertices
+
++class SpriteShape
+{
+    -sprite : Image
+    -imageScale : double
+    
+    +sprite() : void
+    
+}
+
++class TextShape
+{
+    -text : String
+    -font : Font 
+    -color : Color
+}
+
+<> circ
+<> beha
+<> chara
+<> s
+}
+
+
+package "GUI"
+{
+    +class BackgroundMusic 
+    {
+      -clip : Clip 
+      
+      +playMusic() : void
+      +stopMusic() : void
+    }
+
+    +class GamePanel extends JPanel
+    {
+       +gameObjects() : void
+    }
+    GamePanel *-- GameObject : -CopyOnWriteArrayList<> gameObjects
+    
+    +class GUI
+    { 
+      -frame : JFrame
+      -inputQueue : Queue<InputEvent>
+      
+      +getUserInput() : InputEvent
+      +putOnScreen() : void
+    }
+    GUI *-- GamePanel : -gamePanel
+    
+    +class KeyListenerImpl implements KeyListener
+    {
+      -inputQueue : Queue<InputEvent>
+    }
+}
+
+
+GameObject <|-- circ
+circ -- MovingObject
+circ -- UIObject
+circ -- EffectObject
+
+Behaviour <|-- beha
+beha -- EnemySpawnerBehaviour
+beha -- BulletBehaviour
+beha -- CharacterBehaviour
+beha -- BombBehaviour
+beha -- EffectBehaviour
+beha -- TitleBehaviour
+beha -- ArcGaugeBehaviour
+
+CharacterBehaviour <|-- chara
+chara -- PlayerShipBehaviour
+chara -- PlanetBehaviour
+chara -- EnemyBehaviour
+
+Shape <|-- s 
+s -- ArcShape
+s -- TextShape
+s -- CircleShape
+s -- PolygonShape
+s -- SpriteShape
+
+@enduml
