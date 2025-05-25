@@ -253,20 +253,6 @@ public class GameEngine implements IGameEngine
     }
 
     /**
-     * Apaga todos os objetos menos o fundo.
-     */
-    public void resetEngine()
-    {
-        for(IGameObject go : this.getEnabled())
-        {
-            if(!go.name().equals("back"))
-            {
-                this.destroy(go);
-            }
-        }
-    }
-
-    /**
      * Check collisions for all the enabled objects
      * pos: calls Behaviour.onCollision(gol) for all enabled GameObjects
      *      passing in the list of all the objects that collided with each IGameObject
